@@ -16,4 +16,4 @@ MonoBehaviour:
   <Icon>k__BackingField: {fileID: 21300000, guid: c0134418f6834b643b9bb48b6a669dcb,
     type: 3}
   <Cooldown>k__BackingField: 5
-  <RemainingCooldown>k__BackingField: -0.002819444
+  <RemainingCooldown>k__BackingField: 0

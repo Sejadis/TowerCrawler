@@ -1,6 +1,7 @@
 ﻿using System;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace SejDev.Systems.Abilities
 {
@@ -22,15 +23,11 @@ namespace SejDev.Systems.Abilities
 
         private void Update()
         {
-            if (weaponBase != null) weaponBase.UpdateCooldown(Time.deltaTime);
+            weaponBase?.UpdateCooldown(Time.deltaTime);
             weaponSpecial?.UpdateCooldown(Time.deltaTime);
             core1?.UpdateCooldown(Time.deltaTime);
             core2?.UpdateCooldown(Time.deltaTime);
             core3?.UpdateCooldown(Time.deltaTime);
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                ActivateAbility();
-            }
         }
 
         public void ChangeAbility(Ability ability, AbilitySlot slot)
@@ -42,7 +39,7 @@ namespace SejDev.Systems.Abilities
             OnPostAbilityChanged?.Invoke(this, null);
         }
 
-        public void ActivateAbility()
+        public void ActivateCore1(InputAction.CallbackContext context)
         {
             if (core1?.RemainingCooldown > 0)
             {
@@ -50,7 +47,42 @@ namespace SejDev.Systems.Abilities
             }
             core1?.Activate();
         }
+        
+        public void ActivateCore2(InputAction.CallbackContext context)
+        {
+            if (core2?.RemainingCooldown > 0)
+            {
+                return;
+            }
+            core2?.Activate();
+        }
+        public void ActivateCore3(InputAction.CallbackContext context)
+        {
+            if (core3?.RemainingCooldown > 0)
+            {
+                return;
+            }
+            core3?.Activate();
+        }
 
+        public void ActivateWeaponBase(InputAction.CallbackContext context)
+        {
+            if (weaponBase?.RemainingCooldown > 0)
+            {
+                return;
+            }
+            weaponBase?.Activate();
+        }
+        
+        public void ActivateWeaponSpecial(InputAction.CallbackContext context)
+        {
+            if (weaponSpecial?.RemainingCooldown > 0)
+            {
+                return;
+            }
+            weaponSpecial?.Activate();
+        }
+        
         private ref Ability GetSlot(AbilitySlot slot)
         {
             switch (slot)

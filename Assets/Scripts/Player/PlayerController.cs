@@ -46,6 +46,13 @@ namespace SejDev.Player
             // var input = context.ReadValue<Vector2>();
             MovementData = new Vector3(input.x, 0, input.y).normalized;
         }
+        
+        public void OnMovement(InputAction.CallbackContext context)
+        {
+            // var input = value.Get<Vector2>();
+            var input = context.ReadValue<Vector2>();
+            MovementData = new Vector3(input.x, 0, input.y).normalized;
+        }
 
         // public void OnLook(InputValue value)
         // {

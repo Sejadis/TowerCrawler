@@ -58,7 +58,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Abilities\Activator\CastAbilityActivator.cs" />
+     <Compile Include="Assets\Scripts\Abilities\Activator\InstantAbilityActivator.cs" />
      <Compile Include="Assets\Scripts\Abilities\LogAbility.cs" />
+     <Compile Include="Assets\Scripts\Abilities\LogCastAbility.cs" />
      <Compile Include="Assets\Scripts\Abilities\Test\AbilityGranter.cs" />
      <Compile Include="Assets\Scripts\Editor\RenameAttribute.cs" />
      <Compile Include="Assets\Scripts\Editor\RenameEditor.cs" />
@@ -66,6 +69,7 @@
      <Compile Include="Assets\Scripts\HealthChangedEventArgs.cs" />
      <Compile Include="Assets\Scripts\HealthManager.cs" />
      <Compile Include="Assets\Scripts\IEntityController.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerAbilityUI.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerDamageHandler.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerStatusEffectsUI.cs" />
@@ -76,8 +80,11 @@
      <Compile Include="Assets\Scripts\StatusEffects\Test\StatusEffectTrigger.cs" />
      <Compile Include="Assets\Scripts\StatusEffects\ThornsStatusEffect.cs" />
      <Compile Include="Assets\Scripts\Systems\Abilities\Ability.cs" />
+     <Compile Include="Assets\Scripts\Systems\Abilities\AbilityActivationType.cs" />
+     <Compile Include="Assets\Scripts\Systems\Abilities\AbilityActivator.cs" />
      <Compile Include="Assets\Scripts\Systems\Abilities\AbilityManager.cs" />
      <Compile Include="Assets\Scripts\Systems\Abilities\AbilitySlot.cs" />
+     <Compile Include="Assets\Scripts\Systems\Abilities\AbilityType.cs" />
      <Compile Include="Assets\Scripts\Systems\Abilities\IAbility.cs" />
      <Compile Include="Assets\Scripts\Systems\Core\DamageFlags.cs" />
      <Compile Include="Assets\Scripts\Systems\Core\DamageHandlerEventArgs.cs" />
@@ -112,7 +119,8 @@
      <Compile Include="Assets\Scripts\Systems\StatusEffects\StatusEffect.cs" />
      <Compile Include="Assets\Scripts\Systems\StatusEffects\StatusEffectChangedEventArgs.cs" />
      <Compile Include="Assets\Scripts\Systems\StatusEffects\StatusEffectManager.cs" />
-     <Compile Include="Assets\Scripts\UI\AbilityUI.cs" />
+     <Compile Include="Assets\Scripts\UI\AbilityHolderUI.cs" />
+     <Compile Include="Assets\Scripts\UI\CastBarUI.cs" />
      <Compile Include="Assets\Scripts\UI\HealthUI.cs" />
      <Compile Include="Assets\Scripts\UI\StatusEffectHolderUI.cs" />
      <None Include="Assets\Scripts\Scripts.asmdef" />

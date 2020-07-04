@@ -1,11 +1,15 @@
-﻿using SejDev.Systems.Abilities;
+﻿using SejDev.Abilities.Activator;
+using SejDev.Editor;
+using SejDev.Systems.Abilities;
 using UnityEngine;
 
 namespace SejDev.Abilities
 {
-    [CreateAssetMenu(fileName = "Assets/Ressources/Abilities/NewLogAbility", menuName = "Systems/Ability/Log Ability")]
-    public class LogAbility : Ability
+    [CreateAssetMenu(fileName = "Assets/Ressources/Abilities/NewLogCastAbility",
+        menuName = "Systems/Ability/Log CastAbility")]
+    public class LogCastAbility : Ability
     {
+
         public override void Bind(AbilityManager abilityManager)
         {
             base.Bind(abilityManager);
@@ -15,7 +19,8 @@ namespace SejDev.Abilities
         {
             base.PerformAbility();
             Debug.Log("Ability fired");
+            Ping ping = new Ping("123");
+            
         }
     }
-
 }

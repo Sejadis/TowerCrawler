@@ -185,12 +185,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 9f534cf483f47a64197cffc3b50d7f69, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.711
+  m_FillAmount: 0.665
   m_FillClockwise: 0
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 8751654497934601980}
   - component: {fileID: 8751654497934601983}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: InputBindingText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -363,7 +363,7 @@ GameObject:
   - component: {fileID: 8751654498011847862}
   - component: {fileID: 8751654498011847881}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: CooldownText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AbilityUI : MonoBehaviour
+public class AbilityHolderUI : MonoBehaviour
 {
     //TODO remove, only for testing
     [SerializeField] private Ability ability;
@@ -22,13 +22,16 @@ public class AbilityUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (ability == null) return;
-        Bind(ability);
+        icon.gameObject.SetActive(false);
+        cooldownObject.SetActive(false);
+        inputText.gameObject.SetActive(false);
     }
 
     public void Bind(Ability ability)
     {
+        if (ability == null) return; //slot is empty
         icon.sprite = ability.Icon;
+        icon.gameObject.SetActive(true);
         cooldown = ability.Cooldown;
         ability.OnCooldownChanged += OnCooldownChanged;
         OnCooldownChanged(this, new OldNewEventArgs<float>(0,ability.RemainingCooldown));

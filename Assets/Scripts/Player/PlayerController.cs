@@ -39,13 +39,19 @@ namespace SejDev.Player
             InputManager.Instance.PlayerInput.Controls.Movement.started += OnMovement;
             InputManager.Instance.PlayerInput.Controls.Movement.performed += OnMovement;
             InputManager.Instance.PlayerInput.Controls.Movement.canceled += OnMovement;
+            
+            InputManager.Instance.PlayerInput.Controls.Look.started += OnLook;
+            InputManager.Instance.PlayerInput.Controls.Look.performed += OnLook;
+            InputManager.Instance.PlayerInput.Controls.Look.canceled += OnLook;
         }
 
         void FixedUpdate()
         {
             // float speed = moveSpeed * moveSpeedStat.Value;
-            rigidBody.MovePosition(transform.position + MovementData * moveSpeed);
-            // rigidbody.MoveRotation(rigidbody.rotation * Quaternion.Euler(LookData * lookSensitivity));
+            rigidBody.MoveRotation(rigidBody.rotation * Quaternion.Euler(LookData * lookSensitivity));
+            Vector3 newPos = transform.forward * MovementData.z;
+            newPos += transform.right * MovementData.x;
+            rigidBody.MovePosition(transform.position + newPos * moveSpeed);
         }
 
         public void OnMovement(InputValue value)
@@ -62,13 +68,13 @@ namespace SejDev.Player
             MovementData = new Vector3(input.x, 0, input.y).normalized;
         }
 
-        // public void OnLook(InputValue value)
-        // {
-        //     Debug.Log("onlook called");
-        //     LookData = value.Get<Vector2>();
-        //     var input = value.Get<Vector2>();
-        //     // var input = context.ReadValue<Vector2>();
-        //     LookData = new Vector3(input.y, input.x, 0);
-        // }
+        public void OnLook(InputAction.CallbackContext context)//InputValue value)
+        {
+            Debug.Log("onlook called");
+            // LookData = value.Get<Vector2>();
+            // var input = value.Get<Vector2>();
+            var input = context.ReadValue<Vector2>();
+            LookData = new Vector3(0, input.x, 0);
+        }
     }
 }

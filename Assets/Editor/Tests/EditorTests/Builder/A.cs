@@ -1,5 +1,4 @@
 using SejDev.Systems.Gear;
-using SejDev.Systems.Skills;
 
 namespace Editor.Tests.EditorTests.Builder
 {

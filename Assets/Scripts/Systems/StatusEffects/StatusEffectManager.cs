@@ -45,10 +45,13 @@ namespace SejDev.Systems.StatusEffects
 
                 (existingEffect as StackableStatusEffect).AddStack(stacks);
             }
+            else
+            {
+                statusEffects.Add(effect);
+                effect.Bind(this, stacks);
+                OnStatusEffectAdded?.Invoke(this, new StatusEffectChangedEventArgs(effect));
+            }
 
-            statusEffects.Add(effect);
-            effect.Bind(this, stacks);
-            OnStatusEffectAdded?.Invoke(this, new StatusEffectChangedEventArgs(effect));
             return effect;
         }
 

@@ -42,19 +42,23 @@ namespace SejDev.StatusEffects
 
         private IEnumerator ApplyDoT()
         {
-            // int actualTicks = 0;
+            int actualTicks = 0;
             while (DurationLeft >= 0)
             {
                 if (nextTick <= Time.time)
                 {
                     damagable.TakeDamage(this, tickDamage);
                     nextTick = GetNextTickTime();
-                    // actualTicks++;
+                    actualTicks++;
                 }
 
                 yield return null;
             }
 
+            if (actualTicks < ticks)
+            {
+                damagable.TakeDamage(this, tickDamage);
+            }
             //TODO potentially apply last tick manually if skipped in low FPS situations
         }
     }

@@ -62,10 +62,59 @@ namespace SejDev.Systems.Abilities
             }
         }
 
-        // private void Start()
-        // {
-        //     PlayerInput input = GetComponent<PlayerInput>();
-        // }
+        private void Start()
+        {
+            InputManager.Instance.PlayerInput.Controls.Core1.started += ActivateCore1;
+            InputManager.Instance.PlayerInput.Controls.Core1.performed += ActivateCore1;
+            InputManager.Instance.PlayerInput.Controls.Core1.canceled += ActivateCore1;
+
+
+            InputManager.Instance.PlayerInput.Controls.Core2.started += ActivateCore1;
+            InputManager.Instance.PlayerInput.Controls.Core2.performed += ActivateCore2;
+            InputManager.Instance.PlayerInput.Controls.Core2.canceled += ActivateCore2;
+
+
+            InputManager.Instance.PlayerInput.Controls.Core3.started += ActivateCore3;
+            InputManager.Instance.PlayerInput.Controls.Core3.performed += ActivateCore3;
+            InputManager.Instance.PlayerInput.Controls.Core3.canceled += ActivateCore3;
+
+
+            InputManager.Instance.PlayerInput.Controls.WeaponBase.started += ActivateWeaponBase;
+            InputManager.Instance.PlayerInput.Controls.WeaponBase.performed += ActivateWeaponBase;
+            InputManager.Instance.PlayerInput.Controls.WeaponBase.canceled += ActivateWeaponBase;
+
+
+            InputManager.Instance.PlayerInput.Controls.WeaponSpecial.started += ActivateWeaponSpecial;
+            InputManager.Instance.PlayerInput.Controls.WeaponSpecial.performed += ActivateWeaponSpecial;
+            InputManager.Instance.PlayerInput.Controls.WeaponSpecial.canceled += ActivateWeaponSpecial;
+        }
+
+        private void OnDestroy()
+        {
+            InputManager.Instance.PlayerInput.Controls.Core1.started -= ActivateCore1;
+            InputManager.Instance.PlayerInput.Controls.Core1.performed -= ActivateCore1;
+            InputManager.Instance.PlayerInput.Controls.Core1.canceled -= ActivateCore1;
+
+
+            InputManager.Instance.PlayerInput.Controls.Core2.started -= ActivateCore1;
+            InputManager.Instance.PlayerInput.Controls.Core2.performed -= ActivateCore2;
+            InputManager.Instance.PlayerInput.Controls.Core2.canceled -= ActivateCore2;
+
+
+            InputManager.Instance.PlayerInput.Controls.Core3.started -= ActivateCore3;
+            InputManager.Instance.PlayerInput.Controls.Core3.performed -= ActivateCore3;
+            InputManager.Instance.PlayerInput.Controls.Core3.canceled -= ActivateCore3;
+
+
+            InputManager.Instance.PlayerInput.Controls.WeaponBase.started -= ActivateWeaponBase;
+            InputManager.Instance.PlayerInput.Controls.WeaponBase.performed -= ActivateWeaponBase;
+            InputManager.Instance.PlayerInput.Controls.WeaponBase.canceled -= ActivateWeaponBase;
+
+
+            InputManager.Instance.PlayerInput.Controls.WeaponSpecial.started -= ActivateWeaponSpecial;
+            InputManager.Instance.PlayerInput.Controls.WeaponSpecial.performed -= ActivateWeaponSpecial;
+            InputManager.Instance.PlayerInput.Controls.WeaponSpecial.canceled -= ActivateWeaponSpecial;
+        }
 
         private void Update()
         {

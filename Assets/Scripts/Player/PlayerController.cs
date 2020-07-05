@@ -1,4 +1,5 @@
-﻿using SejDev.Systems.Stats;
+﻿using System;
+using SejDev.Systems.Stats;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -31,6 +32,13 @@ namespace SejDev.Player
             Stat moveSpeedStat = StatsManager.GetStatByType(StatType.MovementSpeed);
             moveSpeedStat.OnStatChanged += (_, args) => moveSpeed = args.NewValue;
             moveSpeed = moveSpeedStat.Value;
+        }
+
+        private void Start()
+        {
+            InputManager.Instance.PlayerInput.Controls.Movement.started += OnMovement;
+            InputManager.Instance.PlayerInput.Controls.Movement.performed += OnMovement;
+            InputManager.Instance.PlayerInput.Controls.Movement.canceled += OnMovement;
         }
 
         void FixedUpdate()

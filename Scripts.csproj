@@ -69,6 +69,7 @@
      <Compile Include="Assets\Scripts\HealthChangedEventArgs.cs" />
      <Compile Include="Assets\Scripts\HealthManager.cs" />
      <Compile Include="Assets\Scripts\IEntityController.cs" />
+     <Compile Include="Assets\Scripts\Input\PlayerInputActionAsset.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerAbilityUI.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerDamageHandler.cs" />
@@ -105,6 +106,7 @@
      <Compile Include="Assets\Scripts\Systems\Gear\IInventory.cs" />
      <Compile Include="Assets\Scripts\Systems\Gear\Inventory.cs" />
      <Compile Include="Assets\Scripts\Systems\Gear\Item.cs" />
+     <Compile Include="Assets\Scripts\Systems\Input\InputManager.cs" />
      <Compile Include="Assets\Scripts\Systems\Skills\ISkillEffect.cs" />
      <Compile Include="Assets\Scripts\Systems\Stats\IStats.cs" />
      <Compile Include="Assets\Scripts\Systems\Stats\Modifier.cs" />

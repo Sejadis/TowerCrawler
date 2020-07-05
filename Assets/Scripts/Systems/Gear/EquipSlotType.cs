@@ -1,7 +1,7 @@
-    namespace SejDev.Systems.Gear
+namespace SejDev.Systems.Gear
+{
+    public enum EquipSlotType
     {
-        public enum EquipSlotType
-        {
-            Weapon
-        }
+        Weapon
     }
+}

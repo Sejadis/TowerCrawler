@@ -14,13 +14,9 @@ namespace SejDev.Systems.Stats
         public float GetFinalModifierByType(ModifierType type)
         {
             float final = 0;
-            foreach (Modifier modifier in Modifiers)
-            {
+            foreach (var modifier in Modifiers)
                 if (modifier.type.Equals(type))
-                {
                     final += modifier.value;
-                }
-            }
             return final;
         }
     }

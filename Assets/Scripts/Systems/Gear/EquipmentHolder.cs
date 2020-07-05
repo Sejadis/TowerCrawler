@@ -4,14 +4,15 @@ namespace SejDev.Systems.Gear
 {
     public class EquipmentHolder
     {
+        private readonly IInventory inventory;
         private Equipment weaponSlot;
-        private IInventory inventory;
 
         public EquipmentHolder(IInventory inventory, Equipment weaponSlot = null)
         {
             this.inventory = inventory;
             this.weaponSlot = weaponSlot;
         }
+
         public Equipment GetItemForSlot(EquipSlotType equipSlot)
         {
             Equipment item = null;
@@ -22,23 +23,17 @@ namespace SejDev.Systems.Gear
                     item = weaponSlot;
                     break;
                 }
-                default:
-                    break;
             }
+
             return item;
         }
 
         public void EquipItem(Equipment item)
         {
-            if (!inventory.ContainsItem(item))
-            {
-                throw new InvalidOperationException("Item not in Inventory");
-            }
+            if (!inventory.ContainsItem(item)) throw new InvalidOperationException("Item not in Inventory");
 
-            Equipment currentItem = GetItemForSlot(item.EquipSlot);
-            if(currentItem != null){
-                inventory.AddItem(currentItem);
-            }
+            var currentItem = GetItemForSlot(item.EquipSlot);
+            if (currentItem != null) inventory.AddItem(currentItem);
 
             switch (item.EquipSlot)
             {
@@ -47,9 +42,8 @@ namespace SejDev.Systems.Gear
                     weaponSlot = item;
                     break;
                 }
-                default:
-                    break;
             }
+
             inventory.RemoveItem(item);
         }
     }

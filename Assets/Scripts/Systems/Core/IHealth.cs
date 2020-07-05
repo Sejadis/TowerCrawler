@@ -7,8 +7,8 @@ namespace SejDev.Systems.Core
         int MaxHealth { get; }
         int CurrentHealth { get; }
         event EventHandler<HealthChangedEventArgs> OnCurrentHealthChanged;
+
         event EventHandler<HealthChangedEventArgs> OnMaxHealthChanged;
         //TODO refactor to OldNewEventArgs<int>
     }
-    
 }

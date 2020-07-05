@@ -4,8 +4,8 @@ namespace SejDev.Systems.StatusEffects
 {
     public class StatusEffectChangedEventArgs : EventArgs
     {
-        public float durationLeft;
         public int? currentStacks;
+        public float durationLeft;
         public StatusEffect statusEffect;
 
         public StatusEffectChangedEventArgs(int currentStacks)
@@ -17,6 +17,7 @@ namespace SejDev.Systems.StatusEffects
         {
             this.statusEffect = statusEffect;
         }
+
         public StatusEffectChangedEventArgs(float durationLeft)
         {
             this.durationLeft = durationLeft;

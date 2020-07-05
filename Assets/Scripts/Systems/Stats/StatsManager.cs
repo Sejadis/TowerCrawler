@@ -11,7 +11,7 @@ namespace SejDev.Systems.Stats
 
         public Stat GetStatByType(StatType type)
         {
-            return stats.Find((stat) => stat.Type.Equals(type));
+            return stats.Find(stat => stat.Type.Equals(type));
         }
 
         public void RemoveModifier(StatType type, Modifier modifier)
@@ -24,20 +24,14 @@ namespace SejDev.Systems.Stats
             GetStatByType(type)?.AddModifier(modifier);
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
-            foreach (Stat stat in stats)
-            {
-                stat.OnStatChanged += OnStatChanged;
-            }
+            foreach (var stat in stats) stat.OnStatChanged += OnStatChanged;
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
-            foreach (Stat stat in stats)
-            {
-                stat.OnStatChanged -= OnStatChanged;
-            }
+            foreach (var stat in stats) stat.OnStatChanged -= OnStatChanged;
         }
 
         private void OnStatChanged(object sender, EventArgs args)

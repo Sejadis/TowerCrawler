@@ -7,11 +7,11 @@ namespace SejDev.Systems.Abilities
 {
     public class AbilityManager : MonoBehaviour, IAbility
     {
-        [CanBeNull] private Ability weaponBase;
-        [CanBeNull] private Ability weaponSpecial;
         [CanBeNull] private Ability core1;
         [CanBeNull] private Ability core2;
         [CanBeNull] private Ability core3;
+        [CanBeNull] private Ability weaponBase;
+        [CanBeNull] private Ability weaponSpecial;
 
         public event EventHandler OnPreAbilityChanged;
 
@@ -21,70 +21,21 @@ namespace SejDev.Systems.Abilities
 
         public event EventHandler<AbilityActivationEventArgs> OnPostAbilityActivation;
 
-        // private void Start()
-        // {
-        //     PlayerInput input = GetComponent<PlayerInput>();
-        // }
-
-        private void Update()
-        {
-            weaponBase?.UpdateCooldown(Time.deltaTime);
-            weaponSpecial?.UpdateCooldown(Time.deltaTime);
-            core1?.UpdateCooldown(Time.deltaTime);
-            core2?.UpdateCooldown(Time.deltaTime);
-            core3?.UpdateCooldown(Time.deltaTime);
-        }
-
         public void ChangeAbility(Ability ability, AbilitySlot slot)
         {
             OnPreAbilityChanged?.Invoke(this, null);
-            ref Ability intendedSlot = ref GetSlot(slot);
+            ref var intendedSlot = ref GetSlot(slot);
             if (intendedSlot != null)
             {
                 intendedSlot.OnPreAbilityActivation -= RaiseOnPreAbilityActivation;
                 intendedSlot.OnPostAbilityActivation -= RaiseOnPostAbilityActivation;
             }
+
             intendedSlot = ability;
             intendedSlot.OnPreAbilityActivation += RaiseOnPreAbilityActivation;
             intendedSlot.OnPostAbilityActivation += RaiseOnPostAbilityActivation;
             ability.Bind(this);
-            OnPostAbilityChanged?.Invoke(this, new AbilityChangedEventArgs(slot,ability));
-        }
-
-        private void RaiseOnPostAbilityActivation(object sender, AbilityActivationEventArgs e)
-        {
-            //TODO consider original sender
-            OnPostAbilityActivation?.Invoke(this,e);
-        }
-
-        private void RaiseOnPreAbilityActivation(object sender, AbilityActivationEventArgs e)
-        {
-            //TODO consider original sender
-            OnPreAbilityActivation?.Invoke(this,e);
-        }
-
-        private ref Ability GetSlot(AbilitySlot slot)
-        {
-            switch (slot)
-            {
-                case AbilitySlot.WeaponBase:
-                    return ref weaponBase;
-                    break;
-                case AbilitySlot.WeaponSpecial:
-                    return ref weaponSpecial;
-                    break;
-                case AbilitySlot.Core1:
-                    return ref core1;
-                    break;
-                case AbilitySlot.Core2:
-                    return ref core2;
-                    break;
-                case AbilitySlot.Core3:
-                    return ref core3;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(slot), slot, null);
-            }
+            OnPostAbilityChanged?.Invoke(this, new AbilityChangedEventArgs(slot, ability));
         }
 
         public Ability GetAbilityBySlot(AbilitySlot slot)
@@ -111,14 +62,61 @@ namespace SejDev.Systems.Abilities
             }
         }
 
+        // private void Start()
+        // {
+        //     PlayerInput input = GetComponent<PlayerInput>();
+        // }
+
+        private void Update()
+        {
+            weaponBase?.UpdateCooldown(Time.deltaTime);
+            weaponSpecial?.UpdateCooldown(Time.deltaTime);
+            core1?.UpdateCooldown(Time.deltaTime);
+            core2?.UpdateCooldown(Time.deltaTime);
+            core3?.UpdateCooldown(Time.deltaTime);
+        }
+
+        private void RaiseOnPostAbilityActivation(object sender, AbilityActivationEventArgs e)
+        {
+            //TODO consider original sender
+            OnPostAbilityActivation?.Invoke(this, e);
+        }
+
+        private void RaiseOnPreAbilityActivation(object sender, AbilityActivationEventArgs e)
+        {
+            //TODO consider original sender
+            OnPreAbilityActivation?.Invoke(this, e);
+        }
+
+        private ref Ability GetSlot(AbilitySlot slot)
+        {
+            switch (slot)
+            {
+                case AbilitySlot.WeaponBase:
+                    return ref weaponBase;
+                    break;
+                case AbilitySlot.WeaponSpecial:
+                    return ref weaponSpecial;
+                    break;
+                case AbilitySlot.Core1:
+                    return ref core1;
+                    break;
+                case AbilitySlot.Core2:
+                    return ref core2;
+                    break;
+                case AbilitySlot.Core3:
+                    return ref core3;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(slot), slot, null);
+            }
+        }
+
         public void ActivateCore1(InputAction.CallbackContext context)
         {
             // Debug.Log(context.ToString());
             // Debug.Log($"got input with phase {context.phase}");
-            if (core1?.RemainingCooldown > 0)
-            {
-                return;
-            }
+            if (core1?.RemainingCooldown > 0) return;
 
             core1?.Activate();
         }
@@ -126,10 +124,7 @@ namespace SejDev.Systems.Abilities
         public void ActivateCore2(InputAction.CallbackContext context)
         {
             Debug.Log(context.ToString());
-            if (core2?.RemainingCooldown > 0)
-            {
-                return;
-            }
+            if (core2?.RemainingCooldown > 0) return;
 
             core2?.Activate();
         }
@@ -137,10 +132,7 @@ namespace SejDev.Systems.Abilities
         public void ActivateCore3(InputAction.CallbackContext context)
         {
             Debug.Log(context.ToString());
-            if (core3?.RemainingCooldown > 0)
-            {
-                return;
-            }
+            if (core3?.RemainingCooldown > 0) return;
 
             core3?.Activate();
         }
@@ -148,10 +140,7 @@ namespace SejDev.Systems.Abilities
         public void ActivateWeaponBase(InputAction.CallbackContext context)
         {
             Debug.Log(context.ToString());
-            if (weaponBase?.RemainingCooldown > 0)
-            {
-                return;
-            }
+            if (weaponBase?.RemainingCooldown > 0) return;
 
             weaponBase?.Activate();
         }
@@ -159,10 +148,7 @@ namespace SejDev.Systems.Abilities
         public void ActivateWeaponSpecial(InputAction.CallbackContext context)
         {
             Debug.Log(context.ToString());
-            if (weaponSpecial?.RemainingCooldown > 0)
-            {
-                return;
-            }
+            if (weaponSpecial?.RemainingCooldown > 0) return;
 
             weaponSpecial?.Activate();
         }

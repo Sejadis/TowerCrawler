@@ -6,6 +6,6 @@ namespace SejDev.Systems.Core
     public enum DamageFlags
     {
         None = 0,
-        IgnoresMitigation = 1 << 0,
+        IgnoresMitigation = 1 << 0
     }
 }

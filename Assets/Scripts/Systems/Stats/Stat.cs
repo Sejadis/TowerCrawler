@@ -7,30 +7,29 @@ namespace SejDev.Systems.Stats
     [CreateAssetMenu(fileName = "Assets/Ressources/Stats/NewStat", menuName = "Systems/Stats/Stat")]
     public class Stat : ScriptableObject
     {
-        [field: Rename, SerializeField] public StatType Type { get; protected set; }
+        [SerializeField] protected float baseValue;
+
+        private float? currentValue;
+
+        private readonly ModifierContainer modContainer = new ModifierContainer();
 
         [SerializeField] protected StatRestrictor restrictor;
 
-        [SerializeField] protected float baseValue;
-
-        private float? currentValue = null;
-
-        public event EventHandler<StatChangedEventArgs> OnStatChanged;
-
-        private ModifierContainer modContainer = new ModifierContainer();
+        [field: Rename]
+        [field: SerializeField]
+        public StatType Type { get; protected set; }
 
         public float Value
         {
             get
             {
-                if (currentValue == null)
-                {
-                    Evaluate();
-                }
+                if (currentValue == null) Evaluate();
 
                 return (float) currentValue;
             }
         }
+
+        public event EventHandler<StatChangedEventArgs> OnStatChanged;
 
         public void AddModifier(Modifier modifier)
         {
@@ -40,9 +39,9 @@ namespace SejDev.Systems.Stats
 
         protected void RaiseOnStatChanged()
         {
-            float oldValue = Value;
+            var oldValue = Value;
             Evaluate();
-            StatChangedEventArgs args = new StatChangedEventArgs(oldValue,Value);
+            var args = new StatChangedEventArgs(oldValue, Value);
             OnStatChanged?.Invoke(this, args);
         }
 
@@ -56,11 +55,9 @@ namespace SejDev.Systems.Stats
             //apply multiplier
             newValue *= 1 + modContainer.GetFinalModifierByType(ModifierType.Percent);
             if (restrictor != null)
-            {
                 //adhere to restrictions
-                newValue = Mathf.Clamp((float) newValue, baseValue * restrictor.minPercent,
+                newValue = Mathf.Clamp(newValue, baseValue * restrictor.minPercent,
                     baseValue * restrictor.maxPercent);
-            }
             currentValue = newValue;
         }
 

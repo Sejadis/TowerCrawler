@@ -19,11 +19,6 @@ namespace Editor.Tests.EditorTests.Builder
             return new EquipmentBuilder();
         }
 
-        public static SkillHandlerBuilder SkillHandler(ISkillEffect skillEffect)
-        {
-            return new SkillHandlerBuilder(skillEffect);
-        }
-
         public static HealthManagerBuilder HealthManager()
         {
             return new HealthManagerBuilder();

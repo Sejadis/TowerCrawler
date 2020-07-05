@@ -7,6 +7,41 @@ namespace SejDev.Systems.StatusEffects
     [Serializable]
     public abstract class StatusEffect : ScriptableObject, IEquatable<StatusEffect>
     {
+        protected float applyTime;
+        private float durationLeft;
+        protected Guid guid = Guid.NewGuid();
+
+
+        protected StatusEffectManager statusEffectManager;
+
+        [field: SerializeField]
+        [field: Rename]
+        public EffectType EffectType { get; protected set; }
+
+        [field: SerializeField]
+        [field: Rename]
+        public string Name { get; protected set; }
+
+        [field: SerializeField]
+        [field: Rename]
+        public bool IsExclusive { get; protected set; }
+
+        [field: SerializeField]
+        [field: Rename]
+        public float Duration { get; protected set; }
+
+        public float DurationLeft
+        {
+            get => durationLeft;
+            protected set
+            {
+                if (value == durationLeft) return;
+
+                durationLeft = value;
+                RaiseOnStatusEffectChanged(new StatusEffectChangedEventArgs(DurationLeft));
+            }
+        }
+
         public bool Equals(StatusEffect other)
         {
             return base.Equals(other) && guid.Equals(other.guid);
@@ -16,36 +51,10 @@ namespace SejDev.Systems.StatusEffects
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((StatusEffect) obj);
         }
 
-        [field: SerializeField, Rename] public EffectType EffectType { get; protected set; }
-        [field: SerializeField, Rename] public string Name { get; protected set; }
-        [field: SerializeField, Rename] public bool IsExclusive { get; protected set; }
-        [field: SerializeField, Rename] public float Duration { get; protected set; }
-
-        protected float applyTime;
-        protected Guid guid = Guid.NewGuid();
-        private float durationLeft;
-
-        public float DurationLeft
-        {
-            get { return durationLeft; }
-            protected set
-            {
-                if (value == durationLeft)
-                {
-                    return;
-                }
-
-                durationLeft = value;
-                RaiseOnStatusEffectChanged(new StatusEffectChangedEventArgs(DurationLeft));
-            }
-        }
-
-
-        protected StatusEffectManager statusEffectManager;
         public event EventHandler<StatusEffectChangedEventArgs> OnStatusEffectChanged;
 
         protected void RaiseOnStatusEffectChanged(StatusEffectChangedEventArgs statusEffectChangedEventArgs)
@@ -67,10 +76,7 @@ namespace SejDev.Systems.StatusEffects
         public void UpdateDuration(float deltaTime)
         {
             DurationLeft -= deltaTime;
-            if (DurationLeft <= 0)
-            {
-                RemoveSelf();
-            }
+            if (DurationLeft <= 0) RemoveSelf();
         }
 
         protected void RemoveSelf()
@@ -80,12 +86,12 @@ namespace SejDev.Systems.StatusEffects
 
         public bool HasSameBaseObject(StatusEffect other)
         {
-            return other.guid.Equals(this.guid);
+            return other.guid.Equals(guid);
         }
 
         public StatusEffect CreateDeepClone()
         {
-            StatusEffect clone = Instantiate(this);
+            var clone = Instantiate(this);
             clone.guid = guid;
             return clone;
         }

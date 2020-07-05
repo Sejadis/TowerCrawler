@@ -3,6 +3,6 @@
     public enum StatType
     {
         None,
-        MovementSpeed,
+        MovementSpeed
     }
 }

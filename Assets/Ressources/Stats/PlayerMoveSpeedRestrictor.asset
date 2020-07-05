@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8883ff40fecb4c6ca0c80ac9839b9836, type: 3}
   m_Name: PlayerMoveSpeedRestrictor
   m_EditorClassIdentifier: 
-  maxPercent: 2
+  maxPercent: 1.5
   minPercent: 0.7

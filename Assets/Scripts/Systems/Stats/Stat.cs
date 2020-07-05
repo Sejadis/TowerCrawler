@@ -49,15 +49,65 @@ namespace SejDev.Systems.Stats
         {
             float newValue;
             newValue = baseValue;
+            float absoluteNormal = modContainer.GetFinalModifierByType(ModifierType.Absolute);
+            float absoluteOverriding = modContainer.GetFinalOverridingModifierByType(ModifierType.Absolute);
+            float percentNormal = modContainer.GetFinalModifierByType(ModifierType.Percent);
+            float percentOverriding = modContainer.GetFinalOverridingModifierByType(ModifierType.Percent);
 
-            //add absolute value to base
-            newValue += modContainer.GetFinalModifierByType(ModifierType.Absolute);
-            //apply multiplier
-            newValue *= 1 + modContainer.GetFinalModifierByType(ModifierType.Percent);
-            if (restrictor != null)
-                //adhere to restrictions
+            bool sameSign = (absoluteNormal >= 0 && absoluteOverriding >= 0) ||
+                            (absoluteNormal < 0 && absoluteOverriding < 0);
+            bool absOverrideSmaller = Mathf.Abs(absoluteOverriding) < Mathf.Abs(absoluteNormal);
+
+            newValue += absoluteNormal;
+            if (restrictor != null && sameSign)
+            {
+                newValue = Mathf.Clamp(newValue, baseValue * restrictor.minPercent,
+                baseValue * restrictor.maxPercent);
+            }
+
+            newValue += absoluteOverriding; //final value for sameSign / differentSign+overridebigger
+            if (restrictor != null && !sameSign && absOverrideSmaller)
+            {
                 newValue = Mathf.Clamp(newValue, baseValue * restrictor.minPercent,
                     baseValue * restrictor.maxPercent);
+            }
+            
+            // if (sameSign)
+            // {
+            //     //same sign
+            //     newValue += absoluteNormal;
+            //     if (restrictor != null)
+            //     {
+            //         newValue = Mathf.Clamp(newValue, baseValue * restrictor.minPercent,
+            //             baseValue * restrictor.maxPercent);
+            //     }
+            //
+            //     newValue += absoluteOverriding;
+            //     //adhere to restrictions
+            // }
+            // else
+            // {
+            //     //different sign 
+            //     if (overrideSmaller)
+            //     {
+            //         //override smaller
+            //         newValue += absoluteOverriding;
+            //         newValue += absoluteNormal;
+            //     }
+            //     else
+            //     {
+            //         
+            //     }
+            // }
+
+            // //add absolute value to base
+            // newValue += modContainer.GetFinalModifierByType(ModifierType.Absolute);
+            // //apply multiplier
+            // newValue *= 1 + modContainer.GetFinalModifierByType(ModifierType.Percent);
+            // if (restrictor != null)
+            //     //adhere to restrictions
+            //     newValue = Mathf.Clamp(newValue, baseValue * restrictor.minPercent,
+            //         baseValue * restrictor.maxPercent);
             currentValue = newValue;
         }
 
@@ -65,6 +115,34 @@ namespace SejDev.Systems.Stats
         {
             modContainer.Modifiers.Remove(modifier);
             RaiseOnStatChanged();
+        }
+    }
+
+    public class ModifierEvalutationTestImpl
+    {
+        public float Evaluate(float baseValue, float absoluteNormal, float absoluteOverriding, StatRestrictor restrictor)
+        {
+            var newValue = baseValue;
+
+            bool sameSign = (absoluteNormal >= 0 && absoluteOverriding >= 0) ||
+                            (absoluteNormal < 0 && absoluteOverriding < 0);
+            bool absOverrideSmaller = Mathf.Abs(absoluteOverriding) < Mathf.Abs(absoluteNormal);
+
+            newValue += absoluteNormal;
+            if (restrictor != null && sameSign)
+            {
+                newValue = Mathf.Clamp(newValue, baseValue * restrictor.minPercent,
+                    baseValue * restrictor.maxPercent);
+            }
+
+            newValue += absoluteOverriding; //final value for sameSign / differentSign+overridebigger
+            if (restrictor != null && !sameSign && absOverrideSmaller)
+            {
+                newValue = Mathf.Clamp(newValue, baseValue * restrictor.minPercent,
+                    baseValue * restrictor.maxPercent);
+            }
+
+            return newValue;
         }
     }
 }

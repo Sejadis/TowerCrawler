@@ -68,6 +68,7 @@
      <Compile Include="Assets\Editor\Tests\EditorTests\InventoryTest.cs" />
      <Compile Include="Assets\Editor\Tests\EditorTests\PlayerControllerTests.cs" />
      <Compile Include="Assets\Editor\Tests\EditorTests\PlayerUiTests.cs" />
+     <Compile Include="Assets\Editor\Tests\EditorTests\StatModifierTest.cs" />
      <None Include="Assets\Editor\Tests\EditorTests\EditorTests.asmdef" />
  <Reference Include="UnityEngine.TestRunner">
  <HintPath>G:/Unity/Projects/TowerCrawler/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>

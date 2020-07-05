@@ -70,7 +70,7 @@ namespace SejDev.Player
 
         public void OnLook(InputAction.CallbackContext context)//InputValue value)
         {
-            Debug.Log("onlook called");
+            // Debug.Log("onlook called");
             // LookData = value.Get<Vector2>();
             // var input = value.Get<Vector2>();
             var input = context.ReadValue<Vector2>();

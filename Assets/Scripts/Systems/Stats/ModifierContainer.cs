@@ -15,7 +15,15 @@ namespace SejDev.Systems.Stats
         {
             float final = 0;
             foreach (var modifier in Modifiers)
-                if (modifier.type.Equals(type))
+                if (modifier.type.Equals(type) && !modifier.ignoreRestriction)
+                    final += modifier.value;
+            return final;
+        }
+        public float GetFinalOverridingModifierByType(ModifierType type)
+        {
+            float final = 0;
+            foreach (var modifier in Modifiers)
+                if (modifier.type.Equals(type) && modifier.ignoreRestriction)
                     final += modifier.value;
             return final;
         }

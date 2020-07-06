@@ -17,6 +17,9 @@ namespace SejDev.Player
 
         public StatsManager StatsManager { get; private set; }
         [SerializeField] private Transform playerCamera;
+        private float currentCameraRotation;
+        public float lowerRoationLimit;
+        public float upperRoationLimit;
 
         //
         // [SerializeField] private float moveSpeed = 20f;
@@ -36,6 +39,7 @@ namespace SejDev.Player
             Stat moveSpeedStat = StatsManager.GetStatByType(StatType.MovementSpeed);
             moveSpeedStat.OnStatChanged += (_, args) => moveSpeed = args.NewValue;
             moveSpeed = moveSpeedStat.Value;
+            currentCameraRotation = playerCamera.rotation.eulerAngles.x;
         }
 
         private void Start()
@@ -54,7 +58,13 @@ namespace SejDev.Player
         {
             RigidBody.MoveRotation(RigidBody.rotation *
                                    Quaternion.Euler(new Vector3(0, LookData.y, 0) * horizontalLookSensitivity));
-            playerCamera.Rotate(Vector3.right * (LookData.x * verticalLookSensitivity));
+            var desiredRotation = currentCameraRotation + LookData.x * verticalLookSensitivity;
+            if (desiredRotation < upperRoationLimit && desiredRotation > lowerRoationLimit)
+            {
+                playerCamera.Rotate(Vector3.right * (LookData.x * verticalLookSensitivity));
+                currentCameraRotation = desiredRotation;
+            }
+
             Vector3 adjustedPosition = transform.forward * MovementData.z;
             adjustedPosition += transform.right * MovementData.x;
             if (shouldMove)

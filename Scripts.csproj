@@ -61,8 +61,8 @@
      <Compile Include="Assets\Scripts\Abilities\Activator\CastAbilityActivator.cs" />
      <Compile Include="Assets\Scripts\Abilities\Activator\InstantAbilityActivator.cs" />
      <Compile Include="Assets\Scripts\Abilities\LogAbility.cs" />
-     <Compile Include="Assets\Scripts\Abilities\LogCastAbility.cs" />
      <Compile Include="Assets\Scripts\Abilities\Test\AbilityGranter.cs" />
+     <Compile Include="Assets\Scripts\Abilities\Warp.cs"/>
      <Compile Include="Assets\Scripts\Editor\RenameAttribute.cs" />
      <Compile Include="Assets\Scripts\Editor\RenameEditor.cs" />
      <Compile Include="Assets\Scripts\EnemyHealthManager.cs" />

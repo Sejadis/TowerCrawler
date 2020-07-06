@@ -10,7 +10,7 @@ namespace SejDev.Player
     [RequireComponent(typeof(StatsManager))]
     public class PlayerController : MonoBehaviour, IEntityController
     {
-        Rigidbody rigidBody;
+        public Rigidbody RigidBody { get; private set; }
 
         public Vector3 MovementData { get; private set; }
         public HealthManager HealthManager { get; private set; }
@@ -24,11 +24,13 @@ namespace SejDev.Player
 
         [SerializeField] private float horizontalLookSensitivity = 0.5f;
         [SerializeField] private float verticalLookSensitivity = 10f;
+        private bool shouldMove;
+        private Vector3 warpDirection;
         public Vector3 LookData { get; private set; }
 
         void Awake()
         {
-            rigidBody = GetComponent<Rigidbody>();
+            RigidBody = GetComponent<Rigidbody>();
             HealthManager = GetComponent<HealthManager>();
             StatsManager = GetComponent<StatsManager>();
             Stat moveSpeedStat = StatsManager.GetStatByType(StatType.MovementSpeed);
@@ -50,12 +52,21 @@ namespace SejDev.Player
 
         void FixedUpdate()
         {
-            rigidBody.MoveRotation(rigidBody.rotation *
+            RigidBody.MoveRotation(RigidBody.rotation *
                                    Quaternion.Euler(new Vector3(0, LookData.y, 0) * horizontalLookSensitivity));
             playerCamera.Rotate(Vector3.right * (LookData.x * verticalLookSensitivity));
             Vector3 adjustedPosition = transform.forward * MovementData.z;
             adjustedPosition += transform.right * MovementData.x;
-            rigidBody.MovePosition(transform.position + adjustedPosition * moveSpeed);
+            if (shouldMove)
+            {
+                adjustedPosition += warpDirection;
+                // adjustedPosition += (rigidBody.velocity != Vector3.zero ? rigidBody.velocity.normalized : rigidBody.transform.forward) * 100;
+                shouldMove = false;
+            }
+
+            RigidBody.MovePosition(transform.position + adjustedPosition * moveSpeed);
+
+
             LookData = Vector3.zero;
             // MovementData = Vector3.zero;
         }
@@ -63,6 +74,12 @@ namespace SejDev.Player
         private void LateUpdate()
         {
             // playerCamera.Rotate(Vector3.right * (LookData.x * verticalLookSensitivity * Time.deltaTime));
+        }
+
+        public void WarpPosition(Vector3 warpDirection)
+        {
+            shouldMove = true;
+            this.warpDirection = warpDirection;
         }
 
         public void OnMovement(InputValue value)

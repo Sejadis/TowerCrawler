@@ -19,5 +19,5 @@ MonoBehaviour:
   affectedStat: 1
   modifier:
     type: 1
-    value: 0.025
-    ignoreRestriction: 0
+    value: 0.4
+    ignoreRestriction: 1

@@ -15,10 +15,10 @@ namespace SejDev.Abilities
         [field: SerializeField, Rename] public bool WarpInMoveDirection { get; private set; }
         private IEntityController controller;
 
-        public override void Bind(AbilityManager abilityManager)
+        public override void Bind(IAbility abilityHandler)
         {
-            base.Bind(abilityManager);
-            controller = abilityManager.GetComponent<IEntityController>();
+            base.Bind(abilityHandler);
+            controller = (abilityHandler as MonoBehaviour).GetComponent<IEntityController>();
         }
 
         protected override void PerformAbility()

@@ -7,13 +7,14 @@ namespace SejDev.Abilities.Test
     public class AbilityGranter : MonoBehaviour
     {
         public Ability ability;
+        public AbilitySlot slot;
 
         private void OnTriggerEnter(Collider other)
         {
             IAbility abilityManager = other.gameObject.GetComponent<IAbility>();
             if (abilityManager != null)
             {
-                abilityManager.ChangeAbility(ability,AbilitySlot.Core1);
+                abilityManager.ChangeAbility(ability, slot);
             }
         }
     }

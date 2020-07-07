@@ -60,9 +60,10 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Abilities\Activator\CastAbilityActivator.cs" />
      <Compile Include="Assets\Scripts\Abilities\Activator\InstantAbilityActivator.cs" />
+     <Compile Include="Assets\Scripts\Abilities\HitScanDamage.cs"/>
      <Compile Include="Assets\Scripts\Abilities\LogAbility.cs" />
      <Compile Include="Assets\Scripts\Abilities\Test\AbilityGranter.cs" />
-     <Compile Include="Assets\Scripts\Abilities\Warp.cs"/>
+      <Compile Include="Assets\Scripts\Abilities\Warp.cs"/>
      <Compile Include="Assets\Scripts\Editor\RenameAttribute.cs" />
      <Compile Include="Assets\Scripts\Editor\RenameEditor.cs" />
      <Compile Include="Assets\Scripts\EnemyHealthManager.cs" />
@@ -92,6 +93,7 @@
      <Compile Include="Assets\Scripts\Systems\Abilities\ChannelAbilityActivator.cs" />
      <Compile Include="Assets\Scripts\Systems\Abilities\IAbility.cs" />
      <Compile Include="Assets\Scripts\Systems\Abilities\IAbilityActivator.cs" />
+      <Compile Include="Assets\Scripts\Systems\Abilities\RaycastTarget.cs"/>
      <Compile Include="Assets\Scripts\Systems\Core\DamageFlags.cs" />
      <Compile Include="Assets\Scripts\Systems\Core\DamageHandlerEventArgs.cs" />
      <Compile Include="Assets\Scripts\Systems\Core\IDamagable.cs" />

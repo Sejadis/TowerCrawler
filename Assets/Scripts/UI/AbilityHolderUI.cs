@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using SejDev.Systems.Abilities;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class AbilityHolderUI : MonoBehaviour
@@ -26,7 +27,7 @@ public class AbilityHolderUI : MonoBehaviour
     private int? charges;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         icon.gameObject.SetActive(false);
         cooldownObject.SetActive(false);
@@ -85,5 +86,11 @@ public class AbilityHolderUI : MonoBehaviour
                 chargesImage.fillAmount = 1 - fillPercent;
             }
         }
+    }
+
+    public void Bind(InputBinding binding)
+    {
+        inputText.gameObject.SetActive(true);
+        inputText.text = binding.ToDisplayString();
     }
 }

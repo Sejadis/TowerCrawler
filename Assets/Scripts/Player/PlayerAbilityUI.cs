@@ -7,21 +7,35 @@ namespace SejDev.UI
 {
     public class PlayerAbilityUI : MonoBehaviour
     {
-        [SerializeField]private AbilityHolderUI weaponBase;
-        [SerializeField]private AbilityHolderUI weaponSpecial;
-        [SerializeField]private AbilityHolderUI core1;
-        [SerializeField]private AbilityHolderUI core2;
-        [SerializeField]private AbilityHolderUI core3;
+        [SerializeField] private AbilityHolderUI weaponBase;
+        [SerializeField] private AbilityHolderUI weaponSpecial;
+        [SerializeField] private AbilityHolderUI core1;
+        [SerializeField] private AbilityHolderUI core2;
+        [SerializeField] private AbilityHolderUI core3;
         [SerializeField] private AbilityManager abilityManager;
 
         private void Start()
         {
             weaponBase.Bind(abilityManager.GetAbilityBySlot(AbilitySlot.WeaponBase));
+            weaponBase.Bind(InputManager.Instance.PlayerInput.Controls.WeaponBase.bindings[0]);
+
             weaponSpecial.Bind(abilityManager.GetAbilityBySlot(AbilitySlot.WeaponSpecial));
+            weaponSpecial.Bind(InputManager.Instance.PlayerInput.Controls.WeaponSpecial.bindings[0]);
+
             core1.Bind(abilityManager.GetAbilityBySlot(AbilitySlot.Core1));
+            core1.Bind(InputManager.Instance.PlayerInput.Controls.Core1.bindings[0]);
+
             core2.Bind(abilityManager.GetAbilityBySlot(AbilitySlot.Core2));
+            core2.Bind(InputManager.Instance.PlayerInput.Controls.Core2.bindings[0]);
+
             core3.Bind(abilityManager.GetAbilityBySlot(AbilitySlot.Core3));
+            core3.Bind(InputManager.Instance.PlayerInput.Controls.Core3.bindings[0]);
             abilityManager.OnPostAbilityChanged += OnPostAbilityChanged;
+        }
+
+        private void OnDestroy()
+        {
+            abilityManager.OnPostAbilityChanged -= OnPostAbilityChanged;
         }
 
         private void OnPostAbilityChanged(object sender, AbilityChangedEventArgs e)

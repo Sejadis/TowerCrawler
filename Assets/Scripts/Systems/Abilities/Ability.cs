@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 using SejDev.Abilities.Activator;
 using SejDev.Editor;
 using UnityEngine;
@@ -80,9 +81,9 @@ namespace SejDev.Systems.Abilities
         public event EventHandler<OldNewEventArgs<float>> OnCooldownChanged;
         public event EventHandler<OldNewEventArgs<int>> OnChargesChanged;
 
-        public virtual void Bind(IAbility abilityHandler)
+        public virtual void Bind([NotNull] IAbility abilityHandler)
         {
-            this.abilityManager = abilityHandler;
+            abilityManager = abilityHandler;
             abilityActivationEventArgs = new AbilityActivationEventArgs(this);
             switch (AbilityActivationType)
             {
@@ -91,7 +92,7 @@ namespace SejDev.Systems.Abilities
                     break;
                 case AbilityActivationType.Cast:
                     AbilityActivator =
-                        new CastAbilityActivator(PerformAbility, CastTime, abilityHandler as MonoBehaviour);
+                        new CastAbilityActivator(PerformAbility, CastTime, abilityManager as MonoBehaviour);
                     break;
                 case AbilityActivationType.Channel:
                     AbilityActivator = new ChannelAbilityActivator();
@@ -116,6 +117,7 @@ namespace SejDev.Systems.Abilities
                     throw new ArgumentOutOfRangeException();
             }
         }
+
 
         public void Activate()
         {
@@ -171,10 +173,5 @@ namespace SejDev.Systems.Abilities
                     throw new ArgumentOutOfRangeException();
             }
         }
-    }
-
-    public interface IAbilityTargeter<T>
-    {
-        T GetTarget();
     }
 }

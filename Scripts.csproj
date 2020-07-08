@@ -58,19 +58,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Abilities\Activator\CastAbilityActivator.cs" />
-     <Compile Include="Assets\Scripts\Abilities\Activator\InstantAbilityActivator.cs" />
-     <Compile Include="Assets\Scripts\Abilities\HitScanDamage.cs"/>
-     <Compile Include="Assets\Scripts\Abilities\LogAbility.cs" />
-     <Compile Include="Assets\Scripts\Abilities\Test\AbilityGranter.cs" />
+      <Compile Include="Assets\Scripts\Abilities\Activator\CastAbilityActivator.cs"/>
+      <Compile Include="Assets\Scripts\Abilities\Activator\InstantAbilityActivator.cs"/>
+      <Compile Include="Assets\Scripts\Abilities\GroundTarget.cs"/>
+      <Compile Include="Assets\Scripts\Abilities\HitScanDamage.cs"/>
+      <Compile Include="Assets\Scripts\Abilities\LogAbility.cs"/>
+      <Compile Include="Assets\Scripts\Abilities\Test\AbilityGranter.cs"/>
       <Compile Include="Assets\Scripts\Abilities\Warp.cs"/>
-     <Compile Include="Assets\Scripts\Editor\RenameAttribute.cs" />
-     <Compile Include="Assets\Scripts\Editor\RenameEditor.cs" />
-     <Compile Include="Assets\Scripts\EnemyHealthManager.cs" />
-     <Compile Include="Assets\Scripts\HealthChangedEventArgs.cs" />
-     <Compile Include="Assets\Scripts\HealthManager.cs" />
-     <Compile Include="Assets\Scripts\IEntityController.cs" />
-     <Compile Include="Assets\Scripts\Input\PlayerInputActionAsset.cs" />
+      <Compile Include="Assets\Scripts\Editor\RenameAttribute.cs"/>
+      <Compile Include="Assets\Scripts\Editor\RenameEditor.cs"/>
+      <Compile Include="Assets\Scripts\EnemyHealthManager.cs"/>
+      <Compile Include="Assets\Scripts\HealthChangedEventArgs.cs"/>
+      <Compile Include="Assets\Scripts\HealthManager.cs"/>
+      <Compile Include="Assets\Scripts\IEntityController.cs"/>
+      <Compile Include="Assets\Scripts\Input\PlayerInputActionAsset.cs"/>
      <Compile Include="Assets\Scripts\Player\PlayerAbilityUI.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerDamageHandler.cs" />
@@ -91,6 +92,7 @@
      <Compile Include="Assets\Scripts\Systems\Abilities\AbilityType.cs" />
      <Compile Include="Assets\Scripts\Systems\Abilities\CastChannelAbilityActivator.cs" />
      <Compile Include="Assets\Scripts\Systems\Abilities\ChannelAbilityActivator.cs" />
+      <Compile Include="Assets\Scripts\Systems\Abilities\GroundTargeting.cs"/>
      <Compile Include="Assets\Scripts\Systems\Abilities\IAbility.cs" />
      <Compile Include="Assets\Scripts\Systems\Abilities\IAbilityActivator.cs" />
       <Compile Include="Assets\Scripts\Systems\Abilities\RaycastTarget.cs"/>
@@ -124,6 +126,7 @@
      <Compile Include="Assets\Scripts\Systems\StatusEffects\StatusEffect.cs" />
      <Compile Include="Assets\Scripts\Systems\StatusEffects\StatusEffectChangedEventArgs.cs" />
      <Compile Include="Assets\Scripts\Systems\StatusEffects\StatusEffectManager.cs" />
+      <Compile Include="Assets\Scripts\TEst.cs"/>
      <Compile Include="Assets\Scripts\UI\AbilityHolderUI.cs" />
      <Compile Include="Assets\Scripts\UI\CastBarUI.cs" />
      <Compile Include="Assets\Scripts\UI\HealthUI.cs" />

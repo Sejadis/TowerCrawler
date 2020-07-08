@@ -5,6 +5,8 @@ namespace SejDev.Systems.Abilities
 {
     public interface IAbility
     {
+        Transform AbilityOrigin { get; }
+        Camera TargetingCamera { get; }
         void ChangeAbility(Ability ability, AbilitySlot slot);
         Ability GetAbilityBySlot(AbilitySlot slot);
         event EventHandler OnPreAbilityChanged;

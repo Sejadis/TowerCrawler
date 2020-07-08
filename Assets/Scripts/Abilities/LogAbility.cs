@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SejDev.Abilities
 {
-    [CreateAssetMenu(fileName = "Assets/Ressources/Abilities/NewLogAbility", menuName = "Systems/Ability/Log Ability")]
+    [CreateAssetMenu(fileName = "Assets/Resources/Abilities/NewLogAbility", menuName = "Systems/Ability/Log Ability")]
     public class LogAbility : Ability
     {
         public override void Bind(IAbility abilityHandler)

@@ -1,7 +1,9 @@
 ﻿using System;
 using JetBrains.Annotations;
+using SejDev.Editor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace SejDev.Systems.Abilities
 {
@@ -20,6 +22,8 @@ namespace SejDev.Systems.Abilities
         public event EventHandler<AbilityActivationEventArgs> OnPreAbilityActivation;
 
         public event EventHandler<AbilityActivationEventArgs> OnPostAbilityActivation;
+        [field: SerializeField, Rename] public Transform AbilityOrigin { get; private set; }
+        [field: SerializeField, Rename] public Camera TargetingCamera { get; private set; }
 
         public void ChangeAbility(Ability ability, AbilitySlot slot)
         {
@@ -62,7 +66,8 @@ namespace SejDev.Systems.Abilities
             }
         }
 
-        private void Start()
+
+        private void OnEnable()
         {
             // InputManager.Instance.PlayerInput.Controls.Core1.started += ActivateCore1;
             InputManager.Instance.PlayerInput.Controls.Core1.performed += ActivateCore1;
@@ -89,7 +94,7 @@ namespace SejDev.Systems.Abilities
             // InputManager.Instance.PlayerInput.Controls.WeaponSpecial.canceled += ActivateWeaponSpecial;
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             // InputManager.Instance.PlayerInput.Controls.Core1.started -= ActivateCore1;
             InputManager.Instance.PlayerInput.Controls.Core1.performed -= ActivateCore1;
@@ -159,6 +164,18 @@ namespace SejDev.Systems.Abilities
                 default:
                     throw new ArgumentOutOfRangeException(nameof(slot), slot, null);
             }
+
+            if (int.TryParse(Console.ReadLine(), out var input))
+            {
+                if (input == 1)
+                {
+                    //leave
+                }
+            }
+            else
+            {
+                //tell the user he is to stupid to put in a number
+            }
         }
 
         public void ActivateCore1(InputAction.CallbackContext context)
@@ -173,15 +190,15 @@ namespace SejDev.Systems.Abilities
         public void ActivateCore2(InputAction.CallbackContext context)
         {
             // Debug.Log(context.ToString());
-            if ((bool) !core2?.CanActivate) return;
+            if (core2?.CanActivate != null && !core2.CanActivate) return;
 
             core2?.Activate();
         }
 
         public void ActivateCore3(InputAction.CallbackContext context)
         {
-            Debug.Log(context.ToString());
-            if (core3?.RemainingCooldown > 0) return;
+            // Debug.Log(context.ToString());
+            if (core3?.CanActivate != null && !core3.CanActivate) return;
 
             core3?.Activate();
         }

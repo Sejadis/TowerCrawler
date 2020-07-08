@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 namespace SejDev.Abilities
 {
-    [CreateAssetMenu(fileName = "Assets/Ressources/Abilities/NewWarpAbility",
+    [CreateAssetMenu(fileName = "Assets/Resources/Abilities/NewWarpAbility",
         menuName = "Systems/Ability/Warp")]
     public class Warp : Ability
     {

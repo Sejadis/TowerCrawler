@@ -16,6 +16,7 @@ public class CastBarUI : MonoBehaviour
     private float castTime;
     private float channelTime;
     private AbilityActivationType activationType;
+
     void Start()
     {
         Hide();
@@ -36,7 +37,7 @@ public class CastBarUI : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-    
+
 
     public void Bind(IAbility abilityHandler)
     {
@@ -46,6 +47,7 @@ public class CastBarUI : MonoBehaviour
 
     private void OnPostAbilityActivation(object sender, AbilityActivationEventArgs e)
     {
+        e.ability.AbilityActivator.OnStatusChanged -= OnStatusChanged;
         Hide();
     }
 
@@ -61,19 +63,20 @@ public class CastBarUI : MonoBehaviour
             case AbilityActivationType.Cast:
                 castTime = e.ability.CastTime;
                 channelTickLayoutParent.SetActive(false);
+                Show();
                 break;
             case AbilityActivationType.Channel:
                 channelTime = e.ability.ChannelTime;
+                Show();
                 break;
             case AbilityActivationType.CastChannel:
                 castTime = e.ability.CastTime;
                 channelTime = e.ability.ChannelTime;
+                Show();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
-
-        Show();
     }
 
     private void OnStatusChanged(object sender, AbilityActivatorStatusChangedEventArgs e)

@@ -2,11 +2,21 @@
 
 namespace SejDev.Systems.Abilities
 {
-    public class RaycastTarget : IAbilityTargeter<Vector3>
+    public class RaycastTarget
     {
-        public Vector3 GetTarget()
+        private Transform origin;
+        private float range;
+
+        public RaycastTarget(Transform origin, float range)
         {
-            return Vector3.zero;
+            this.origin = origin;
+            this.range = range;
+        }
+
+        public Transform GetTarget()
+        {
+            Physics.Raycast(origin.position, origin.forward, out var hit, range);
+            return hit.transform;
         }
     }
 }

@@ -11,22 +11,22 @@ namespace SejDev.Abilities
     {
         [field: SerializeField, Rename] public float HitRange { get; private set; }
         [field: SerializeField, Rename] public int Damage { get; private set; }
-        private RaycastTarget raycastTarget;
 
         public override void Bind(IAbility abilityHandler)
         {
-            base.Bind(abilityHandler);
-            raycastTarget = new RaycastTarget(abilityHandler.TargetingCamera.transform, HitRange);
+            RaycastTargeter raycastTargeter = new RaycastTargeter(abilityHandler.TargetingCamera.transform, HitRange);
+            base.Bind(abilityHandler, raycastTargeter);
         }
 
         protected override void PerformAbility()
         {
             base.PerformAbility();
-            Transform target = raycastTarget.GetTarget();
             // Debug.Log($"Hit {(target ? target.name : "nothing")}");
+
             if (target != null)
             {
-                IDamagable damagable = target.GetComponent<IDamagable>();
+                Transform hit = target as Transform;
+                IDamagable damagable = hit.GetComponent<IDamagable>();
                 if (damagable != null)
                 {
                     damagable.TakeDamage(this, Damage);

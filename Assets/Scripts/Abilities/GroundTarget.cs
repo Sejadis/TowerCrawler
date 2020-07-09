@@ -12,27 +12,17 @@ namespace SejDev.Abilities
         [field: SerializeField, Rename] public int Size { get; private set; }
         [SerializeField] private GameObject spawnPrefab;
 
-        private GroundTargeting groundTargeting;
-
         public override void Bind(IAbility abilityHandler)
         {
-            base.Bind(abilityHandler);
-            groundTargeting = new GroundTargeting(abilityHandler.TargetingCamera, Range, Size,
+            GroundTargeting groundTargeting = new GroundTargeting(abilityHandler.TargetingCamera, Range, Size,
                 1 << LayerMask.NameToLayer("Ground"), abilityHandler as MonoBehaviour);
+            base.Bind(abilityHandler, groundTargeting);
         }
 
         protected override void PerformAbility()
         {
-            if (!groundTargeting.IsTargeting)
-            {
-                groundTargeting.StartTargeting();
-            }
-            else
-            {
-                base.PerformAbility();
-                Vector3 target = groundTargeting.GetTarget();
-                Instantiate(spawnPrefab, target, Quaternion.identity);
-            }
+            base.PerformAbility();
+            Instantiate(spawnPrefab, (Vector3) target, Quaternion.identity);
         }
     }
 }

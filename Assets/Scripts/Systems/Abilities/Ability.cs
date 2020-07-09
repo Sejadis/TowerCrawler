@@ -1,5 +1,6 @@
 ﻿using System;
 using JetBrains.Annotations;
+using NSubstitute;
 using SejDev.Abilities.Activator;
 using SejDev.Editor;
 using UnityEngine;
@@ -74,7 +75,8 @@ namespace SejDev.Systems.Abilities
 
         public IAbilityActivator AbilityActivator { get; protected set; }
 
-        // public IAbilityTargeter AbilityTargeter { get; protected set; }
+        private IAbilityTargeter AbilityTargeter;
+        protected object target;
         public event EventHandler<AbilityActivationEventArgs> OnPreAbilityActivation;
         public event EventHandler<AbilityActivationEventArgs> OnPostAbilityActivation;
 
@@ -83,6 +85,12 @@ namespace SejDev.Systems.Abilities
 
         public virtual void Bind([NotNull] IAbility abilityHandler)
         {
+            Bind(abilityHandler, null);
+        }
+
+        protected void Bind([NotNull] IAbility abilityHandler, IAbilityTargeter abilityTargeter)
+        {
+            AbilityTargeter = abilityTargeter;
             abilityManager = abilityHandler;
             abilityActivationEventArgs = new AbilityActivationEventArgs(this);
             switch (AbilityActivationType)
@@ -123,31 +131,22 @@ namespace SejDev.Systems.Abilities
         {
             // Debug.Log($"call to activate (will be {CanActivate})");
             if (!CanActivate) return;
-            OnPreAbilityActivation?.Invoke(this, abilityActivationEventArgs);
-            AbilityActivator.Activate();
-        }
 
-        public void UpdateCooldown(float deltaTime)
-        {
-            if (RemainingCooldown == 0) return;
-
-            var old = RemainingCooldown;
-            RemainingCooldown -= deltaTime;
-            if (RemainingCooldown <= 0)
+            if (AbilityTargeter != null)
             {
-                RemainingCooldown = 0;
-                if (Type == AbilityType.Charge && CurrentCharges < Charges)
+                if (AbilityTargeter.RequiresSeperateTargeting && !AbilityTargeter.IsTargeting)
                 {
-                    CurrentCharges++;
-                    OnChargesChanged?.Invoke(this, new OldNewEventArgs<int>(CurrentCharges - 1, CurrentCharges));
-                    if (CurrentCharges < Charges)
-                    {
-                        RemainingCooldown += ChargeCooldown;
-                    }
+                    AbilityTargeter.StartTargeting();
+                    return;
+                }
+                else
+                {
+                    target = AbilityTargeter.GetTarget();
                 }
             }
 
-            OnCooldownChanged?.Invoke(this, new OldNewEventArgs<float>(old, RemainingCooldown));
+            OnPreAbilityActivation?.Invoke(this, abilityActivationEventArgs);
+            AbilityActivator.Activate();
         }
 
         protected virtual void PerformAbility()
@@ -173,5 +172,40 @@ namespace SejDev.Systems.Abilities
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+        public void UpdateCooldown(float deltaTime)
+        {
+            if (RemainingCooldown == 0) return;
+
+            var old = RemainingCooldown;
+            RemainingCooldown -= deltaTime;
+            if (RemainingCooldown <= 0)
+            {
+                RemainingCooldown = 0;
+                if (Type == AbilityType.Charge && CurrentCharges < Charges)
+                {
+                    CurrentCharges++;
+                    OnChargesChanged?.Invoke(this, new OldNewEventArgs<int>(CurrentCharges - 1, CurrentCharges));
+                    if (CurrentCharges < Charges)
+                    {
+                        RemainingCooldown += ChargeCooldown;
+                    }
+                }
+            }
+
+            OnCooldownChanged?.Invoke(this, new OldNewEventArgs<float>(old, RemainingCooldown));
+        }
+    }
+
+    public interface IAbilityTargeter
+    {
+        bool IsTargeting { get; }
+        bool RequiresSeperateTargeting { get; }
+
+        /*
+        IAbilitiTargeter(ref object target);
+*/
+        void StartTargeting();
+        object GetTarget();
     }
 }

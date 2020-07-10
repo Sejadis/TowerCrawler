@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using SejDev.Systems.Stats;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,8 +6,6 @@ using UnityEngine.InputSystem;
 namespace SejDev.Player
 {
     [RequireComponent(typeof(Rigidbody))]
-    [RequireComponent(typeof(HealthManager))]
-    [RequireComponent(typeof(StatsManager))]
     public class PlayerController : MonoBehaviour, IEntityController
     {
         public Rigidbody RigidBody { get; private set; }
@@ -34,23 +32,21 @@ namespace SejDev.Player
         void Awake()
         {
             RigidBody = GetComponent<Rigidbody>();
-            HealthManager = GetComponent<HealthManager>();
-            StatsManager = GetComponent<StatsManager>();
-            Stat moveSpeedStat = StatsManager.GetStatByType(StatType.MovementSpeed);
-            moveSpeedStat.OnStatChanged += (_, args) => moveSpeed = args.NewValue;
-            moveSpeed = moveSpeedStat.Value;
+            Stat moveSpeedStat = GetComponent<StatsManager>()?.GetStatByType(StatType.MovementSpeed);
+            if (moveSpeedStat != null)
+            {
+                moveSpeedStat.OnStatChanged += (_, args) => moveSpeed = args.NewValue;
+                moveSpeed = moveSpeedStat.Value;
+            }
+
             currentCameraRotation = playerCamera.rotation.eulerAngles.x;
         }
 
         private void Start()
         {
-            InputManager.Instance.PlayerInput.Controls.Movement.started += OnMovement;
-            InputManager.Instance.PlayerInput.Controls.Movement.performed += OnMovement;
-            InputManager.Instance.PlayerInput.Controls.Movement.canceled += OnMovement;
+            InputManager.Instance.OnMovement += OnMovement;
 
-            InputManager.Instance.PlayerInput.Controls.Look.started += OnLook;
-            InputManager.Instance.PlayerInput.Controls.Look.performed += OnLook;
-            InputManager.Instance.PlayerInput.Controls.Look.canceled += OnLook;
+            InputManager.Instance.OnLook += OnLook;
             Cursor.lockState = CursorLockMode.Locked;
         }
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using JetBrains.Annotations;
 using SejDev.Editor;
 using UnityEngine;
@@ -69,56 +69,68 @@ namespace SejDev.Systems.Abilities
 
         private void OnEnable()
         {
-            // InputManager.Instance.PlayerInput.Controls.Core1.started += ActivateCore1;
-            InputManager.Instance.PlayerInput.Controls.Core1.performed += ActivateCore1;
-            // InputManager.Instance.PlayerInput.Controls.Core1.canceled += ActivateCore1;
+            InputManager.Instance.OnCore1 += ActivateCore1;
+            InputManager.Instance.OnCore2 += ActivateCore2;
+            InputManager.Instance.OnCore3 += ActivateCore3;
+            InputManager.Instance.OnWeaponBase += ActivateWeaponBase;
+            InputManager.Instance.OnWeaponSpecial += ActivateWeaponSpecial;
 
-
-            // InputManager.Instance.PlayerInput.Controls.Core2.started += ActivateCore2;
-            InputManager.Instance.PlayerInput.Controls.Core2.performed += ActivateCore2;
-            // InputManager.Instance.PlayerInput.Controls.Core2.canceled += ActivateCore2;
-
-
-            // InputManager.Instance.PlayerInput.Controls.Core3.started += ActivateCore3;
-            InputManager.Instance.PlayerInput.Controls.Core3.performed += ActivateCore3;
-            // InputManager.Instance.PlayerInput.Controls.Core3.canceled += ActivateCore3;
-
-
-            // InputManager.Instance.PlayerInput.Controls.WeaponBase.started += ActivateWeaponBase;
-            InputManager.Instance.PlayerInput.Controls.WeaponBase.performed += ActivateWeaponBase;
-            // InputManager.Instance.PlayerInput.Controls.WeaponBase.canceled += ActivateWeaponBase;
-
-
-            // InputManager.Instance.PlayerInput.Controls.WeaponSpecial.started += ActivateWeaponSpecial;
-            InputManager.Instance.PlayerInput.Controls.WeaponSpecial.performed += ActivateWeaponSpecial;
-            // InputManager.Instance.PlayerInput.Controls.WeaponSpecial.canceled += ActivateWeaponSpecial;
+            // // InputManager.Instance.PlayerInput.Controls.Core1.started += ActivateCore1;
+            // InputManager.Instance.PlayerInput.Controls.Core1.performed += ActivateCore1;
+            // // InputManager.Instance.PlayerInput.Controls.Core1.canceled += ActivateCore1;
+            //
+            //
+            // // InputManager.Instance.PlayerInput.Controls.Core2.started += ActivateCore2;
+            // InputManager.Instance.PlayerInput.Controls.Core2.performed += ActivateCore2;
+            // // InputManager.Instance.PlayerInput.Controls.Core2.canceled += ActivateCore2;
+            //
+            //
+            // // InputManager.Instance.PlayerInput.Controls.Core3.started += ActivateCore3;
+            // InputManager.Instance.PlayerInput.Controls.Core3.performed += ActivateCore3;
+            // // InputManager.Instance.PlayerInput.Controls.Core3.canceled += ActivateCore3;
+            //
+            //
+            // // InputManager.Instance.PlayerInput.Controls.WeaponBase.started += ActivateWeaponBase;
+            // InputManager.Instance.PlayerInput.Controls.WeaponBase.performed += ActivateWeaponBase;
+            // // InputManager.Instance.PlayerInput.Controls.WeaponBase.canceled += ActivateWeaponBase;
+            //
+            //
+            // // InputManager.Instance.PlayerInput.Controls.WeaponSpecial.started += ActivateWeaponSpecial;
+            // InputManager.Instance.PlayerInput.Controls.WeaponSpecial.performed += ActivateWeaponSpecial;
+            // // InputManager.Instance.PlayerInput.Controls.WeaponSpecial.canceled += ActivateWeaponSpecial;
         }
 
         private void OnDisable()
         {
-            // InputManager.Instance.PlayerInput.Controls.Core1.started -= ActivateCore1;
-            InputManager.Instance.PlayerInput.Controls.Core1.performed -= ActivateCore1;
-            // InputManager.Instance.PlayerInput.Controls.Core1.canceled -= ActivateCore1;
+            InputManager.Instance.OnCore1 -= ActivateCore1;
+            InputManager.Instance.OnCore2 -= ActivateCore2;
+            InputManager.Instance.OnCore3 -= ActivateCore3;
+            InputManager.Instance.OnWeaponBase -= ActivateWeaponBase;
+            InputManager.Instance.OnWeaponSpecial -= ActivateWeaponSpecial;
 
-
-            // InputManager.Instance.PlayerInput.Controls.Core2.started -= ActivateCore2;
-            InputManager.Instance.PlayerInput.Controls.Core2.performed -= ActivateCore2;
-            // InputManager.Instance.PlayerInput.Controls.Core2.canceled -= ActivateCore2;
-
-
-            // InputManager.Instance.PlayerInput.Controls.Core3.started -= ActivateCore3;
-            InputManager.Instance.PlayerInput.Controls.Core3.performed -= ActivateCore3;
-            // InputManager.Instance.PlayerInput.Controls.Core3.canceled -= ActivateCore3;
-
-
-            // InputManager.Instance.PlayerInput.Controls.WeaponBase.started -= ActivateWeaponBase;
-            InputManager.Instance.PlayerInput.Controls.WeaponBase.performed -= ActivateWeaponBase;
-            // InputManager.Instance.PlayerInput.Controls.WeaponBase.canceled -= ActivateWeaponBase;
-
-
-            // InputManager.Instance.PlayerInput.Controls.WeaponSpecial.started -= ActivateWeaponSpecial;
-            InputManager.Instance.PlayerInput.Controls.WeaponSpecial.performed -= ActivateWeaponSpecial;
-            // InputManager.Instance.PlayerInput.Controls.WeaponSpecial.canceled -= ActivateWeaponSpecial;
+            // // InputManager.Instance.PlayerInput.Controls.Core1.started -= ActivateCore1;
+            // InputManager.Instance.PlayerInput.Controls.Core1.performed -= ActivateCore1;
+            // // InputManager.Instance.PlayerInput.Controls.Core1.canceled -= ActivateCore1;
+            //
+            //
+            // // InputManager.Instance.PlayerInput.Controls.Core2.started -= ActivateCore2;
+            // InputManager.Instance.PlayerInput.Controls.Core2.performed -= ActivateCore2;
+            // // InputManager.Instance.PlayerInput.Controls.Core2.canceled -= ActivateCore2;
+            //
+            //
+            // // InputManager.Instance.PlayerInput.Controls.Core3.started -= ActivateCore3;
+            // InputManager.Instance.PlayerInput.Controls.Core3.performed -= ActivateCore3;
+            // // InputManager.Instance.PlayerInput.Controls.Core3.canceled -= ActivateCore3;
+            //
+            //
+            // // InputManager.Instance.PlayerInput.Controls.WeaponBase.started -= ActivateWeaponBase;
+            // InputManager.Instance.PlayerInput.Controls.WeaponBase.performed -= ActivateWeaponBase;
+            // // InputManager.Instance.PlayerInput.Controls.WeaponBase.canceled -= ActivateWeaponBase;
+            //
+            //
+            // // InputManager.Instance.PlayerInput.Controls.WeaponSpecial.started -= ActivateWeaponSpecial;
+            // InputManager.Instance.PlayerInput.Controls.WeaponSpecial.performed -= ActivateWeaponSpecial;
+            // // InputManager.Instance.PlayerInput.Controls.WeaponSpecial.canceled -= ActivateWeaponSpecial;
         }
 
         private void Update()

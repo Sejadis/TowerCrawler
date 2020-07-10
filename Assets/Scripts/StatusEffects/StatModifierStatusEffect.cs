@@ -4,13 +4,14 @@ using UnityEngine;
 
 namespace SejDev.StatusEffects
 {
-    [CreateAssetMenu(fileName = "Assets/Ressources/StatusEffects/NewStatModifierEffect", menuName = "Systems/Status Effects/Stat Modifier")]
+    [CreateAssetMenu(fileName = "Assets/Resources/StatusEffects/NewStatModifierEffect",
+        menuName = "Systems/Status Effects/Stat Modifier")]
     public class StatModifierStatusEffect : StatusEffect
     {
         IStats stats;
         [SerializeField] private StatType affectedStat;
         [SerializeField] private Modifier modifier;
-        
+
 
         public override void Bind(StatusEffectManager statusEffectManager)
         {
@@ -23,7 +24,7 @@ namespace SejDev.StatusEffects
             }
             else
             {
-               stats.AddModifier(affectedStat, modifier);
+                stats.AddModifier(affectedStat, modifier);
             }
         }
 

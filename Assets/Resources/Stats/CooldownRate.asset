@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c886dda536beac4b8d6aca09bd39067, type: 3}
-  m_Name: MoveSpeed
-  m_EditorClassIdentifier: Scripts:Sejadis.Systems.Stats:Stat
-  baseValue: 5
-  restrictor: {fileID: 11400000, guid: 9f0c3037316ce0f42b81d4af0d78bb57, type: 2}
-  <Type>k__BackingField: 1
+  m_Name: CooldownRate
+  m_EditorClassIdentifier: 
+  baseValue: 1
+  restrictor: {fileID: 0}
+  <Type>k__BackingField: 3

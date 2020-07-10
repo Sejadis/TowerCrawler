@@ -1,6 +1,7 @@
-using System;
+﻿using System;
 using JetBrains.Annotations;
 using SejDev.Editor;
+using SejDev.Systems.Stats;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -24,6 +25,9 @@ namespace SejDev.Systems.Abilities
         public event EventHandler<AbilityActivationEventArgs> OnPostAbilityActivation;
         [field: SerializeField, Rename] public Transform AbilityOrigin { get; private set; }
         [field: SerializeField, Rename] public Camera TargetingCamera { get; private set; }
+
+        private Stat castTimeStat;
+        private float cooldownRate = 1;
 
         public void ChangeAbility(Ability ability, AbilitySlot slot)
         {
@@ -63,6 +67,22 @@ namespace SejDev.Systems.Abilities
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(slot), slot, null);
+            }
+        }
+
+        private void Start()
+        {
+            var handler = GetComponent<IStats>();
+            if (handler != null)
+            {
+                var cooldownRateStat = handler.GetStatByType(StatType.CooldownRate);
+                if (cooldownRateStat != null)
+                {
+                    cooldownRate = cooldownRateStat.Value;
+                    cooldownRateStat.OnStatChanged += (s, args) => cooldownRate = args.NewValue;
+                }
+
+                // castTimeStat = handler?.GetStatByType(StatType.CastTime);
             }
         }
 
@@ -135,11 +155,13 @@ namespace SejDev.Systems.Abilities
 
         private void Update()
         {
-            weaponBase?.UpdateCooldown(Time.deltaTime);
-            weaponSpecial?.UpdateCooldown(Time.deltaTime);
-            core1?.UpdateCooldown(Time.deltaTime);
-            core2?.UpdateCooldown(Time.deltaTime);
-            core3?.UpdateCooldown(Time.deltaTime);
+            float delta = Time.deltaTime;
+            delta *= cooldownRate;
+            weaponBase?.UpdateCooldown(delta);
+            weaponSpecial?.UpdateCooldown(delta);
+            core1?.UpdateCooldown(delta);
+            core2?.UpdateCooldown(delta);
+            core3?.UpdateCooldown(delta);
         }
 
         private void RaiseOnPostAbilityActivation(object sender, AbilityActivationEventArgs e)

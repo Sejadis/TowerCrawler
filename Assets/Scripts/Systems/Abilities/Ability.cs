@@ -7,8 +7,32 @@ using UnityEngine;
 
 namespace SejDev.Systems.Abilities
 {
-    public abstract class Ability : ScriptableObject
+    [Serializable]
+    public abstract class Ability : ScriptableObject, IEquatable<Ability>
     {
+        public bool Equals(Ability other)
+        {
+            return base.Equals(other) && guid.Equals(other.guid);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Ability) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (base.GetHashCode() * 397) ^ guid.GetHashCode();
+            }
+        }
+
+        private Guid guid = Guid.NewGuid();
+
         //TODO replace Header attributes by custom inspector
         private AbilityActivationEventArgs abilityActivationEventArgs;
         private IAbility abilityManager;
@@ -69,7 +93,9 @@ namespace SejDev.Systems.Abilities
         [field: Header("Channel")]
         public float ChannelTime { get; protected set; }
 
-        public bool CanActivate => !AbilityActivator.IsActive && (RemainingCooldown <= 0 || CurrentCharges > 0);
+        public bool CanActivate => (AbilityActivator == null || !AbilityActivator.IsActive) &&
+                                   (RemainingCooldown <= 0 || CurrentCharges > 0);
+
         public float RemainingCooldown { get; protected set; }
         public int CurrentCharges { get; protected set; }
 

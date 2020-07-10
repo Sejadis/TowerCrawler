@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SejDev.Systems.Stats
 {
-    [CreateAssetMenu(fileName = "Assets/Ressources/Stats/NewStat", menuName = "Systems/Stats/Stat")]
+    [CreateAssetMenu(fileName = "Assets/Resources/Stats/NewStat", menuName = "Systems/Stats/Stat")]
     public class Stat : ScriptableObject
     {
         [SerializeField] protected float baseValue;
@@ -62,7 +62,7 @@ namespace SejDev.Systems.Stats
             if (restrictor != null && sameSign)
             {
                 newValue = Mathf.Clamp(newValue, baseValue * restrictor.minPercent,
-                baseValue * restrictor.maxPercent);
+                    baseValue * restrictor.maxPercent);
             }
 
             newValue += absoluteOverriding; //final value for sameSign / differentSign+overridebigger
@@ -71,7 +71,7 @@ namespace SejDev.Systems.Stats
                 newValue = Mathf.Clamp(newValue, baseValue * restrictor.minPercent,
                     baseValue * restrictor.maxPercent);
             }
-            
+
             // if (sameSign)
             // {
             //     //same sign
@@ -120,7 +120,8 @@ namespace SejDev.Systems.Stats
 
     public class ModifierEvalutationTestImpl
     {
-        public float Evaluate(float baseValue, float absoluteNormal, float absoluteOverriding, StatRestrictor restrictor)
+        public float Evaluate(float baseValue, float absoluteNormal, float absoluteOverriding,
+            StatRestrictor restrictor)
         {
             var newValue = baseValue;
 

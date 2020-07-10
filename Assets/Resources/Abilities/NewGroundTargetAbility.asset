@@ -21,8 +21,8 @@ MonoBehaviour:
   <Energy>k__BackingField: 0
   <EnergyDrainRate>k__BackingField: 0
   <EnergyFillRate>k__BackingField: 0
-  <AbilityActivationType>k__BackingField: 0
-  <CastTime>k__BackingField: 0
+  <AbilityActivationType>k__BackingField: 1
+  <CastTime>k__BackingField: 1
   <ChannelTime>k__BackingField: 0
   <Range>k__BackingField: 10
   <Size>k__BackingField: 1

@@ -35,11 +35,11 @@ namespace SejDev.Systems.Abilities
                 intendedSlot.OnPostAbilityActivation -= RaiseOnPostAbilityActivation;
             }
 
-            intendedSlot = ability;
+            intendedSlot = Instantiate(ability);
             intendedSlot.OnPreAbilityActivation += RaiseOnPreAbilityActivation;
             intendedSlot.OnPostAbilityActivation += RaiseOnPostAbilityActivation;
-            ability.Bind(this);
-            OnPostAbilityChanged?.Invoke(this, new AbilityChangedEventArgs(slot, ability));
+            intendedSlot.Bind(this);
+            OnPostAbilityChanged?.Invoke(this, new AbilityChangedEventArgs(slot, intendedSlot));
         }
 
         public Ability GetAbilityBySlot(AbilitySlot slot)

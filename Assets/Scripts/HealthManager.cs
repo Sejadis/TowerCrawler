@@ -7,7 +7,6 @@ namespace SejDev
 {
     public class HealthManager : MonoBehaviour, IDamagable, IHealable, IHealth
     {
-
         public int MaxHealth { get; private set; }
         public int CurrentHealth { get; private set; }
 
@@ -19,6 +18,7 @@ namespace SejDev
         public event EventHandler<HealthChangedEventArgs> OnMaxHealthChanged;
 
         private IDamageHandler damageHandler = new PlayerDamageHandler();
+
         void Awake()
         {
             MaxHealth = 150;
@@ -61,7 +61,7 @@ namespace SejDev
             CurrentHealth += amount;
             CurrentHealth = Mathf.Min(CurrentHealth, MaxHealth);
 
-            OnCurrentHealthChanged?.Invoke(this, new HealthChangedEventArgs(oldHealth,CurrentHealth));
+            OnCurrentHealthChanged?.Invoke(this, new HealthChangedEventArgs(oldHealth, CurrentHealth));
             OnPostHeal?.Invoke(this, null);
         }
     }

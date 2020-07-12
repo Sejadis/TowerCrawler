@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0a009b0b80afe347a939d745b60d725, type: 3}
   m_Name: CooldownRateModifier
   m_EditorClassIdentifier: 
-  <EffectType>k__BackingField: 0
+  <EffectType>k__BackingField: 1
   <Name>k__BackingField: 
   <IsExclusive>k__BackingField: 0
   <Duration>k__BackingField: 0
-  affectedStat: 0
+  affectedStat: 3
   modifier:
-    type: 0
-    value: 0
+    type: 1
+    value: 1
     ignoreRestriction: 0

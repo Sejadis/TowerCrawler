@@ -77,6 +77,7 @@
       <Compile Include="Assets\Scripts\Player\MouseLook.cs"/>
       <Compile Include="Assets\Scripts\Player\PlayerAbilityUI.cs"/>
       <Compile Include="Assets\Scripts\Player\PlayerDamageHandler.cs"/>
+      <Compile Include="Assets\Scripts\Player\PlayerHealHandler.cs"/>
       <Compile Include="Assets\Scripts\Player\PlayerMovement.cs"/>
       <Compile Include="Assets\Scripts\Player\PlayerStatusEffectsUI.cs"/>
       <Compile Include="Assets\Scripts\StatusEffects\DamageMitigationStackEffect.cs"/>
@@ -99,8 +100,10 @@
       <Compile Include="Assets\Scripts\Systems\Abilities\RaycastTargeter.cs"/>
       <Compile Include="Assets\Scripts\Systems\Core\DamageFlags.cs"/>
       <Compile Include="Assets\Scripts\Systems\Core\DamageHandlerEventArgs.cs"/>
+      <Compile Include="Assets\Scripts\Systems\Core\HealHandlerEventArgs.cs"/>
       <Compile Include="Assets\Scripts\Systems\Core\IDamagable.cs"/>
       <Compile Include="Assets\Scripts\Systems\Core\IDamageHandler.cs"/>
+      <Compile Include="Assets\Scripts\Systems\Core\IHealHandler.cs"/>
       <Compile Include="Assets\Scripts\Systems\Core\IHealable.cs"/>
       <Compile Include="Assets\Scripts\Systems\Core\IHealth.cs"/>
       <Compile Include="Assets\Scripts\Systems\Core\OldNewEventArgs.cs"/>
@@ -124,16 +127,16 @@
       <Compile Include="Assets\Scripts\Systems\StatusEffects\EffectType.cs"/>
       <Compile Include="Assets\Scripts\Systems\StatusEffects\IBuffable.cs"/>
       <Compile Include="Assets\Scripts\Systems\StatusEffects\StackableStatusEffect.cs"/>
-     <Compile Include="Assets\Scripts\Systems\StatusEffects\StatusEffect.cs" />
-     <Compile Include="Assets\Scripts\Systems\StatusEffects\StatusEffectChangedEventArgs.cs" />
-     <Compile Include="Assets\Scripts\Systems\StatusEffects\StatusEffectManager.cs" />
-     <Compile Include="Assets\Scripts\UI\AbilityHolderUI.cs" />
-     <Compile Include="Assets\Scripts\UI\CastBarUI.cs" />
-     <Compile Include="Assets\Scripts\UI\HealthUI.cs" />
-     <Compile Include="Assets\Scripts\UI\StatusEffectHolderUI.cs" />
-     <None Include="Assets\Scripts\Scripts.asmdef" />
- <Reference Include="Unity.InputSystem">
- <HintPath>G:/Unity/Projects/TowerCrawler/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>
+      <Compile Include="Assets\Scripts\Systems\StatusEffects\StatusEffect.cs"/>
+      <Compile Include="Assets\Scripts\Systems\StatusEffects\StatusEffectChangedEventArgs.cs"/>
+      <Compile Include="Assets\Scripts\Systems\StatusEffects\StatusEffectManager.cs"/>
+      <Compile Include="Assets\Scripts\UI\AbilityHolderUI.cs"/>
+      <Compile Include="Assets\Scripts\UI\CastBarUI.cs"/>
+      <Compile Include="Assets\Scripts\UI\HealthUI.cs"/>
+      <Compile Include="Assets\Scripts\UI\StatusEffectHolderUI.cs"/>
+      <None Include="Assets\Scripts\Scripts.asmdef"/>
+      <Reference Include="Unity.InputSystem">
+          <HintPath>G:/Unity/Projects/TowerCrawler/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
  <HintPath>G:/Unity/Projects/TowerCrawler/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>

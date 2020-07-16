@@ -12,12 +12,13 @@ namespace SejDev
 
         public event EventHandler<DamageHandlerEventArgs> OnPreDamage;
         public event EventHandler<DamageHandlerEventArgs> OnPostDamage;
-        public event EventHandler OnPreHeal;
-        public event EventHandler OnPostHeal;
+        public event EventHandler<HealHandlerEventArgs> OnPreHeal;
+        public event EventHandler<HealHandlerEventArgs> OnPostHeal;
         public event EventHandler<HealthChangedEventArgs> OnCurrentHealthChanged;
         public event EventHandler<HealthChangedEventArgs> OnMaxHealthChanged;
 
         private IDamageHandler damageHandler = new PlayerDamageHandler();
+        private IHealHandler healHandler = new PlayerHealHandler();
 
         void Awake()
         {
@@ -53,16 +54,24 @@ namespace SejDev
             OnPostDamage?.Invoke(this, damageHandlerEventArgs);
         }
 
-        public void Heal(int amount)
+        public void Heal(object source, int amount)
         {
+            int finalHeal;
             int oldHealth = CurrentHealth;
-            OnPreHeal?.Invoke(this, null);
+            HealHandlerEventArgs healHandlerEventArgs = new HealHandlerEventArgs(source, amount);
+            OnPreHeal?.Invoke(this, healHandlerEventArgs);
 
-            CurrentHealth += amount;
+            finalHeal = healHandler.HandleHeal(healHandlerEventArgs);
+            healHandlerEventArgs.finalHeal = finalHeal;
+            CurrentHealth += finalHeal;
             CurrentHealth = Mathf.Min(CurrentHealth, MaxHealth);
+            if (CurrentHealth == MaxHealth)
+            {
+                healHandlerEventArgs.overheal = Mathf.Abs(MaxHealth - oldHealth - finalHeal);
+            }
 
             OnCurrentHealthChanged?.Invoke(this, new HealthChangedEventArgs(oldHealth, CurrentHealth));
-            OnPostHeal?.Invoke(this, null);
+            OnPostHeal?.Invoke(this, healHandlerEventArgs);
         }
     }
 }

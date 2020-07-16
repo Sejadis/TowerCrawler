@@ -4,8 +4,8 @@ namespace SejDev.Systems.Core
 {
     public interface IHealable
     {
-        void Heal(int amount);
-        event EventHandler OnPreHeal;
-        event EventHandler OnPostHeal;
+        void Heal(object source, int amount);
+        event EventHandler<HealHandlerEventArgs> OnPreHeal;
+        event EventHandler<HealHandlerEventArgs> OnPostHeal;
     }
 }

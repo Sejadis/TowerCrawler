@@ -12,7 +12,7 @@ namespace SejDev.Systems.Core.Test
             if (shouldHeal)
             {
                 var healable = other.gameObject.GetComponent<IHealable>();
-                if (healable != null) healable.Heal(amount);
+                if (healable != null) healable.Heal(this, amount);
             }
             else
             {

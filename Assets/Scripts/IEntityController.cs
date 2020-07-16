@@ -1,11 +1,13 @@
+using System;
 using UnityEngine;
 
 namespace SejDev
 {
     public interface IEntityController
     {
-        Vector3 MovementData { get; }
-        Rigidbody RigidBody { get; }
+        bool IsMoving { get; }
+        Vector3 FrameVelocity { get; }
+        event EventHandler<bool> OnMoveStateChanged;
         void WarpPosition(Vector3 direction);
     }
 }

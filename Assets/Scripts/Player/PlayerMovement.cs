@@ -6,18 +6,30 @@ using UnityEngine.InputSystem;
 namespace SejDev.Player
 {
     [RequireComponent(typeof(CharacterController))]
-    public class PlayerMovement : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour, IEntityController
     {
+        public bool IsMoving { get; private set; }
+        public event EventHandler<bool> OnMoveStateChanged;
+
         [SerializeField] private CharacterController controller;
+
         [SerializeField] private float moveSpeed = 15f;
+
         [SerializeField] private float gravityMultiplier = 1;
+
         [SerializeField] private float jumpHeight = 5;
+
         [SerializeField] private float groundCheckRadius = 0.05f;
+
         private Vector2 movementData;
-        private Vector3 velocity = Vector3.zero;
+
+        private Vector3 yVelocity = Vector3.zero;
+        public Vector3 FrameVelocity { get; private set; }
+
         private bool isGrounded;
-        private bool isMoving;
-        [SerializeField] private int allowedMidAirJumps = 0;
+
+        [SerializeField] private int allowedMidAirJumps = 0; //TODO remove serializeField
+
         private int performedMidAirJumps;
 
         private void Awake()
@@ -49,7 +61,7 @@ namespace SejDev.Player
 
         private void Update()
         {
-            var lastMoveState = isMoving;
+            var lastMoveState = IsMoving;
             var lastPosition = transform.position;
             GroundCheck();
             if (isGrounded)
@@ -57,12 +69,13 @@ namespace SejDev.Player
                 performedMidAirJumps = 0;
             }
 
-            Move();
+            ApplyInputMovement();
             ApplyGravity();
-            isMoving = lastPosition != transform.position;
-            if (isMoving != lastMoveState)
+            FrameVelocity = transform.position - lastPosition;
+            IsMoving = !(FrameVelocity == Vector3.zero);
+            if (IsMoving != lastMoveState)
             {
-                //trigger movestate chan
+                OnMoveStateChanged?.Invoke(this, IsMoving);
             }
         }
 
@@ -76,7 +89,7 @@ namespace SejDev.Player
         {
             if (isGrounded || allowedMidAirJumps > performedMidAirJumps)
             {
-                velocity.y = jumpHeight;
+                yVelocity.y = jumpHeight;
                 if (!isGrounded)
                 {
                     performedMidAirJumps++;
@@ -84,7 +97,7 @@ namespace SejDev.Player
             }
         }
 
-        private void Move()
+        private void ApplyInputMovement()
         {
             var finalMove = movementData.x * transform.right;
             finalMove += movementData.y * transform.forward;
@@ -95,16 +108,16 @@ namespace SejDev.Player
 
         private void ApplyGravity()
         {
-            if (isGrounded && velocity.y < 0)
+            if (isGrounded && yVelocity.y < 0)
             {
-                velocity.y = -2f;
+                yVelocity.y = -2f;
             }
             else
             {
-                velocity += Physics.gravity * (gravityMultiplier * Time.deltaTime);
+                yVelocity += Physics.gravity * (gravityMultiplier * Time.deltaTime);
             }
 
-            controller.Move(velocity * Time.deltaTime);
+            controller.Move(yVelocity * Time.deltaTime);
         }
 
         private void GroundCheck()
@@ -112,6 +125,11 @@ namespace SejDev.Player
             isGrounded = Physics.CheckSphere(transform.position - new Vector3(0, controller.height / 2f, 0),
                 groundCheckRadius,
                 1 << LayerMask.NameToLayer("Ground"));
+        }
+
+        public void WarpPosition(Vector3 direction)
+        {
+            controller.Move(direction);
         }
 
         private void OnDrawGizmosSelected()

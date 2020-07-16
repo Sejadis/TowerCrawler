@@ -34,7 +34,7 @@ namespace SejDev.Systems.Abilities
         private Guid guid = Guid.NewGuid();
 
         //TODO replace Header attributes by custom inspector
-        private AbilityActivationEventArgs abilityActivationEventArgs;
+        private AbilityStatusEventArgs abilityStatusEventArgs;
         private IAbility abilityManager;
 
         [field: Rename]
@@ -103,8 +103,9 @@ namespace SejDev.Systems.Abilities
 
         private IAbilityTargeter AbilityTargeter;
         protected object target;
-        public event EventHandler<AbilityActivationEventArgs> OnPreAbilityActivation;
-        public event EventHandler<AbilityActivationEventArgs> OnPostAbilityActivation;
+        public event EventHandler OnAbilityInterrupted;
+        public event EventHandler<AbilityStatusEventArgs> OnPreAbilityActivation;
+        public event EventHandler<AbilityStatusEventArgs> OnPostAbilityActivation;
 
         public event EventHandler<OldNewEventArgs<float>> OnCooldownChanged;
         public event EventHandler<OldNewEventArgs<int>> OnChargesChanged;
@@ -118,7 +119,7 @@ namespace SejDev.Systems.Abilities
         {
             AbilityTargeter = abilityTargeter;
             abilityManager = abilityHandler;
-            abilityActivationEventArgs = new AbilityActivationEventArgs(this);
+            abilityStatusEventArgs = new AbilityStatusEventArgs(this);
             switch (AbilityActivationType)
             {
                 case AbilityActivationType.Instant:
@@ -171,13 +172,13 @@ namespace SejDev.Systems.Abilities
                 }
             }
 
-            OnPreAbilityActivation?.Invoke(this, abilityActivationEventArgs);
+            OnPreAbilityActivation?.Invoke(this, abilityStatusEventArgs);
             AbilityActivator.Activate();
         }
 
         protected virtual void PerformAbility()
         {
-            OnPostAbilityActivation?.Invoke(this, abilityActivationEventArgs);
+            OnPostAbilityActivation?.Invoke(this, abilityStatusEventArgs);
             switch (Type)
             {
                 case AbilityType.Cooldown:
@@ -220,6 +221,12 @@ namespace SejDev.Systems.Abilities
             }
 
             OnCooldownChanged?.Invoke(this, new OldNewEventArgs<float>(old, RemainingCooldown));
+        }
+
+        public void Interrupt()
+        {
+            AbilityActivator.Interrupt();
+            OnAbilityInterrupted?.Invoke(this, null);
         }
     }
 

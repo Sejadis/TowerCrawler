@@ -6,6 +6,7 @@ namespace SejDev.Systems.Abilities
     {
         bool IsActive { get; }
         void Activate();
+        void Interrupt();
         event EventHandler<AbilityActivatorStatusChangedEventArgs> OnStatusChanged;
     }
 }

@@ -9,11 +9,17 @@ namespace SejDev.Abilities.Activator
     public class CastAbilityActivator : IAbilityActivator
     {
         public bool IsActive => isCasting;
+
         public event EventHandler<AbilityActivatorStatusChangedEventArgs> OnStatusChanged;
+
         private Action callback;
+
         private MonoBehaviour routineBase;
+
         private readonly float castTime;
+
         private bool isCasting;
+        private Coroutine coroutine;
 
         public CastAbilityActivator([NotNull] Action callback, float castTime, [NotNull] MonoBehaviour routineBase)
         {
@@ -24,7 +30,13 @@ namespace SejDev.Abilities.Activator
 
         public void Activate()
         {
-            routineBase.StartCoroutine(WaitForCastTime());
+            coroutine = routineBase.StartCoroutine(WaitForCastTime());
+        }
+
+        public void Interrupt()
+        {
+            routineBase.StopCoroutine(coroutine);
+            isCasting = false;
         }
 
 

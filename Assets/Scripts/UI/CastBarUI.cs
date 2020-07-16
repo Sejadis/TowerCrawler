@@ -43,15 +43,22 @@ public class CastBarUI : MonoBehaviour
     {
         abilityHandler.OnPreAbilityActivation += OnPreAbilityActivation;
         abilityHandler.OnPostAbilityActivation += OnPostAbilityActivation;
+        abilityHandler.OnAbilityInterrupted += OnAbilityInterrupted;
     }
 
-    private void OnPostAbilityActivation(object sender, AbilityActivationEventArgs e)
+    private void OnAbilityInterrupted(object sender, AbilityStatusEventArgs e)
     {
         e.ability.AbilityActivator.OnStatusChanged -= OnStatusChanged;
         Hide();
     }
 
-    private void OnPreAbilityActivation(object sender, AbilityActivationEventArgs e)
+    private void OnPostAbilityActivation(object sender, AbilityStatusEventArgs e)
+    {
+        e.ability.AbilityActivator.OnStatusChanged -= OnStatusChanged;
+        Hide();
+    }
+
+    private void OnPreAbilityActivation(object sender, AbilityStatusEventArgs e)
     {
         IAbilityActivator abilityActivator = e.ability.AbilityActivator;
         abilityActivator.OnStatusChanged += OnStatusChanged;

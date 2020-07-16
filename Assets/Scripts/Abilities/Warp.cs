@@ -13,6 +13,7 @@ namespace SejDev.Abilities
     {
         [field: SerializeField, Rename] public float WarpDistance { get; private set; }
         [field: SerializeField, Rename] public bool WarpInMoveDirection { get; private set; }
+        [field: SerializeField, Rename] public bool AllowVerticalWarp { get; private set; } = false;
         private IEntityController controller;
 
         public override void Bind(IAbility abilityHandler)
@@ -28,14 +29,20 @@ namespace SejDev.Abilities
             Vector3 direction;
             if (WarpInMoveDirection)
             {
+                var velocity = controller.FrameVelocity;
                 direction =
-                    (controller.RigidBody.velocity != Vector3.zero
-                        ? controller.RigidBody.velocity.normalized
-                        : controller.RigidBody.transform.forward) * (WarpDistance * 10);
+                    (controller.FrameVelocity != Vector3.zero
+                        ? controller.FrameVelocity.normalized
+                        : (controller as MonoBehaviour).transform.forward) * WarpDistance;
             }
             else
             {
-                direction = controller.RigidBody.transform.forward * (WarpDistance * 10);
+                direction = (controller as MonoBehaviour).transform.forward * WarpDistance;
+            }
+
+            if (!AllowVerticalWarp)
+            {
+                direction.y = -5f;
             }
 
             controller.WarpPosition(direction);

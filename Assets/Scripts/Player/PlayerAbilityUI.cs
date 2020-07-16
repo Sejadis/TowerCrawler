@@ -17,19 +17,19 @@ namespace SejDev.UI
         private void Start()
         {
             weaponBase.Bind(abilityManager.GetAbilityBySlot(AbilitySlot.WeaponBase));
-            weaponBase.Bind(InputManager.Instance.PlayerInput.Controls.WeaponBase.bindings[0]);
+            weaponBase.Bind(InputManager.Instance.PlayerInput.Abilities.WeaponBase.bindings[0]);
 
             weaponSpecial.Bind(abilityManager.GetAbilityBySlot(AbilitySlot.WeaponSpecial));
-            weaponSpecial.Bind(InputManager.Instance.PlayerInput.Controls.WeaponSpecial.bindings[0]);
+            weaponSpecial.Bind(InputManager.Instance.PlayerInput.Abilities.WeaponSpecial.bindings[0]);
 
             core1.Bind(abilityManager.GetAbilityBySlot(AbilitySlot.Core1));
-            core1.Bind(InputManager.Instance.PlayerInput.Controls.Core1.bindings[0]);
+            core1.Bind(InputManager.Instance.PlayerInput.Abilities.Core1.bindings[0]);
 
             core2.Bind(abilityManager.GetAbilityBySlot(AbilitySlot.Core2));
-            core2.Bind(InputManager.Instance.PlayerInput.Controls.Core2.bindings[0]);
+            core2.Bind(InputManager.Instance.PlayerInput.Abilities.Core2.bindings[0]);
 
             core3.Bind(abilityManager.GetAbilityBySlot(AbilitySlot.Core3));
-            core3.Bind(InputManager.Instance.PlayerInput.Controls.Core3.bindings[0]);
+            core3.Bind(InputManager.Instance.PlayerInput.Abilities.Core3.bindings[0]);
             abilityManager.OnPostAbilityChanged += OnPostAbilityChanged;
         }
 

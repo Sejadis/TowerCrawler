@@ -89,11 +89,14 @@ namespace SejDev.Systems.Abilities
 
         private void OnEnable()
         {
-            InputManager.Instance.OnCore1 += ActivateCore1;
-            InputManager.Instance.OnCore2 += ActivateCore2;
-            InputManager.Instance.OnCore3 += ActivateCore3;
-            InputManager.Instance.OnWeaponBase += ActivateWeaponBase;
-            InputManager.Instance.OnWeaponSpecial += ActivateWeaponSpecial;
+            if (InputManager.Instance != null)
+            {
+                InputManager.Instance.OnCore1 += ActivateCore1;
+                InputManager.Instance.OnCore2 += ActivateCore2;
+                InputManager.Instance.OnCore3 += ActivateCore3;
+                InputManager.Instance.OnWeaponBase += ActivateWeaponBase;
+                InputManager.Instance.OnWeaponSpecial += ActivateWeaponSpecial;
+            }
 
             // // InputManager.Instance.PlayerInput.Controls.Core1.started += ActivateCore1;
             // InputManager.Instance.PlayerInput.Controls.Core1.performed += ActivateCore1;
@@ -122,11 +125,14 @@ namespace SejDev.Systems.Abilities
 
         private void OnDisable()
         {
-            InputManager.Instance.OnCore1 -= ActivateCore1;
-            InputManager.Instance.OnCore2 -= ActivateCore2;
-            InputManager.Instance.OnCore3 -= ActivateCore3;
-            InputManager.Instance.OnWeaponBase -= ActivateWeaponBase;
-            InputManager.Instance.OnWeaponSpecial -= ActivateWeaponSpecial;
+            if (InputManager.Instance != null)
+            {
+                InputManager.Instance.OnCore1 -= ActivateCore1;
+                InputManager.Instance.OnCore2 -= ActivateCore2;
+                InputManager.Instance.OnCore3 -= ActivateCore3;
+                InputManager.Instance.OnWeaponBase -= ActivateWeaponBase;
+                InputManager.Instance.OnWeaponSpecial -= ActivateWeaponSpecial;
+            }
 
             // // InputManager.Instance.PlayerInput.Controls.Core1.started -= ActivateCore1;
             // InputManager.Instance.PlayerInput.Controls.Core1.performed -= ActivateCore1;
@@ -197,18 +203,6 @@ namespace SejDev.Systems.Abilities
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(slot), slot, null);
-            }
-
-            if (int.TryParse(Console.ReadLine(), out var input))
-            {
-                if (input == 1)
-                {
-                    //leave
-                }
-            }
-            else
-            {
-                //tell the user he is to stupid to put in a number
             }
         }
 

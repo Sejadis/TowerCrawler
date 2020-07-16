@@ -60,7 +60,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ShadowTex:
-        m_Texture: {fileID: 2800000, guid: 5365af9f63182aa429dab79b72984cf1, type: 3}
+        m_Texture: {fileID: 2800000, guid: 340c8c5f6ed60844faa7b60e5385b9d3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:

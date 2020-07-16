@@ -18,6 +18,7 @@ public class InputManager : MonoBehaviour
     public Action<InputAction.CallbackContext> OnMovement;
 
     public Action<InputAction.CallbackContext> OnLook;
+    public Action<InputAction.CallbackContext> OnJump;
 
     // Start is called before the first frame update
     void Awake()
@@ -33,6 +34,7 @@ public class InputManager : MonoBehaviour
             Destroy(this);
         }
 
+        Application.targetFrameRate = 60;
         PlayerInput = new PlayerInputActionAsset();
 
         PlayerInput.Controls.Movement.started += ctx => OnMovement?.Invoke(ctx);
@@ -43,26 +45,32 @@ public class InputManager : MonoBehaviour
         PlayerInput.Controls.Look.performed += ctx => OnLook?.Invoke(ctx);
         PlayerInput.Controls.Look.canceled += ctx => OnLook?.Invoke(ctx);
 
-        // PlayerInput.Controls.Core1.started += ctx => OnCore1?.Invoke(ctx);
-        PlayerInput.Controls.Core1.performed += ctx => OnCore1?.Invoke(ctx);
-        // PlayerInput.Controls.Core1.canceled += ctx => OnCore1?.Invoke(ctx);
+        // PlayerInput.Controls.Jump.started += ctx => OnJump?.Invoke(ctx);
+        PlayerInput.Controls.Jump.performed += ctx => OnJump?.Invoke(ctx);
+        // PlayerInput.Controls.Jump.canceled += ctx => OnJump?.Invoke(ctx);
 
-        // PlayerInput.Controls.Core2.started += ctx => OnCore2?.Invoke(ctx);
-        PlayerInput.Controls.Core2.performed += ctx => OnCore2?.Invoke(ctx);
-        // PlayerInput.Controls.Core2.canceled += ctx => OnCore2?.Invoke(ctx);
+        PlayerInput.Controls.Enable();
 
-        // PlayerInput.Controls.Core3.started += ctx => OnCore3?.Invoke(ctx);
-        PlayerInput.Controls.Core3.performed += ctx => OnCore3?.Invoke(ctx);
-        // PlayerInput.Controls.Core3.canceled += ctx => OnCore3?.Invoke(ctx);
+        // PlayerInput.Abilities.Core1.started += ctx => OnCore1?.Invoke(ctx);
+        PlayerInput.Abilities.Core1.performed += ctx => OnCore1?.Invoke(ctx);
+        // PlayerInput.Abilities.Core1.canceled += ctx => OnCore1?.Invoke(ctx);
 
-        // PlayerInput.Controls.WeaponBase.started += ctx => OnWeaponBase?.Invoke(ctx);
-        PlayerInput.Controls.WeaponBase.performed += ctx => OnWeaponBase?.Invoke(ctx);
-        // PlayerInput.Controls.WeaponBase.canceled += ctx => OnWeaponBase?.Invoke(ctx);
+        // PlayerInput.Abilities.Core2.started += ctx => OnCore2?.Invoke(ctx);
+        PlayerInput.Abilities.Core2.performed += ctx => OnCore2?.Invoke(ctx);
+        // PlayerInput.Abilities.Core2.canceled += ctx => OnCore2?.Invoke(ctx);
 
-        // PlayerInput.Controls.WeaponSpecial.started += ctx => OnWeaponSpecial?.Invoke(ctx);
-        PlayerInput.Controls.WeaponSpecial.performed += ctx => OnWeaponSpecial?.Invoke(ctx);
-        // PlayerInput.Controls.WeaponSpecial.canceled += ctx => OnWeaponSpecial?.Invoke(ctx);
+        // PlayerInput.Abilities.Core3.started += ctx => OnCore3?.Invoke(ctx);
+        PlayerInput.Abilities.Core3.performed += ctx => OnCore3?.Invoke(ctx);
+        // PlayerInput.Abilities.Core3.canceled += ctx => OnCore3?.Invoke(ctx);
 
-        PlayerInput.Enable();
+        // PlayerInput.Abilities.WeaponBase.started += ctx => OnWeaponBase?.Invoke(ctx);
+        PlayerInput.Abilities.WeaponBase.performed += ctx => OnWeaponBase?.Invoke(ctx);
+        // PlayerInput.Abilities.WeaponBase.canceled += ctx => OnWeaponBase?.Invoke(ctx);
+
+        // PlayerInput.Abilities.WeaponSpecial.started += ctx => OnWeaponSpecial?.Invoke(ctx);
+        PlayerInput.Abilities.WeaponSpecial.performed += ctx => OnWeaponSpecial?.Invoke(ctx);
+        // PlayerInput.Abilities.WeaponSpecial.canceled += ctx => OnWeaponSpecial?.Invoke(ctx);
+
+        PlayerInput.Abilities.Enable();
     }
 }

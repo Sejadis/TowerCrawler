@@ -25,8 +25,8 @@ namespace Editor.Tests.PlayTests
         public IEnumerator MoveUp()
         {
             IEntityController controller = Substitute.For<IEntityController>();
-            var move = new Vector3(0,0,1);
-            player.MovementData.Returns(move);
+            var move = new Vector3(0, 0, 1);
+            // player.MovementData.Returns(move);
 
             yield return new WaitForSeconds(2.2f);
 

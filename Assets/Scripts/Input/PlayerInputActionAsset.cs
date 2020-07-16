@@ -9,6 +9,7 @@ using UnityEngine.InputSystem.Utilities;
 public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
 {
     public InputActionAsset asset { get; }
+
     public @PlayerInputActionAsset()
     {
         asset = InputActionAsset.FromJson(@"{
@@ -35,41 +36,9 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""WeaponBase"",
+                    ""name"": ""Jump"",
                     ""type"": ""Button"",
-                    ""id"": ""215c5b08-8e13-40d0-942e-9b8055a3696e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""WeaponSpecial"",
-                    ""type"": ""Button"",
-                    ""id"": ""23d157c5-9397-44b8-9897-b76e4a5a5d70"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Core1"",
-                    ""type"": ""Button"",
-                    ""id"": ""1832f652-9b35-425d-bf72-23dcf459059f"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Core2"",
-                    ""type"": ""Button"",
-                    ""id"": ""0dfd9319-a4bc-41dc-a550-e67a7b43b5d6"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Core3"",
-                    ""type"": ""Button"",
-                    ""id"": ""e1db2890-6997-4ce4-b139-ca77bf9e4971"",
+                    ""id"": ""ee4c42e8-e94b-4d54-b29b-7b3d33e76960"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -144,56 +113,12 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4575ecaa-a973-461c-ae39-605d2d9f3f3e"",
-                    ""path"": ""<Keyboard>/3"",
+                    ""id"": ""2517b5cd-ca1b-46d0-a0ed-c8a17238ee8d"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Core1"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3a170a71-97fa-4b62-bcd3-ef3719ee8f3c"",
-                    ""path"": ""<Keyboard>/1"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""WeaponBase"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2d2f8b94-08a9-4a35-a917-ddba905e4fc0"",
-                    ""path"": ""<Keyboard>/2"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""WeaponSpecial"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6cf9a54b-d2b3-4f21-937b-8d3460fdb638"",
-                    ""path"": ""<Keyboard>/4"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Core2"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d86b0b04-7658-4f05-87d4-2263025033d6"",
-                    ""path"": ""<Keyboard>/5"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Core3"",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -321,11 +246,7 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
         m_Controls = asset.FindActionMap("Controls", throwIfNotFound: true);
         m_Controls_Movement = m_Controls.FindAction("Movement", throwIfNotFound: true);
         m_Controls_Look = m_Controls.FindAction("Look", throwIfNotFound: true);
-        m_Controls_WeaponBase = m_Controls.FindAction("WeaponBase", throwIfNotFound: true);
-        m_Controls_WeaponSpecial = m_Controls.FindAction("WeaponSpecial", throwIfNotFound: true);
-        m_Controls_Core1 = m_Controls.FindAction("Core1", throwIfNotFound: true);
-        m_Controls_Core2 = m_Controls.FindAction("Core2", throwIfNotFound: true);
-        m_Controls_Core3 = m_Controls.FindAction("Core3", throwIfNotFound: true);
+        m_Controls_Jump = m_Controls.FindAction("Jump", throwIfNotFound: true);
         // Abilities
         m_Abilities = asset.FindActionMap("Abilities", throwIfNotFound: true);
         m_Abilities_WeaponBase = m_Abilities.FindAction("WeaponBase", throwIfNotFound: true);
@@ -384,27 +305,43 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
     private IControlsActions m_ControlsActionsCallbackInterface;
     private readonly InputAction m_Controls_Movement;
     private readonly InputAction m_Controls_Look;
-    private readonly InputAction m_Controls_WeaponBase;
-    private readonly InputAction m_Controls_WeaponSpecial;
-    private readonly InputAction m_Controls_Core1;
-    private readonly InputAction m_Controls_Core2;
-    private readonly InputAction m_Controls_Core3;
+    private readonly InputAction m_Controls_Jump;
+
     public struct ControlsActions
     {
         private @PlayerInputActionAsset m_Wrapper;
-        public ControlsActions(@PlayerInputActionAsset wrapper) { m_Wrapper = wrapper; }
+
+        public ControlsActions(@PlayerInputActionAsset wrapper)
+        {
+            m_Wrapper = wrapper;
+        }
+
         public InputAction @Movement => m_Wrapper.m_Controls_Movement;
         public InputAction @Look => m_Wrapper.m_Controls_Look;
-        public InputAction @WeaponBase => m_Wrapper.m_Controls_WeaponBase;
-        public InputAction @WeaponSpecial => m_Wrapper.m_Controls_WeaponSpecial;
-        public InputAction @Core1 => m_Wrapper.m_Controls_Core1;
-        public InputAction @Core2 => m_Wrapper.m_Controls_Core2;
-        public InputAction @Core3 => m_Wrapper.m_Controls_Core3;
-        public InputActionMap Get() { return m_Wrapper.m_Controls; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
+        public InputAction @Jump => m_Wrapper.m_Controls_Jump;
+
+        public InputActionMap Get()
+        {
+            return m_Wrapper.m_Controls;
+        }
+
+        public void Enable()
+        {
+            Get().Enable();
+        }
+
+        public void Disable()
+        {
+            Get().Disable();
+        }
+
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(ControlsActions set) { return set.Get(); }
+
+        public static implicit operator InputActionMap(ControlsActions set)
+        {
+            return set.Get();
+        }
+
         public void SetCallbacks(IControlsActions instance)
         {
             if (m_Wrapper.m_ControlsActionsCallbackInterface != null)
@@ -415,22 +352,11 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                 @Look.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnLook;
                 @Look.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnLook;
                 @Look.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnLook;
-                @WeaponBase.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnWeaponBase;
-                @WeaponBase.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnWeaponBase;
-                @WeaponBase.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnWeaponBase;
-                @WeaponSpecial.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnWeaponSpecial;
-                @WeaponSpecial.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnWeaponSpecial;
-                @WeaponSpecial.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnWeaponSpecial;
-                @Core1.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnCore1;
-                @Core1.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnCore1;
-                @Core1.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnCore1;
-                @Core2.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnCore2;
-                @Core2.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnCore2;
-                @Core2.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnCore2;
-                @Core3.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnCore3;
-                @Core3.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnCore3;
-                @Core3.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnCore3;
+                @Jump.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnJump;
             }
+
             m_Wrapper.m_ControlsActionsCallbackInterface = instance;
             if (instance != null)
             {
@@ -440,24 +366,13 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
-                @WeaponBase.started += instance.OnWeaponBase;
-                @WeaponBase.performed += instance.OnWeaponBase;
-                @WeaponBase.canceled += instance.OnWeaponBase;
-                @WeaponSpecial.started += instance.OnWeaponSpecial;
-                @WeaponSpecial.performed += instance.OnWeaponSpecial;
-                @WeaponSpecial.canceled += instance.OnWeaponSpecial;
-                @Core1.started += instance.OnCore1;
-                @Core1.performed += instance.OnCore1;
-                @Core1.canceled += instance.OnCore1;
-                @Core2.started += instance.OnCore2;
-                @Core2.performed += instance.OnCore2;
-                @Core2.canceled += instance.OnCore2;
-                @Core3.started += instance.OnCore3;
-                @Core3.performed += instance.OnCore3;
-                @Core3.canceled += instance.OnCore3;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
             }
         }
     }
+
     public ControlsActions @Controls => new ControlsActions(this);
 
     // Abilities
@@ -468,20 +383,44 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
     private readonly InputAction m_Abilities_Core1;
     private readonly InputAction m_Abilities_Core2;
     private readonly InputAction m_Abilities_Core3;
+
     public struct AbilitiesActions
     {
         private @PlayerInputActionAsset m_Wrapper;
-        public AbilitiesActions(@PlayerInputActionAsset wrapper) { m_Wrapper = wrapper; }
+
+        public AbilitiesActions(@PlayerInputActionAsset wrapper)
+        {
+            m_Wrapper = wrapper;
+        }
+
         public InputAction @WeaponBase => m_Wrapper.m_Abilities_WeaponBase;
         public InputAction @WeaponSpecial => m_Wrapper.m_Abilities_WeaponSpecial;
         public InputAction @Core1 => m_Wrapper.m_Abilities_Core1;
         public InputAction @Core2 => m_Wrapper.m_Abilities_Core2;
         public InputAction @Core3 => m_Wrapper.m_Abilities_Core3;
-        public InputActionMap Get() { return m_Wrapper.m_Abilities; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
+
+        public InputActionMap Get()
+        {
+            return m_Wrapper.m_Abilities;
+        }
+
+        public void Enable()
+        {
+            Get().Enable();
+        }
+
+        public void Disable()
+        {
+            Get().Disable();
+        }
+
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(AbilitiesActions set) { return set.Get(); }
+
+        public static implicit operator InputActionMap(AbilitiesActions set)
+        {
+            return set.Get();
+        }
+
         public void SetCallbacks(IAbilitiesActions instance)
         {
             if (m_Wrapper.m_AbilitiesActionsCallbackInterface != null)
@@ -502,6 +441,7 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                 @Core3.performed -= m_Wrapper.m_AbilitiesActionsCallbackInterface.OnCore3;
                 @Core3.canceled -= m_Wrapper.m_AbilitiesActionsCallbackInterface.OnCore3;
             }
+
             m_Wrapper.m_AbilitiesActionsCallbackInterface = instance;
             if (instance != null)
             {
@@ -523,8 +463,10 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
             }
         }
     }
+
     public AbilitiesActions @Abilities => new AbilitiesActions(this);
     private int m_KeyboardSchemeIndex = -1;
+
     public InputControlScheme KeyboardScheme
     {
         get
@@ -533,16 +475,14 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
             return asset.controlSchemes[m_KeyboardSchemeIndex];
         }
     }
+
     public interface IControlsActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
-        void OnWeaponBase(InputAction.CallbackContext context);
-        void OnWeaponSpecial(InputAction.CallbackContext context);
-        void OnCore1(InputAction.CallbackContext context);
-        void OnCore2(InputAction.CallbackContext context);
-        void OnCore3(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
+
     public interface IAbilitiesActions
     {
         void OnWeaponBase(InputAction.CallbackContext context);

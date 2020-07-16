@@ -6,5 +6,6 @@
         MovementSpeed,
         CastTime,
         CooldownRate,
+        MidAirJump,
     }
 }

@@ -9,15 +9,10 @@ namespace SejDev.Abilities.Activator
     public class CastAbilityActivator : IAbilityActivator
     {
         public bool IsActive => isCasting;
-
         public event EventHandler<AbilityActivatorStatusChangedEventArgs> OnStatusChanged;
-
         private Action callback;
-
         private MonoBehaviour routineBase;
-
         private readonly float castTime;
-
         private bool isCasting;
         private Coroutine coroutine;
 

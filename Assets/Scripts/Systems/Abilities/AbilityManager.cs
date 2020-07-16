@@ -17,17 +17,17 @@ namespace SejDev.Systems.Abilities
         [CanBeNull] private Ability weaponSpecial;
 
         public event EventHandler OnPreAbilityChanged;
-
         public event EventHandler<AbilityChangedEventArgs> OnPostAbilityChanged;
+        public event EventHandler<AbilityStatusEventArgs> OnPreAbilityActivation;
+        public event EventHandler<AbilityStatusEventArgs> OnAbilityInterrupted;
+        public event EventHandler<AbilityStatusEventArgs> OnPostAbilityActivation;
 
-        public event EventHandler<AbilityActivationEventArgs> OnPreAbilityActivation;
-
-        public event EventHandler<AbilityActivationEventArgs> OnPostAbilityActivation;
         [field: SerializeField, Rename] public Transform AbilityOrigin { get; private set; }
         [field: SerializeField, Rename] public Camera TargetingCamera { get; private set; }
 
         private Stat castTimeStat;
         private float cooldownRate = 1;
+        private Ability activeAbility;
 
         public void ChangeAbility(Ability ability, AbilitySlot slot)
         {
@@ -37,11 +37,13 @@ namespace SejDev.Systems.Abilities
             {
                 intendedSlot.OnPreAbilityActivation -= RaiseOnPreAbilityActivation;
                 intendedSlot.OnPostAbilityActivation -= RaiseOnPostAbilityActivation;
+                intendedSlot.OnAbilityInterrupted -= RaiseOnAbilityInterrupted;
             }
 
             intendedSlot = Instantiate(ability);
             intendedSlot.OnPreAbilityActivation += RaiseOnPreAbilityActivation;
             intendedSlot.OnPostAbilityActivation += RaiseOnPostAbilityActivation;
+            intendedSlot.OnAbilityInterrupted += RaiseOnAbilityInterrupted;
             intendedSlot.Bind(this);
             OnPostAbilityChanged?.Invoke(this, new AbilityChangedEventArgs(slot, intendedSlot));
         }
@@ -82,8 +84,19 @@ namespace SejDev.Systems.Abilities
                     cooldownRateStat.OnStatChanged += (s, args) => cooldownRate = args.NewValue;
                 }
 
-                // castTimeStat = handler?.GetStatByType(StatType.CastTime);
+                //TODO castTimeStat = handler?.GetStatByType(StatType.CastTime);
             }
+
+            var movementHandler = GetComponent<IEntityController>();
+            if (movementHandler != null)
+            {
+                movementHandler.OnMoveStateChanged += OnOnMoveStateChanged;
+            }
+        }
+
+        private void OnOnMoveStateChanged(object sender, bool e)
+        {
+            activeAbility?.Interrupt();
         }
 
 
@@ -97,30 +110,6 @@ namespace SejDev.Systems.Abilities
                 InputManager.Instance.OnWeaponBase += ActivateWeaponBase;
                 InputManager.Instance.OnWeaponSpecial += ActivateWeaponSpecial;
             }
-
-            // // InputManager.Instance.PlayerInput.Controls.Core1.started += ActivateCore1;
-            // InputManager.Instance.PlayerInput.Controls.Core1.performed += ActivateCore1;
-            // // InputManager.Instance.PlayerInput.Controls.Core1.canceled += ActivateCore1;
-            //
-            //
-            // // InputManager.Instance.PlayerInput.Controls.Core2.started += ActivateCore2;
-            // InputManager.Instance.PlayerInput.Controls.Core2.performed += ActivateCore2;
-            // // InputManager.Instance.PlayerInput.Controls.Core2.canceled += ActivateCore2;
-            //
-            //
-            // // InputManager.Instance.PlayerInput.Controls.Core3.started += ActivateCore3;
-            // InputManager.Instance.PlayerInput.Controls.Core3.performed += ActivateCore3;
-            // // InputManager.Instance.PlayerInput.Controls.Core3.canceled += ActivateCore3;
-            //
-            //
-            // // InputManager.Instance.PlayerInput.Controls.WeaponBase.started += ActivateWeaponBase;
-            // InputManager.Instance.PlayerInput.Controls.WeaponBase.performed += ActivateWeaponBase;
-            // // InputManager.Instance.PlayerInput.Controls.WeaponBase.canceled += ActivateWeaponBase;
-            //
-            //
-            // // InputManager.Instance.PlayerInput.Controls.WeaponSpecial.started += ActivateWeaponSpecial;
-            // InputManager.Instance.PlayerInput.Controls.WeaponSpecial.performed += ActivateWeaponSpecial;
-            // // InputManager.Instance.PlayerInput.Controls.WeaponSpecial.canceled += ActivateWeaponSpecial;
         }
 
         private void OnDisable()
@@ -133,30 +122,6 @@ namespace SejDev.Systems.Abilities
                 InputManager.Instance.OnWeaponBase -= ActivateWeaponBase;
                 InputManager.Instance.OnWeaponSpecial -= ActivateWeaponSpecial;
             }
-
-            // // InputManager.Instance.PlayerInput.Controls.Core1.started -= ActivateCore1;
-            // InputManager.Instance.PlayerInput.Controls.Core1.performed -= ActivateCore1;
-            // // InputManager.Instance.PlayerInput.Controls.Core1.canceled -= ActivateCore1;
-            //
-            //
-            // // InputManager.Instance.PlayerInput.Controls.Core2.started -= ActivateCore2;
-            // InputManager.Instance.PlayerInput.Controls.Core2.performed -= ActivateCore2;
-            // // InputManager.Instance.PlayerInput.Controls.Core2.canceled -= ActivateCore2;
-            //
-            //
-            // // InputManager.Instance.PlayerInput.Controls.Core3.started -= ActivateCore3;
-            // InputManager.Instance.PlayerInput.Controls.Core3.performed -= ActivateCore3;
-            // // InputManager.Instance.PlayerInput.Controls.Core3.canceled -= ActivateCore3;
-            //
-            //
-            // // InputManager.Instance.PlayerInput.Controls.WeaponBase.started -= ActivateWeaponBase;
-            // InputManager.Instance.PlayerInput.Controls.WeaponBase.performed -= ActivateWeaponBase;
-            // // InputManager.Instance.PlayerInput.Controls.WeaponBase.canceled -= ActivateWeaponBase;
-            //
-            //
-            // // InputManager.Instance.PlayerInput.Controls.WeaponSpecial.started -= ActivateWeaponSpecial;
-            // InputManager.Instance.PlayerInput.Controls.WeaponSpecial.performed -= ActivateWeaponSpecial;
-            // // InputManager.Instance.PlayerInput.Controls.WeaponSpecial.canceled -= ActivateWeaponSpecial;
         }
 
         private void Update()
@@ -170,16 +135,24 @@ namespace SejDev.Systems.Abilities
             core3?.UpdateCooldown(delta);
         }
 
-        private void RaiseOnPostAbilityActivation(object sender, AbilityActivationEventArgs e)
+        private void RaiseOnPreAbilityActivation(object sender, AbilityStatusEventArgs e)
         {
             //TODO consider original sender
-            OnPostAbilityActivation?.Invoke(this, e);
+            activeAbility = e.ability;
+            OnPreAbilityActivation?.Invoke(this, e);
         }
 
-        private void RaiseOnPreAbilityActivation(object sender, AbilityActivationEventArgs e)
+        private void RaiseOnAbilityInterrupted(object sender, EventArgs e)
+        {
+            OnAbilityInterrupted?.Invoke(this, new AbilityStatusEventArgs(activeAbility));
+            activeAbility = null;
+        }
+
+        private void RaiseOnPostAbilityActivation(object sender, AbilityStatusEventArgs e)
         {
             //TODO consider original sender
-            OnPreAbilityActivation?.Invoke(this, e);
+            activeAbility = null;
+            OnPostAbilityActivation?.Invoke(this, e);
         }
 
         private ref Ability GetSlot(AbilitySlot slot)
@@ -210,7 +183,7 @@ namespace SejDev.Systems.Abilities
         {
             // Debug.Log(context.ToString());
             // Debug.Log($"got input with phase {context.phase}");
-            if (core1?.RemainingCooldown > 0) return;
+            if (activeAbility != null || (core1?.CanActivate != null && !core1.CanActivate)) return;
 
             core1?.Activate();
         }
@@ -218,7 +191,7 @@ namespace SejDev.Systems.Abilities
         public void ActivateCore2(InputAction.CallbackContext context)
         {
             // Debug.Log(context.ToString());
-            if (core2?.CanActivate != null && !core2.CanActivate) return;
+            if (activeAbility != null || (core2?.CanActivate != null && !core2.CanActivate)) return;
 
             core2?.Activate();
         }
@@ -226,7 +199,7 @@ namespace SejDev.Systems.Abilities
         public void ActivateCore3(InputAction.CallbackContext context)
         {
             // Debug.Log(context.ToString());
-            if (core3?.CanActivate != null && !core3.CanActivate) return;
+            if (activeAbility != null || (core3?.CanActivate != null && !core3.CanActivate)) return;
 
             core3?.Activate();
         }
@@ -234,7 +207,7 @@ namespace SejDev.Systems.Abilities
         public void ActivateWeaponBase(InputAction.CallbackContext context)
         {
             Debug.Log(context.ToString());
-            if (weaponBase?.RemainingCooldown > 0) return;
+            if (activeAbility != null || (weaponBase?.CanActivate != null && !weaponBase.CanActivate)) return;
 
             weaponBase?.Activate();
         }
@@ -242,7 +215,7 @@ namespace SejDev.Systems.Abilities
         public void ActivateWeaponSpecial(InputAction.CallbackContext context)
         {
             Debug.Log(context.ToString());
-            if (weaponSpecial?.RemainingCooldown > 0) return;
+            if (activeAbility != null || (weaponSpecial?.CanActivate != null && !weaponSpecial.CanActivate)) return;
 
             weaponSpecial?.Activate();
         }

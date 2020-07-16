@@ -11,7 +11,8 @@ namespace SejDev.Systems.Abilities
         Ability GetAbilityBySlot(AbilitySlot slot);
         event EventHandler OnPreAbilityChanged;
         event EventHandler<AbilityChangedEventArgs> OnPostAbilityChanged;
-        event EventHandler<AbilityActivationEventArgs> OnPreAbilityActivation;
-        event EventHandler<AbilityActivationEventArgs> OnPostAbilityActivation;
+        event EventHandler<AbilityStatusEventArgs> OnPreAbilityActivation;
+        event EventHandler<AbilityStatusEventArgs> OnAbilityInterrupted;
+        event EventHandler<AbilityStatusEventArgs> OnPostAbilityActivation;
     }
 }

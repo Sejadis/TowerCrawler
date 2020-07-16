@@ -58,7 +58,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Editor\Tests\PlayTests\MovementTests.cs" />
      <None Include="Assets\Editor\Tests\PlayTests\PlayTests.asmdef" />
  <Reference Include="UnityEngine.TestRunner">
  <HintPath>G:/Unity/Projects/TowerCrawler/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>

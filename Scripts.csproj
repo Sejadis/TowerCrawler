@@ -59,6 +59,8 @@
   </ItemGroup>
   <ItemGroup>
       <Compile Include="Assets\Scripts\Abilities\Activator\CastAbilityActivator.cs"/>
+      <Compile Include="Assets\Scripts\Abilities\Activator\CastChannelAbilityActivator.cs"/>
+      <Compile Include="Assets\Scripts\Abilities\Activator\ChannelAbilityActivator.cs"/>
       <Compile Include="Assets\Scripts\Abilities\Activator\InstantAbilityActivator.cs"/>
       <Compile Include="Assets\Scripts\Abilities\GroundTarget.cs"/>
       <Compile Include="Assets\Scripts\Abilities\HitScanDamage.cs"/>
@@ -74,7 +76,6 @@
       <Compile Include="Assets\Scripts\Input\PlayerInputActionAsset.cs"/>
       <Compile Include="Assets\Scripts\Player\MouseLook.cs"/>
       <Compile Include="Assets\Scripts\Player\PlayerAbilityUI.cs"/>
-      <Compile Include="Assets\Scripts\Player\PlayerController.cs"/>
       <Compile Include="Assets\Scripts\Player\PlayerDamageHandler.cs"/>
       <Compile Include="Assets\Scripts\Player\PlayerMovement.cs"/>
       <Compile Include="Assets\Scripts\Player\PlayerStatusEffectsUI.cs"/>
@@ -85,15 +86,13 @@
       <Compile Include="Assets\Scripts\StatusEffects\Test\StatusEffectTrigger.cs"/>
       <Compile Include="Assets\Scripts\StatusEffects\ThornsStatusEffect.cs"/>
       <Compile Include="Assets\Scripts\Systems\Abilities\Ability.cs"/>
-      <Compile Include="Assets\Scripts\Systems\Abilities\AbilityActivationEventArgs.cs"/>
       <Compile Include="Assets\Scripts\Systems\Abilities\AbilityActivationType.cs"/>
       <Compile Include="Assets\Scripts\Systems\Abilities\AbilityActivatorStatusChangedEventArgs.cs"/>
       <Compile Include="Assets\Scripts\Systems\Abilities\AbilityChangedEventArgs.cs"/>
       <Compile Include="Assets\Scripts\Systems\Abilities\AbilityManager.cs"/>
       <Compile Include="Assets\Scripts\Systems\Abilities\AbilitySlot.cs"/>
+      <Compile Include="Assets\Scripts\Systems\Abilities\AbilityStatusEventArgs.cs"/>
       <Compile Include="Assets\Scripts\Systems\Abilities\AbilityType.cs"/>
-      <Compile Include="Assets\Scripts\Systems\Abilities\CastChannelAbilityActivator.cs"/>
-      <Compile Include="Assets\Scripts\Systems\Abilities\ChannelAbilityActivator.cs"/>
       <Compile Include="Assets\Scripts\Systems\Abilities\GroundTargeting.cs"/>
       <Compile Include="Assets\Scripts\Systems\Abilities\IAbility.cs"/>
       <Compile Include="Assets\Scripts\Systems\Abilities\IAbilityActivator.cs"/>
@@ -115,16 +114,16 @@
       <Compile Include="Assets\Scripts\Systems\Input\InputManager.cs"/>
       <Compile Include="Assets\Scripts\Systems\Stats\IStats.cs"/>
       <Compile Include="Assets\Scripts\Systems\Stats\Modifier.cs"/>
-     <Compile Include="Assets\Scripts\Systems\Stats\ModifierContainer.cs" />
-     <Compile Include="Assets\Scripts\Systems\Stats\ModifierType.cs" />
-     <Compile Include="Assets\Scripts\Systems\Stats\Stat.cs" />
-     <Compile Include="Assets\Scripts\Systems\Stats\StatChangedEventArgs.cs" />
-     <Compile Include="Assets\Scripts\Systems\Stats\StatRestrictor.cs" />
-     <Compile Include="Assets\Scripts\Systems\Stats\StatType.cs" />
-     <Compile Include="Assets\Scripts\Systems\Stats\StatsManager.cs" />
-     <Compile Include="Assets\Scripts\Systems\StatusEffects\EffectType.cs" />
-     <Compile Include="Assets\Scripts\Systems\StatusEffects\IBuffable.cs" />
-     <Compile Include="Assets\Scripts\Systems\StatusEffects\StackableStatusEffect.cs" />
+      <Compile Include="Assets\Scripts\Systems\Stats\ModifierContainer.cs"/>
+      <Compile Include="Assets\Scripts\Systems\Stats\ModifierType.cs"/>
+      <Compile Include="Assets\Scripts\Systems\Stats\Stat.cs"/>
+      <Compile Include="Assets\Scripts\Systems\Stats\StatChangedEventArgs.cs"/>
+      <Compile Include="Assets\Scripts\Systems\Stats\StatRestrictor.cs"/>
+      <Compile Include="Assets\Scripts\Systems\Stats\StatType.cs"/>
+      <Compile Include="Assets\Scripts\Systems\Stats\StatsManager.cs"/>
+      <Compile Include="Assets\Scripts\Systems\StatusEffects\EffectType.cs"/>
+      <Compile Include="Assets\Scripts\Systems\StatusEffects\IBuffable.cs"/>
+      <Compile Include="Assets\Scripts\Systems\StatusEffects\StackableStatusEffect.cs"/>
      <Compile Include="Assets\Scripts\Systems\StatusEffects\StatusEffect.cs" />
      <Compile Include="Assets\Scripts\Systems\StatusEffects\StatusEffectChangedEventArgs.cs" />
      <Compile Include="Assets\Scripts\Systems\StatusEffects\StatusEffectManager.cs" />

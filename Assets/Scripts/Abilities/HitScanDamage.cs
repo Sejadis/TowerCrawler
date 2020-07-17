@@ -1,6 +1,7 @@
 ﻿using SejDev.Editor;
 using SejDev.Systems.Abilities;
 using SejDev.Systems.Core;
+using SejDev.Systems.Stats;
 using UnityEngine;
 
 namespace SejDev.Abilities
@@ -12,10 +13,10 @@ namespace SejDev.Abilities
         [field: SerializeField, Rename] public float HitRange { get; private set; }
         [field: SerializeField, Rename] public int Damage { get; private set; }
 
-        public override void Bind(IAbility abilityHandler)
+        public override void Bind(IAbility abilityHandler, Stat castTime = null)
         {
             RaycastTargeter raycastTargeter = new RaycastTargeter(abilityHandler.TargetingCamera.transform, HitRange);
-            base.Bind(abilityHandler, raycastTargeter);
+            base.Bind(abilityHandler, raycastTargeter, castTime);
         }
 
         protected override void PerformAbility()

@@ -17,12 +17,12 @@ MonoBehaviour:
   <Type>k__BackingField: 2
   <Cooldown>k__BackingField: 0
   <Charges>k__BackingField: 5
-  <ChargeCooldown>k__BackingField: 2
+  <ChargeCooldown>k__BackingField: 3
   <Energy>k__BackingField: 0
   <EnergyDrainRate>k__BackingField: 0
   <EnergyFillRate>k__BackingField: 0
   <AbilityActivationType>k__BackingField: 1
-  <CastTime>k__BackingField: 3
+  <CastTime>k__BackingField: 1.25
   <ChannelTime>k__BackingField: 0
   <Range>k__BackingField: 10
   <Size>k__BackingField: 1

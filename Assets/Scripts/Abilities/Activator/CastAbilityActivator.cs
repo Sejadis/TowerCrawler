@@ -23,9 +23,9 @@ namespace SejDev.Abilities.Activator
             this.routineBase = routineBase ?? throw new ArgumentNullException(nameof(routineBase));
         }
 
-        public void Activate()
+        public void Activate(float activationModifier)
         {
-            coroutine = routineBase.StartCoroutine(WaitForCastTime());
+            coroutine = routineBase.StartCoroutine(WaitForCastTime(activationModifier));
         }
 
         public void Interrupt()
@@ -34,12 +34,12 @@ namespace SejDev.Abilities.Activator
             isCasting = false;
         }
 
-
-        private IEnumerator WaitForCastTime()
+        private IEnumerator WaitForCastTime(float activationModifier)
         {
             float activeTime = 0;
+            var modifiedTime = castTime * activationModifier;
             isCasting = true;
-            while (activeTime < castTime)
+            while (activeTime < modifiedTime)
             {
                 activeTime += Time.deltaTime;
                 OnStatusChanged?.Invoke(this, new AbilityActivatorStatusChangedEventArgs(activeTime));

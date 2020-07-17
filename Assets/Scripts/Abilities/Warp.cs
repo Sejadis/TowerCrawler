@@ -2,6 +2,7 @@
 using SejDev.Editor;
 using SejDev.Player;
 using SejDev.Systems.Abilities;
+using SejDev.Systems.Stats;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,7 +17,7 @@ namespace SejDev.Abilities
         [field: SerializeField, Rename] public bool AllowVerticalWarp { get; private set; } = false;
         private IEntityController controller;
 
-        public override void Bind(IAbility abilityHandler)
+        public override void Bind(IAbility abilityHandler, Stat castTime = null)
         {
             base.Bind(abilityHandler);
             controller = (abilityHandler as MonoBehaviour).GetComponent<IEntityController>();

@@ -13,7 +13,7 @@ namespace SejDev.Abilities.Activator
             this.callback = callback;
         }
 
-        public void Activate()
+        public void Activate(float activationModifier)
         {
             callback();
         }

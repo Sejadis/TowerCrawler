@@ -44,7 +44,7 @@ namespace SejDev.Systems.Abilities
             intendedSlot.OnPreAbilityActivation += RaiseOnPreAbilityActivation;
             intendedSlot.OnPostAbilityActivation += RaiseOnPostAbilityActivation;
             intendedSlot.OnAbilityInterrupted += RaiseOnAbilityInterrupted;
-            intendedSlot.Bind(this);
+            intendedSlot.Bind(this, castTimeStat);
             OnPostAbilityChanged?.Invoke(this, new AbilityChangedEventArgs(slot, intendedSlot));
         }
 
@@ -84,7 +84,7 @@ namespace SejDev.Systems.Abilities
                     cooldownRateStat.OnStatChanged += (s, args) => cooldownRate = args.NewValue;
                 }
 
-                //TODO castTimeStat = handler?.GetStatByType(StatType.CastTime);
+                castTimeStat = handler.GetStatByType(StatType.CastTime);
             }
 
             var movementHandler = GetComponent<IEntityController>();

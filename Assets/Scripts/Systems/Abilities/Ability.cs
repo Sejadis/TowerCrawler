@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using NSubstitute;
 using SejDev.Abilities.Activator;
 using SejDev.Editor;
+using SejDev.Systems.Stats;
 using UnityEngine;
 
 namespace SejDev.Systems.Abilities
@@ -103,6 +104,8 @@ namespace SejDev.Systems.Abilities
 
         private IAbilityTargeter AbilityTargeter;
         protected object target;
+
+        private float castTimeModifier;
         public event EventHandler OnAbilityInterrupted;
         public event EventHandler<AbilityStatusEventArgs> OnPreAbilityActivation;
         public event EventHandler<AbilityStatusEventArgs> OnPostAbilityActivation;
@@ -110,12 +113,12 @@ namespace SejDev.Systems.Abilities
         public event EventHandler<OldNewEventArgs<float>> OnCooldownChanged;
         public event EventHandler<OldNewEventArgs<int>> OnChargesChanged;
 
-        public virtual void Bind([NotNull] IAbility abilityHandler)
+        public virtual void Bind([NotNull] IAbility abilityHandler, Stat castTime = null)
         {
-            Bind(abilityHandler, null);
+            Bind(abilityHandler, null, castTime);
         }
 
-        protected void Bind([NotNull] IAbility abilityHandler, IAbilityTargeter abilityTargeter)
+        protected void Bind([NotNull] IAbility abilityHandler, IAbilityTargeter abilityTargeter, Stat castTime)
         {
             AbilityTargeter = abilityTargeter;
             abilityManager = abilityHandler;
@@ -151,6 +154,12 @@ namespace SejDev.Systems.Abilities
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
+            if (castTime != null)
+            {
+                castTimeModifier = castTime.Value;
+                castTime.OnStatChanged += (s, args) => castTimeModifier = args.NewValue;
+            }
         }
 
 
@@ -172,8 +181,9 @@ namespace SejDev.Systems.Abilities
                 }
             }
 
+            abilityStatusEventArgs.modifiedCastTime = CastTime * castTimeModifier;
             OnPreAbilityActivation?.Invoke(this, abilityStatusEventArgs);
-            AbilityActivator.Activate();
+            AbilityActivator.Activate(castTimeModifier);
         }
 
         protected virtual void PerformAbility()

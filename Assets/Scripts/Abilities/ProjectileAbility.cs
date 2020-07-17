@@ -13,11 +13,6 @@ namespace SejDev.Abilities
         [SerializeField] private float maxProjectileLifeTime = 0f;
         [SerializeField] private bool isAffectedByGravity;
 
-        public override void Bind(IAbility abilityHandler)
-        {
-            base.Bind(abilityHandler);
-        }
-
         protected override void PerformAbility()
         {
             base.PerformAbility();

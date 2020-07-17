@@ -4,7 +4,7 @@ namespace SejDev.Systems.Abilities
 {
     public class ChannelAbilityActivator : IAbilityActivator
     {
-        public void Activate()
+        public void Activate(float activationModifier)
         {
             throw new NotImplementedException();
         }

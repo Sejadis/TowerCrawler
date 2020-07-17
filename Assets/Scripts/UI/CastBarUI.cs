@@ -68,17 +68,17 @@ public class CastBarUI : MonoBehaviour
             case AbilityActivationType.Instant:
                 break;
             case AbilityActivationType.Cast:
-                castTime = e.ability.CastTime;
+                castTime = e.modifiedCastTime;
                 channelTickLayoutParent.SetActive(false);
                 Show();
                 break;
             case AbilityActivationType.Channel:
-                channelTime = e.ability.ChannelTime;
+                // channelTime = e.ability.ChannelTime;
                 Show();
                 break;
             case AbilityActivationType.CastChannel:
-                castTime = e.ability.CastTime;
-                channelTime = e.ability.ChannelTime;
+                // castTime = e.ability.CastTime;
+                // channelTime = e.ability.ChannelTime;
                 Show();
                 break;
             default:

@@ -5,7 +5,8 @@ namespace SejDev.Systems.Abilities
 {
     public class AbilityStatusEventArgs : EventArgs
     {
-        public Ability ability;
+        public readonly Ability ability;
+        public float modifiedCastTime;
 
         public AbilityStatusEventArgs([NotNull] Ability ability)
         {

@@ -5,7 +5,7 @@ namespace SejDev.Systems.Abilities
     public interface IAbilityActivator
     {
         bool IsActive { get; }
-        void Activate();
+        void Activate(float activationModifier);
         void Interrupt();
         event EventHandler<AbilityActivatorStatusChangedEventArgs> OnStatusChanged;
     }

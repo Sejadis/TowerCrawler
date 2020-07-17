@@ -47,67 +47,49 @@ namespace SejDev.Systems.Stats
 
         private void Evaluate()
         {
-            float newValue;
-            newValue = baseValue;
+            var newValue = baseValue;
             float absoluteNormal = modContainer.GetFinalModifierByType(ModifierType.Absolute);
             float absoluteOverriding = modContainer.GetFinalOverridingModifierByType(ModifierType.Absolute);
-            float percentNormal = modContainer.GetFinalModifierByType(ModifierType.Percent);
-            float percentOverriding = modContainer.GetFinalOverridingModifierByType(ModifierType.Percent);
 
-            bool sameSign = (absoluteNormal >= 0 && absoluteOverriding >= 0) ||
-                            (absoluteNormal < 0 && absoluteOverriding < 0);
+            bool sameSignAbsolute = (absoluteNormal >= 0 && absoluteOverriding >= 0) ||
+                                    (absoluteNormal < 0 && absoluteOverriding < 0);
             bool absOverrideSmaller = Mathf.Abs(absoluteOverriding) < Mathf.Abs(absoluteNormal);
 
             newValue += absoluteNormal;
-            if (restrictor != null && sameSign)
+            if (restrictor != null && sameSignAbsolute)
             {
                 newValue = Mathf.Clamp(newValue, baseValue * restrictor.minPercent,
                     baseValue * restrictor.maxPercent);
             }
 
             newValue += absoluteOverriding; //final value for sameSign / differentSign+overridebigger
-            if (restrictor != null && !sameSign && absOverrideSmaller)
+            if (restrictor != null && !sameSignAbsolute && absOverrideSmaller)
             {
                 newValue = Mathf.Clamp(newValue, baseValue * restrictor.minPercent,
                     baseValue * restrictor.maxPercent);
             }
 
-            // if (sameSign)
-            // {
-            //     //same sign
-            //     newValue += absoluteNormal;
-            //     if (restrictor != null)
-            //     {
-            //         newValue = Mathf.Clamp(newValue, baseValue * restrictor.minPercent,
-            //             baseValue * restrictor.maxPercent);
-            //     }
-            //
-            //     newValue += absoluteOverriding;
-            //     //adhere to restrictions
-            // }
-            // else
-            // {
-            //     //different sign 
-            //     if (overrideSmaller)
-            //     {
-            //         //override smaller
-            //         newValue += absoluteOverriding;
-            //         newValue += absoluteNormal;
-            //     }
-            //     else
-            //     {
-            //         
-            //     }
-            // }
 
-            // //add absolute value to base
-            // newValue += modContainer.GetFinalModifierByType(ModifierType.Absolute);
-            // //apply multiplier
-            // newValue *= 1 + modContainer.GetFinalModifierByType(ModifierType.Percent);
-            // if (restrictor != null)
-            //     //adhere to restrictions
-            //     newValue = Mathf.Clamp(newValue, baseValue * restrictor.minPercent,
-            //         baseValue * restrictor.maxPercent);
+            float percentNormal = modContainer.GetFinalModifierByType(ModifierType.Percent);
+            float percentOverriding = modContainer.GetFinalOverridingModifierByType(ModifierType.Percent);
+            bool sameSignPercent = (percentNormal >= 0 && percentOverriding >= 0) ||
+                                   (percentNormal < 0 && percentOverriding < 0);
+            bool percentOverrideSmaller = Mathf.Abs(percentOverriding) < Mathf.Abs(percentNormal);
+
+            newValue *= 1 + percentNormal;
+            if (restrictor != null && sameSignPercent)
+            {
+                newValue = Mathf.Clamp(newValue, baseValue * restrictor.minPercent,
+                    baseValue * restrictor.maxPercent);
+            }
+
+            newValue *= 1 + percentOverriding; //final value for sameSign / differentSign+overridebigger
+            if (restrictor != null && !sameSignPercent && percentOverrideSmaller)
+            {
+                newValue = Mathf.Clamp(newValue, baseValue * restrictor.minPercent,
+                    baseValue * restrictor.maxPercent);
+            }
+
             currentValue = newValue;
         }
 

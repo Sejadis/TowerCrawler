@@ -16,10 +16,9 @@ public class InputManager : MonoBehaviour
     public Action<InputAction.CallbackContext> OnWeaponSpecial;
 
     public Action<InputAction.CallbackContext> OnMovement;
-
     public Action<InputAction.CallbackContext> OnLook;
     public Action<InputAction.CallbackContext> OnJump;
-    public event Action<InputAction.CallbackContext> OnSprint;
+    public Action<InputAction.CallbackContext> OnSprint;
 
     // Start is called before the first frame update
     void Awake()
@@ -38,6 +37,15 @@ public class InputManager : MonoBehaviour
         Application.targetFrameRate = 60;
         PlayerInput = new PlayerInputActionAsset();
 
+        HookUpControls();
+        PlayerInput.Controls.Enable();
+
+        HookUpAbilities();
+        PlayerInput.Abilities.Enable();
+    }
+
+    private void HookUpControls()
+    {
         PlayerInput.Controls.Movement.started += ctx => OnMovement?.Invoke(ctx);
         PlayerInput.Controls.Movement.performed += ctx => OnMovement?.Invoke(ctx);
         PlayerInput.Controls.Movement.canceled += ctx => OnMovement?.Invoke(ctx);
@@ -53,9 +61,10 @@ public class InputManager : MonoBehaviour
         // PlayerInput.Controls.Jump.started += ctx => OnJump?.Invoke(ctx);
         PlayerInput.Controls.Sprint.performed += ctx => OnSprint?.Invoke(ctx);
         PlayerInput.Controls.Sprint.canceled += ctx => OnSprint?.Invoke(ctx);
+    }
 
-        PlayerInput.Controls.Enable();
-
+    private void HookUpAbilities()
+    {
         // PlayerInput.Abilities.Core1.started += ctx => OnCore1?.Invoke(ctx);
         PlayerInput.Abilities.Core1.performed += ctx => OnCore1?.Invoke(ctx);
         // PlayerInput.Abilities.Core1.canceled += ctx => OnCore1?.Invoke(ctx);
@@ -75,7 +84,5 @@ public class InputManager : MonoBehaviour
         // PlayerInput.Abilities.WeaponSpecial.started += ctx => OnWeaponSpecial?.Invoke(ctx);
         PlayerInput.Abilities.WeaponSpecial.performed += ctx => OnWeaponSpecial?.Invoke(ctx);
         // PlayerInput.Abilities.WeaponSpecial.canceled += ctx => OnWeaponSpecial?.Invoke(ctx);
-
-        PlayerInput.Abilities.Enable();
     }
 }

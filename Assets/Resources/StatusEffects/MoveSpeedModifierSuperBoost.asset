@@ -18,6 +18,6 @@ MonoBehaviour:
   <Duration>k__BackingField: 0
   affectedStat: 1
   modifier:
-    type: 1
+    type: 2
     value: 0.4
     ignoreRestriction: 1

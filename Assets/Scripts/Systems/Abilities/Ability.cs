@@ -35,7 +35,7 @@ namespace SejDev.Systems.Abilities
 
         //TODO replace Header attributes by custom inspector
         private AbilityStatusEventArgs abilityStatusEventArgs;
-        private IAbility abilityManager;
+        protected IAbility abilityManager;
 
         [field: Rename]
         [field: SerializeField]

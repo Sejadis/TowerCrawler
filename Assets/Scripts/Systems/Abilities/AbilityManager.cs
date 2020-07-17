@@ -214,7 +214,7 @@ namespace SejDev.Systems.Abilities
 
         public void ActivateWeaponSpecial(InputAction.CallbackContext context)
         {
-            Debug.Log(context.ToString());
+            // Debug.Log(context.ToString());
             if (activeAbility != null || (weaponSpecial?.CanActivate != null && !weaponSpecial.CanActivate)) return;
 
             weaponSpecial?.Activate();

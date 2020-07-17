@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 223d57939b884acf8ae5fde20c906964, type: 3}
+  m_Name: NewProjectileAbility
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: 
+  <Icon>k__BackingField: {fileID: 21300000, guid: 15abfbed398bb994095e3e546df3e46c,
+    type: 3}
+  <Type>k__BackingField: 0
+  <Cooldown>k__BackingField: 5
+  <Charges>k__BackingField: 0
+  <ChargeCooldown>k__BackingField: 0
+  <Energy>k__BackingField: 0
+  <EnergyDrainRate>k__BackingField: 0
+  <EnergyFillRate>k__BackingField: 0
+  <AbilityActivationType>k__BackingField: 0
+  <CastTime>k__BackingField: 1.5
+  <ChannelTime>k__BackingField: 0
+  projectilePrefab: {fileID: 2475093558044712190, guid: b5159423f7bbabd459f7359fef13ab54,
+    type: 3}
+  forwardForce: 5
+  maxProjectileLifeTime: 2

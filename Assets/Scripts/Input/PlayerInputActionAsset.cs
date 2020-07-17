@@ -42,6 +42,14 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""93ec5cec-d863-4d22-ac78-cc89d19c7ae3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -119,6 +127,17 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aae10477-db4f-41a8-a728-21aee931f49a"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -247,6 +266,7 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
         m_Controls_Movement = m_Controls.FindAction("Movement", throwIfNotFound: true);
         m_Controls_Look = m_Controls.FindAction("Look", throwIfNotFound: true);
         m_Controls_Jump = m_Controls.FindAction("Jump", throwIfNotFound: true);
+        m_Controls_Sprint = m_Controls.FindAction("Sprint", throwIfNotFound: true);
         // Abilities
         m_Abilities = asset.FindActionMap("Abilities", throwIfNotFound: true);
         m_Abilities_WeaponBase = m_Abilities.FindAction("WeaponBase", throwIfNotFound: true);
@@ -306,6 +326,7 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
     private readonly InputAction m_Controls_Movement;
     private readonly InputAction m_Controls_Look;
     private readonly InputAction m_Controls_Jump;
+    private readonly InputAction m_Controls_Sprint;
 
     public struct ControlsActions
     {
@@ -319,6 +340,7 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
         public InputAction @Movement => m_Wrapper.m_Controls_Movement;
         public InputAction @Look => m_Wrapper.m_Controls_Look;
         public InputAction @Jump => m_Wrapper.m_Controls_Jump;
+        public InputAction @Sprint => m_Wrapper.m_Controls_Sprint;
 
         public InputActionMap Get()
         {
@@ -355,6 +377,9 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnJump;
+                @Sprint.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnSprint;
+                @Sprint.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnSprint;
+                @Sprint.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnSprint;
             }
 
             m_Wrapper.m_ControlsActionsCallbackInterface = instance;
@@ -369,6 +394,9 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Sprint.started += instance.OnSprint;
+                @Sprint.performed += instance.OnSprint;
+                @Sprint.canceled += instance.OnSprint;
             }
         }
     }
@@ -481,6 +509,7 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
     }
 
     public interface IAbilitiesActions

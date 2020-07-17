@@ -14,6 +14,7 @@ namespace SejDev.Player
         [SerializeField] private CharacterController controller;
 
         [SerializeField] private float moveSpeed = 15f;
+        [SerializeField] private float sprintSpeedMultiplier = 2f;
 
         [SerializeField] private float gravityMultiplier = 1;
 
@@ -31,6 +32,7 @@ namespace SejDev.Player
         [SerializeField] private int allowedMidAirJumps = 0; //TODO remove serializeField
 
         private int performedMidAirJumps;
+        private bool isSprinting;
 
         private void Awake()
         {
@@ -57,6 +59,7 @@ namespace SejDev.Player
         {
             InputManager.Instance.OnMovement += OnMovement;
             InputManager.Instance.OnJump += OnJump;
+            InputManager.Instance.OnSprint += OnSprint;
         }
 
         private void Update()
@@ -97,12 +100,25 @@ namespace SejDev.Player
             }
         }
 
+        private void OnSprint(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                isSprinting = true;
+            }
+            else if (context.canceled)
+            {
+                isSprinting = false;
+            }
+        }
+
         private void ApplyInputMovement()
         {
             var finalMove = movementData.x * transform.right;
             finalMove += movementData.y * transform.forward;
             finalMove.Normalize();
-            finalMove *= moveSpeed * Time.deltaTime;
+            finalMove *= isSprinting ? moveSpeed * sprintSpeedMultiplier : moveSpeed;
+            finalMove *= Time.deltaTime;
             controller.Move(finalMove);
         }
 

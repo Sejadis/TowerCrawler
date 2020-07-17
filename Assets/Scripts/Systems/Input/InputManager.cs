@@ -19,6 +19,7 @@ public class InputManager : MonoBehaviour
 
     public Action<InputAction.CallbackContext> OnLook;
     public Action<InputAction.CallbackContext> OnJump;
+    public event Action<InputAction.CallbackContext> OnSprint;
 
     // Start is called before the first frame update
     void Awake()
@@ -48,6 +49,10 @@ public class InputManager : MonoBehaviour
         // PlayerInput.Controls.Jump.started += ctx => OnJump?.Invoke(ctx);
         PlayerInput.Controls.Jump.performed += ctx => OnJump?.Invoke(ctx);
         // PlayerInput.Controls.Jump.canceled += ctx => OnJump?.Invoke(ctx);
+
+        // PlayerInput.Controls.Jump.started += ctx => OnJump?.Invoke(ctx);
+        PlayerInput.Controls.Sprint.performed += ctx => OnSprint?.Invoke(ctx);
+        PlayerInput.Controls.Sprint.canceled += ctx => OnSprint?.Invoke(ctx);
 
         PlayerInput.Controls.Enable();
 

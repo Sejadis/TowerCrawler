@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using JetBrains.Annotations;
-using NSubstitute;
 using SejDev.Abilities.Activator;
 using SejDev.Editor;
 using SejDev.Systems.Stats;
@@ -45,6 +45,8 @@ namespace SejDev.Systems.Abilities
         [field: Rename]
         [field: SerializeField]
         public Sprite Icon { get; protected set; }
+
+        [SerializeField] protected List<AbilityUpgrade> upgrades = new List<AbilityUpgrade>();
 
         [field: Rename]
         [field: SerializeField]
@@ -170,7 +172,7 @@ namespace SejDev.Systems.Abilities
 
             if (AbilityTargeter != null)
             {
-                if (AbilityTargeter.RequiresSeperateTargeting && !AbilityTargeter.IsTargeting)
+                if (AbilityTargeter.RequiresSeparateTargeting && !AbilityTargeter.IsTargeting)
                 {
                     AbilityTargeter.StartTargeting();
                     return;
@@ -238,17 +240,5 @@ namespace SejDev.Systems.Abilities
             AbilityActivator.Interrupt();
             OnAbilityInterrupted?.Invoke(this, null);
         }
-    }
-
-    public interface IAbilityTargeter
-    {
-        bool IsTargeting { get; }
-        bool RequiresSeperateTargeting { get; }
-
-        /*
-        IAbilitiTargeter(ref object target);
-*/
-        void StartTargeting();
-        object GetTarget();
     }
 }

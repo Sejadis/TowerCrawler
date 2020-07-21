@@ -18,7 +18,7 @@ namespace SejDev.Systems.Abilities
         private Projector projector;
         private GameObject targetObject;
         public bool IsTargeting { get; private set; }
-        public bool RequiresSeperateTargeting => true;
+        public bool RequiresSeparateTargeting => true;
 
         // // Start is called before the first frame update
         // void Start()

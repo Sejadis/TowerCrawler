@@ -16,7 +16,7 @@ namespace SejDev.Systems.Abilities
 
         public bool IsTargeting => false;
 
-        public bool RequiresSeperateTargeting => false;
+        public bool RequiresSeparateTargeting => false;
 
         public void StartTargeting()
         {

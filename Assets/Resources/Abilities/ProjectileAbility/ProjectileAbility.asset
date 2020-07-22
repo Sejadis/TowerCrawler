@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 223d57939b884acf8ae5fde20c906964, type: 3}
-  m_Name: NewProjectileAbility
+  m_Name: ProjectileAbility
   m_EditorClassIdentifier: 
   id: 213a9937-c89b-4dbf-a1bf-5c0fe40b128a
   <Name>k__BackingField: test
@@ -18,6 +18,7 @@ MonoBehaviour:
     type: 3}
   upgrades:
   - {fileID: 11400000, guid: c74a2142e05b2ee4183cf519e7659a2a, type: 2}
+  upgradeTree: {fileID: 11400000, guid: e552543a09203804fa3c8c91c468f05c, type: 2}
   <Type>k__BackingField: 2
   <Cooldown>k__BackingField: 2
   <Charges>k__BackingField: 5

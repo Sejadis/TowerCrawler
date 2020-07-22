@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using JetBrains.Annotations;
 using SejDev.Editor;
+using SejDev.Save;
 using SejDev.Systems.Stats;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -46,6 +48,10 @@ namespace SejDev.Systems.Abilities
             intendedSlot.OnAbilityInterrupted += RaiseOnAbilityInterrupted;
             intendedSlot.Bind(this, castTimeStat);
             OnPostAbilityChanged?.Invoke(this, new AbilityChangedEventArgs(slot, intendedSlot));
+            if (new List<AbilitySlot>() {AbilitySlot.Core1, AbilitySlot.Core2, AbilitySlot.Core3}.Contains(slot))
+            {
+                SaveManager.SetSave(new EquippedAbilitySave(core1, core2, core3));
+            }
         }
 
         public Ability GetAbilityBySlot(AbilitySlot slot)
@@ -91,6 +97,40 @@ namespace SejDev.Systems.Abilities
             if (movementHandler != null)
             {
                 movementHandler.OnMoveStateChanged += OnOnMoveStateChanged;
+            }
+
+            LoadEquippedAbilities();
+        }
+
+        private void LoadEquippedAbilities()
+        {
+            var save = SaveManager.GetSave<EquippedAbilitySave>();
+            if (save == null) return;
+            if (!string.IsNullOrEmpty(save.core1ID))
+            {
+                var core1 = ResourceManager.Instance.GetAbilityByID(save.core1ID);
+                if (core1 != null)
+                {
+                    ChangeAbility(core1, AbilitySlot.Core1);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(save.core2ID))
+            {
+                var core2 = ResourceManager.Instance.GetAbilityByID(save.core2ID);
+                if (core2 != null)
+                {
+                    ChangeAbility(core2, AbilitySlot.Core2);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(save.core3ID))
+            {
+                var core3 = ResourceManager.Instance.GetAbilityByID(save.core3ID);
+                if (core3 != null)
+                {
+                    ChangeAbility(core3, AbilitySlot.Core3);
+                }
             }
         }
 

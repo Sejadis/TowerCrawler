@@ -92,16 +92,16 @@
       <Compile Include="Assets\Scripts\Systems\Abilities\AbilityActivationType.cs"/>
       <Compile Include="Assets\Scripts\Systems\Abilities\AbilityActivatorStatusChangedEventArgs.cs"/>
       <Compile Include="Assets\Scripts\Systems\Abilities\AbilityChangedEventArgs.cs"/>
-      <Compile Include="Assets\Scripts\Systems\Abilities\AbilityManager.cs"/>
+      <Compile Include="Assets\Scripts\Systems\Abilities\AbilityHandler.cs"/>
       <Compile Include="Assets\Scripts\Systems\Abilities\AbilitySlot.cs"/>
       <Compile Include="Assets\Scripts\Systems\Abilities\AbilityStatusEventArgs.cs"/>
       <Compile Include="Assets\Scripts\Systems\Abilities\AbilityType.cs"/>
+      <Compile Include="Assets\Scripts\Systems\Abilities\AbilityUpgrade.cs"/>
       <Compile Include="Assets\Scripts\Systems\Abilities\GroundTargeting.cs"/>
       <Compile Include="Assets\Scripts\Systems\Abilities\IAbility.cs"/>
       <Compile Include="Assets\Scripts\Systems\Abilities\IAbilityActivator.cs"/>
       <Compile Include="Assets\Scripts\Systems\Abilities\IAbilityTargeter.cs"/>
       <Compile Include="Assets\Scripts\Systems\Abilities\RaycastTargeter.cs"/>
-      <Compile Include="Assets\Scripts\Systems\Abilities\Upgrade.cs"/>
       <Compile Include="Assets\Scripts\Systems\Core\DamageFlags.cs"/>
       <Compile Include="Assets\Scripts\Systems\Core\DamageHandlerEventArgs.cs"/>
       <Compile Include="Assets\Scripts\Systems\Core\HealHandlerEventArgs.cs"/>
@@ -181,16 +181,16 @@
       <Reference Include="UnityEngine.ClusterRendererModule">
           <HintPath>G:/Unity/2019.4.1f1/Editor/Data/Managed/UnityEngine/UnityEngine.ClusterRendererModule.dll</HintPath>
       </Reference>
- <Reference Include="UnityEngine.CoreModule">
- <HintPath>G:/Unity/2019.4.1f1/Editor/Data/Managed/UnityEngine/UnityEngine.CoreModule.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.CrashReportingModule">
- <HintPath>G:/Unity/2019.4.1f1/Editor/Data/Managed/UnityEngine/UnityEngine.CrashReportingModule.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.DSPGraphModule">
- <HintPath>G:/Unity/2019.4.1f1/Editor/Data/Managed/UnityEngine/UnityEngine.DSPGraphModule.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.DirectorModule">
+      <Reference Include="UnityEngine.CoreModule">
+          <HintPath>G:/Unity/2019.4.1f1/Editor/Data/Managed/UnityEngine/UnityEngine.CoreModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.CrashReportingModule">
+          <HintPath>G:/Unity/2019.4.1f1/Editor/Data/Managed/UnityEngine/UnityEngine.CrashReportingModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.DSPGraphModule">
+          <HintPath>G:/Unity/2019.4.1f1/Editor/Data/Managed/UnityEngine/UnityEngine.DSPGraphModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.DirectorModule">
  <HintPath>G:/Unity/2019.4.1f1/Editor/Data/Managed/UnityEngine/UnityEngine.DirectorModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.GameCenterModule">

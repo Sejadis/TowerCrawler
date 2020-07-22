@@ -1759,7 +1759,7 @@ MonoBehaviour:
   core1: {fileID: 953662164}
   core2: {fileID: 647789069}
   core3: {fileID: 248487082}
-  abilityManager: {fileID: 1831252500}
+  abilityHandler: {fileID: 1831252500}
 --- !u!1 &564464393
 GameObject:
   m_ObjectHideFlags: 0
@@ -1968,7 +1968,7 @@ MonoBehaviour:
   channelTickLayoutParent: {fileID: 256719346}
   createdTicks:
   - {fileID: 379452343}
-  abilityManager: {fileID: 1831252500}
+  abilityHandler: {fileID: 1831252500}
 --- !u!1 &704836503
 GameObject:
   m_ObjectHideFlags: 0

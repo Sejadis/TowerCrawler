@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace SejDev.Systems.Abilities
 {
-    public class AbilityManager : MonoBehaviour, IAbility
+    public class AbilityHandler : MonoBehaviour, IAbility
     {
         [CanBeNull] private Ability core1;
         [CanBeNull] private Ability core2;
@@ -31,6 +31,7 @@ namespace SejDev.Systems.Abilities
 
         public void ChangeAbility(Ability ability, AbilitySlot slot)
         {
+            Debug.Log(ability.GUID);
             OnPreAbilityChanged?.Invoke(this, null);
             ref var intendedSlot = ref GetSlot(slot);
             if (intendedSlot != null)

@@ -12,7 +12,7 @@ public class CastBarUI : MonoBehaviour
     [SerializeField] private GameObject channelTickTemplate;
     [SerializeField] private GameObject channelTickLayoutParent;
     [SerializeField] private List<GameObject> createdTicks;
-    [SerializeField] private AbilityManager abilityManager;
+    [SerializeField] private AbilityHandler abilityHandler;
     private float castTime;
     private float channelTime;
     private AbilityActivationType activationType;
@@ -22,9 +22,9 @@ public class CastBarUI : MonoBehaviour
         Hide();
         channelTickLayoutParent.SetActive(false);
         castBarImage.fillAmount = 0;
-        if (abilityManager != null)
+        if (abilityHandler != null)
         {
-            Bind(abilityManager);
+            Bind(abilityHandler);
         }
     }
 

@@ -17,18 +17,7 @@ namespace SejDev.Abilities
         [SerializeField] private bool isAffectedByGravity;
 
         // private List<Quaternion> spawnAngles = new List<Quaternion>() {Quaternion.AngleAxis(0, Vector3.zero)};
-        private List<Vector2> spawnAngles = new List<Vector2>() {Vector2.zero};
-
-
-        public override void Bind(IAbility abilityHandler, Stat castTime = null)
-        {
-            base.Bind(abilityHandler, castTime);
-            foreach (var upgrade in upgrades)
-            {
-                upgrade.Bind(this);
-                upgrade.Activate();
-            }
-        }
+        private readonly List<Vector2> spawnAngles = new List<Vector2>() {Vector2.zero};
 
         protected override void PerformAbility()
         {

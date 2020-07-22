@@ -12,18 +12,16 @@ namespace SejDev.Abilities
         {
             public List<Vector2> spawnAngles = new List<Vector2>();
 
-            public override void Activate()
+            protected override void Activate()
             {
-                base.Activate();
                 foreach (var angle in spawnAngles)
                 {
                     (ability as ProjectileAbility).spawnAngles.Add(angle);
                 }
             }
 
-            public override void DeActivate()
+            protected override void DeActivate()
             {
-                base.DeActivate();
                 foreach (var angle in spawnAngles)
                 {
                     (ability as ProjectileAbility).spawnAngles.Remove(angle);

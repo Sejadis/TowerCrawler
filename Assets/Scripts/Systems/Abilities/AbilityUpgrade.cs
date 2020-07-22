@@ -5,7 +5,6 @@ using UnityEngine;
 namespace SejDev.Systems.Abilities
 {
     public abstract class AbilityUpgrade : ScriptableObject
-        // public abstract class Upgrade<T> : ScriptableObject where T: Ability
     {
         [field: SerializeField, Rename] public string Name { get; private set; }
         [field: SerializeField, Rename] public Sprite Icon { get; private set; }
@@ -14,23 +13,18 @@ namespace SejDev.Systems.Abilities
         protected Ability ability;
         private Guid guid;
         [SerializeField] private string id;
+
         public string GUID => id;
-        public bool IsActive { get; private set; }
 
         public virtual void Bind(Ability ability)
         {
             this.ability = ability;
+            Activate();
         }
 
-        public virtual void Activate()
-        {
-            IsActive = true;
-        }
+        protected abstract void Activate();
 
-        public virtual void DeActivate()
-        {
-            IsActive = false;
-        }
+        protected abstract void DeActivate();
 
         private void OnValidate()
         {

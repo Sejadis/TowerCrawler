@@ -1,6 +1,9 @@
-﻿public enum AbilityType
+﻿namespace SejDev.Systems.Abilities
 {
-    Cooldown,
-    Energy,
-    Charge
+    public enum AbilityType
+    {
+        Cooldown,
+        Energy,
+        Charge
+    }
 }

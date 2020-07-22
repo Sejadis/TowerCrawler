@@ -66,6 +66,7 @@ namespace SejDev.Systems.Abilities
         public Sprite Icon { get; protected set; }
 
         [SerializeField] protected List<AbilityUpgrade> upgrades = new List<AbilityUpgrade>();
+        public UpgradeTree upgradeTree;
 
         [field: Rename]
         [field: SerializeField]
@@ -181,6 +182,14 @@ namespace SejDev.Systems.Abilities
                 castTimeModifier = castTime.Value;
                 castTime.OnStatChanged += (s, args) => castTimeModifier = args.NewValue;
             }
+
+            if (upgradeTree != null)
+            {
+                foreach (var upgrade in upgradeTree.GetActiveUpgrades())
+                {
+                    upgrade.Bind(this);
+                }
+            }
         }
 
 
@@ -258,6 +267,14 @@ namespace SejDev.Systems.Abilities
         {
             AbilityActivator.Interrupt();
             OnAbilityInterrupted?.Invoke(this, null);
+        }
+
+        public Ability CreateDeepClone()
+        {
+            var clone = Instantiate(this);
+            clone.guid = guid;
+            clone.id = id;
+            return clone;
         }
     }
 }

@@ -31,7 +31,6 @@ namespace SejDev.Systems.Abilities
 
         public void ChangeAbility(Ability ability, AbilitySlot slot)
         {
-            Debug.Log(ability.GUID);
             OnPreAbilityChanged?.Invoke(this, null);
             ref var intendedSlot = ref GetSlot(slot);
             if (intendedSlot != null)
@@ -41,7 +40,7 @@ namespace SejDev.Systems.Abilities
                 intendedSlot.OnAbilityInterrupted -= RaiseOnAbilityInterrupted;
             }
 
-            intendedSlot = Instantiate(ability);
+            intendedSlot = ability.CreateDeepClone();
             intendedSlot.OnPreAbilityActivation += RaiseOnPreAbilityActivation;
             intendedSlot.OnPostAbilityActivation += RaiseOnPostAbilityActivation;
             intendedSlot.OnAbilityInterrupted += RaiseOnAbilityInterrupted;

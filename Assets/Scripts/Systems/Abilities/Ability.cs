@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 using SejDev.Abilities.Activator;
 using SejDev.Editor;
 using SejDev.Systems.Stats;
+using UnityEditor;
 using UnityEngine;
 
 namespace SejDev.Systems.Abilities
@@ -32,7 +33,25 @@ namespace SejDev.Systems.Abilities
             }
         }
 
-        private Guid guid = Guid.NewGuid();
+        private Guid guid;
+        [SerializeField] private string id;
+        public string GUID => id;
+
+        private void OnValidate()
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                guid = Guid.NewGuid();
+                id = guid.ToString();
+                EditorUtility.SetDirty(this);
+            }
+
+            if (guid == Guid.Empty)
+            {
+                guid = new Guid(id);
+            }
+        }
+
 
         //TODO replace Header attributes by custom inspector
         private AbilityStatusEventArgs abilityStatusEventArgs;

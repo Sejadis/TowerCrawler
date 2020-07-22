@@ -12,8 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f294f27a45f45ea98f9bf8c7418419c, type: 3}
   m_Name: NewLogAbility
   m_EditorClassIdentifier: 
+  id: ee64c5b9-6752-4a24-8810-6fec01670246
   <Name>k__BackingField: Log
   <Icon>k__BackingField: {fileID: 21300000, guid: c0134418f6834b643b9bb48b6a669dcb,
     type: 3}
+  upgrades: []
+  <Type>k__BackingField: 0
   <Cooldown>k__BackingField: 5
-  <RemainingCooldown>k__BackingField: 0
+  <Charges>k__BackingField: 0
+  <ChargeCooldown>k__BackingField: 0
+  <Energy>k__BackingField: 0
+  <EnergyDrainRate>k__BackingField: 0
+  <EnergyFillRate>k__BackingField: 0
+  <AbilityActivationType>k__BackingField: 0
+  <CastTime>k__BackingField: 0
+  <ChannelTime>k__BackingField: 0

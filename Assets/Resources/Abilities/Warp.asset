@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2959cfb10a784175831eaa640a98fbb9, type: 3}
   m_Name: Warp
   m_EditorClassIdentifier: 
+  id: 513e31cb-87b8-4e24-ad09-3b72cc66df33
   <Name>k__BackingField: 
   <Icon>k__BackingField: {fileID: 21300000, guid: f01a1884cdc597f4795a069a5fb3aaf0,
     type: 3}
+  upgrades: []
   <Type>k__BackingField: 0
   <Cooldown>k__BackingField: 0.5
   <Charges>k__BackingField: 0
@@ -27,3 +29,4 @@ MonoBehaviour:
   <ChannelTime>k__BackingField: 0
   <WarpDistance>k__BackingField: 10
   <WarpInMoveDirection>k__BackingField: 1
+  <AllowVerticalWarp>k__BackingField: 0

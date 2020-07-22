@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fd519ca51d24813ac7656a4d41b1523, type: 3}
   m_Name: NewGroundTargetAbility
   m_EditorClassIdentifier: 
+  id: fd777d01-c9a8-4cda-a9f5-21c1287f80e9
   <Name>k__BackingField: 
   <Icon>k__BackingField: {fileID: 0}
+  upgrades: []
   <Type>k__BackingField: 2
   <Cooldown>k__BackingField: 0
   <Charges>k__BackingField: 5

@@ -1,4 +1,5 @@
-﻿using SejDev.Editor;
+﻿using System;
+using SejDev.Editor;
 using UnityEngine;
 
 namespace SejDev.Systems.Abilities
@@ -11,6 +12,9 @@ namespace SejDev.Systems.Abilities
         [field: SerializeField, Rename] public string Description { get; private set; }
 
         protected Ability ability;
+        private Guid guid;
+        [SerializeField] private string id;
+        public string GUID => id;
         public bool IsActive { get; private set; }
 
         public virtual void Bind(Ability ability)
@@ -26,6 +30,20 @@ namespace SejDev.Systems.Abilities
         public virtual void DeActivate()
         {
             IsActive = false;
+        }
+
+        private void OnValidate()
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                guid = Guid.NewGuid();
+                id = guid.ToString();
+            }
+
+            if (guid == Guid.Empty)
+            {
+                guid = new Guid(id);
+            }
         }
     }
 }

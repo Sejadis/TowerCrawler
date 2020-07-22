@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba76a297cd994298838243d910d84726, type: 3}
   m_Name: NewHitScanAbility
   m_EditorClassIdentifier: 
+  id: 6a1cd029-a756-49c0-95cd-ebfa0b3014a1
   <Name>k__BackingField: 
   <Icon>k__BackingField: {fileID: 21300000, guid: 4760c38a0fbaf034eb7453be153aec39,
     type: 3}
+  upgrades: []
   <Type>k__BackingField: 2
   <Cooldown>k__BackingField: 0
   <Charges>k__BackingField: 3

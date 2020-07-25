@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: UpgradeTree
   m_EditorClassIdentifier: 
   upgrades:
-  - upgrade: {fileID: 11400000, guid: c74a2142e05b2ee4183cf519e7659a2a, type: 2}
+  - upgrade: {fileID: 11400000, guid: 4cc05631a98d9214e8bb2741dc7e58a3, type: 2}
     requiredUpgrades: []
+    requiredPointsSpent: 0
+  - upgrade: {fileID: 11400000, guid: 5b87f721c78ab6541816e8e6095f1b9f, type: 2}
+    requiredUpgrades:
+    - {fileID: 11400000, guid: 4cc05631a98d9214e8bb2741dc7e58a3, type: 2}
     requiredPointsSpent: 0

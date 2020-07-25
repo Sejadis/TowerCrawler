@@ -25,6 +25,21 @@ namespace SejDev.Systems.Abilities
                 .ToList();
         }
 
+        public static List<string> GetInActiveUpgrades(List<string> upgradeIDs)
+        {
+            foreach (var id in upgradeIDs)
+            {
+                GetActiveState(id);
+            }
+
+            return states.Where(
+                    kvp => upgradeIDs.Contains(kvp.Key) &&
+                           !kvp.Value.isActive //check ids from parameter for active state
+                )
+                .Select(kvp => kvp.Key) // take only key from resulting KVP enumerator
+                .ToList();
+        }
+
         public static void Load()
         {
             // UpgradeStateSave save = SaveSystem.Load<UpgradeStateSave>("upgradeStates", SaveType.sav);
@@ -56,7 +71,7 @@ namespace SejDev.Systems.Abilities
             return states[id].isActive;
         }
 
-        public static void SetActive(string upgradeGuid, bool isActive)
+        public static bool SetActive(string upgradeGuid, bool isActive)
         {
             if (!isLoaded)
             {
@@ -65,6 +80,7 @@ namespace SejDev.Systems.Abilities
 
             states[upgradeGuid].isActive = isActive;
             Save();
+            return isActive;
         }
     }
 }

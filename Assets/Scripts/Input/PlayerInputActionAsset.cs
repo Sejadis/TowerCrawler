@@ -245,6 +245,33 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""b58d6693-7ec8-4a3b-87fd-fd37b4087971"",
+            ""actions"": [
+                {
+                    ""name"": ""Upgrade"",
+                    ""type"": ""Button"",
+                    ""id"": ""1d831149-5559-4db2-9794-6fe242b42b3d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ecbf2bdb-b2b3-4272-8849-e58035cfcaf9"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Upgrade"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -274,6 +301,9 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
         m_Abilities_Core1 = m_Abilities.FindAction("Core1", throwIfNotFound: true);
         m_Abilities_Core2 = m_Abilities.FindAction("Core2", throwIfNotFound: true);
         m_Abilities_Core3 = m_Abilities.FindAction("Core3", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Upgrade = m_UI.FindAction("Upgrade", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -493,6 +523,65 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
     }
 
     public AbilitiesActions @Abilities => new AbilitiesActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_Upgrade;
+
+    public struct UIActions
+    {
+        private @PlayerInputActionAsset m_Wrapper;
+
+        public UIActions(@PlayerInputActionAsset wrapper)
+        {
+            m_Wrapper = wrapper;
+        }
+
+        public InputAction @Upgrade => m_Wrapper.m_UI_Upgrade;
+
+        public InputActionMap Get()
+        {
+            return m_Wrapper.m_UI;
+        }
+
+        public void Enable()
+        {
+            Get().Enable();
+        }
+
+        public void Disable()
+        {
+            Get().Disable();
+        }
+
+        public bool enabled => Get().enabled;
+
+        public static implicit operator InputActionMap(UIActions set)
+        {
+            return set.Get();
+        }
+
+        public void SetCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterface != null)
+            {
+                @Upgrade.started -= m_Wrapper.m_UIActionsCallbackInterface.OnUpgrade;
+                @Upgrade.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnUpgrade;
+                @Upgrade.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnUpgrade;
+            }
+
+            m_Wrapper.m_UIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Upgrade.started += instance.OnUpgrade;
+                @Upgrade.performed += instance.OnUpgrade;
+                @Upgrade.canceled += instance.OnUpgrade;
+            }
+        }
+    }
+
+    public UIActions @UI => new UIActions(this);
     private int m_KeyboardSchemeIndex = -1;
 
     public InputControlScheme KeyboardScheme
@@ -519,5 +608,10 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
         void OnCore1(InputAction.CallbackContext context);
         void OnCore2(InputAction.CallbackContext context);
         void OnCore3(InputAction.CallbackContext context);
+    }
+
+    public interface IUIActions
+    {
+        void OnUpgrade(InputAction.CallbackContext context);
     }
 }

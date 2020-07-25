@@ -231,6 +231,33 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "b58d6693-7ec8-4a3b-87fd-fd37b4087971",
+            "actions": [
+                {
+                    "name": "Upgrade",
+                    "type": "Button",
+                    "id": "1d831149-5559-4db2-9794-6fe242b42b3d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ecbf2bdb-b2b3-4272-8849-e58035cfcaf9",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Upgrade",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

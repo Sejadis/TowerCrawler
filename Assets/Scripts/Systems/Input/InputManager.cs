@@ -6,8 +6,9 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
+    //TODO expose keybinds directly
     public static InputManager Instance { get; private set; }
-    public PlayerInputActionAsset PlayerInput { get; private set; }
+    public PlayerInputActionAsset PlayerInput { get; private set; } //TODO private?
 
     public Action<InputAction.CallbackContext> OnCore1;
     public Action<InputAction.CallbackContext> OnCore2;
@@ -19,6 +20,8 @@ public class InputManager : MonoBehaviour
     public Action<InputAction.CallbackContext> OnLook;
     public Action<InputAction.CallbackContext> OnJump;
     public Action<InputAction.CallbackContext> OnSprint;
+
+    public Action<InputAction.CallbackContext> OnUpgradeUI;
 
     // Start is called before the first frame update
     void Awake()
@@ -42,6 +45,9 @@ public class InputManager : MonoBehaviour
 
         HookUpAbilities();
         PlayerInput.Abilities.Enable();
+
+        HookUpUI();
+        PlayerInput.UI.Enable();
     }
 
     private void HookUpControls()
@@ -84,5 +90,12 @@ public class InputManager : MonoBehaviour
         // PlayerInput.Abilities.WeaponSpecial.started += ctx => OnWeaponSpecial?.Invoke(ctx);
         PlayerInput.Abilities.WeaponSpecial.performed += ctx => OnWeaponSpecial?.Invoke(ctx);
         // PlayerInput.Abilities.WeaponSpecial.canceled += ctx => OnWeaponSpecial?.Invoke(ctx);
+    }
+
+    private void HookUpUI()
+    {
+        // PlayerInput.UI.Upgrade.started += ctx => OnUpgradeUI?.Invoke(ctx);
+        PlayerInput.UI.Upgrade.performed += ctx => OnUpgradeUI?.Invoke(ctx);
+        // PlayerInput.UI.Upgrade.canceled += ctx => OnUpgradeUI?.Invoke(ctx);
     }
 }

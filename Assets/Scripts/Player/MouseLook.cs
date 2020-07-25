@@ -14,11 +14,18 @@ namespace SejDev.Player
         private Vector2 lookData;
         private float currentCameraRotation;
 
-        private void Start()
+        private void OnEnable()
         {
             InputManager.Instance.OnLook += OnLook;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+        }
+
+        private void OnDisable()
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            InputManager.Instance.OnLook -= OnLook;
         }
 
         private void Update()

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,7 +17,11 @@ namespace SejDev.Player
 
         private void OnEnable()
         {
-            InputManager.Instance.OnLook += OnLook;
+            if (InputManager.Instance != null)
+            {
+                InputManager.Instance.OnLook += OnLook;
+            }
+
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
@@ -25,7 +30,10 @@ namespace SejDev.Player
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            InputManager.Instance.OnLook -= OnLook;
+            if (InputManager.Instance != null)
+            {
+                InputManager.Instance.OnLook -= OnLook;
+            }
         }
 
         private void Update()

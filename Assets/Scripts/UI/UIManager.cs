@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SejDev.Player;
 using SejDev.Systems.UI;
 using UnityEngine;
@@ -9,26 +10,45 @@ namespace SejDev.UI
     public class UIManager : MonoBehaviour
     {
         public UIScreen upgradeScreen;
+        public UIScreen abilityScreen;
         public MouseLook player;
+        List<UIScreen> activeScreens = new List<UIScreen>();
 
         private void Start()
         {
             InputManager.Instance.OnUpgradeUI += UpgradeUi;
+            InputManager.Instance.OnAbilityUI += AbilityUi;
+        }
+
+        private void CheckStuff()
+        {
+            player.enabled = activeScreens.Count == 0;
+        }
+
+        private void AbilityUi(InputAction.CallbackContext obj)
+        {
+            ChangeScreenState(abilityScreen, !abilityScreen.IsActive);
         }
 
         private void UpgradeUi(InputAction.CallbackContext obj)
         {
-            var state = upgradeScreen.IsActive;
-            if (state)
+            ChangeScreenState(upgradeScreen, !upgradeScreen.IsActive);
+        }
+
+        private void ChangeScreenState(UIScreen screen, bool newState)
+        {
+            if (newState)
             {
-                upgradeScreen.Hide();
+                screen.Show();
+                activeScreens.Add(screen);
             }
             else
             {
-                upgradeScreen.Show();
+                screen.Hide();
+                activeScreens.Remove(screen);
             }
 
-            player.enabled = state;
+            CheckStuff();
         }
     }
 }

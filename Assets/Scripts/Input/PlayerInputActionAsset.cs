@@ -257,6 +257,14 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Ability"",
+                    ""type"": ""Button"",
+                    ""id"": ""92117261-df9c-4f4e-8230-204242fff405"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -268,6 +276,17 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Upgrade"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e0d4ad73-3f78-4bb3-8422-41b6f4268273"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -304,6 +323,7 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Upgrade = m_UI.FindAction("Upgrade", throwIfNotFound: true);
+        m_UI_Ability = m_UI.FindAction("Ability", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -528,6 +548,7 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
     private readonly InputActionMap m_UI;
     private IUIActions m_UIActionsCallbackInterface;
     private readonly InputAction m_UI_Upgrade;
+    private readonly InputAction m_UI_Ability;
 
     public struct UIActions
     {
@@ -539,6 +560,7 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
         }
 
         public InputAction @Upgrade => m_Wrapper.m_UI_Upgrade;
+        public InputAction @Ability => m_Wrapper.m_UI_Ability;
 
         public InputActionMap Get()
         {
@@ -569,6 +591,9 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                 @Upgrade.started -= m_Wrapper.m_UIActionsCallbackInterface.OnUpgrade;
                 @Upgrade.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnUpgrade;
                 @Upgrade.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnUpgrade;
+                @Ability.started -= m_Wrapper.m_UIActionsCallbackInterface.OnAbility;
+                @Ability.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnAbility;
+                @Ability.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnAbility;
             }
 
             m_Wrapper.m_UIActionsCallbackInterface = instance;
@@ -577,6 +602,9 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                 @Upgrade.started += instance.OnUpgrade;
                 @Upgrade.performed += instance.OnUpgrade;
                 @Upgrade.canceled += instance.OnUpgrade;
+                @Ability.started += instance.OnAbility;
+                @Ability.performed += instance.OnAbility;
+                @Ability.canceled += instance.OnAbility;
             }
         }
     }
@@ -613,5 +641,6 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
     public interface IUIActions
     {
         void OnUpgrade(InputAction.CallbackContext context);
+        void OnAbility(InputAction.CallbackContext context);
     }
 }

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: EvenMoreProjectiles
   m_EditorClassIdentifier: 
   <Name>k__BackingField: 
-  <Icon>k__BackingField: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 21300000, guid: d4ceccb6744254e4baed969f24099b29,
+    type: 3}
   <Description>k__BackingField: 
   id: 8e5f5721-cb03-4c17-9dce-26eeeafc7d45
   upgrade:

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: MOARProjectiles
   m_EditorClassIdentifier: 
   <Name>k__BackingField: 
-  <Icon>k__BackingField: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 89d749235b668c044a8649a3c028c0fa,
+    type: 3}
   <Description>k__BackingField: 
   id: 2c9d3f7f-8bbe-4d84-9c76-e380d4bc90e9
   upgrade:

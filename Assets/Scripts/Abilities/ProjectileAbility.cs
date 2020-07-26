@@ -45,7 +45,6 @@ namespace SejDev.Abilities
                 // rigidBody.AddForce(projectile.transform.forward * forwardForce, ForceMode.Impulse);
                 rigidBody.AddRelativeForce(Vector3.forward * forwardForce, ForceMode.Impulse);
 
-
                 if (maxProjectileLifeTime > 0)
                 {
                     Destroy(projectile, maxProjectileLifeTime);

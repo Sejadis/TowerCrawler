@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Test
-  m_EditorClassIdentifier: Scripts:SejDev.Abilities:ProjectileAbility/MoreProjectilesUpgrade
+  m_Script: {fileID: 11500000, guid: 234c1cb64a4d8644a9c36cb604274ffb, type: 3}
+  m_Name: EvenMoreProjectiles
+  m_EditorClassIdentifier: 
   <Name>k__BackingField: 
   <Icon>k__BackingField: {fileID: 0}
   <Description>k__BackingField: 
-  id: e01755d4-7426-43a0-8647-9f46670c2136
-  spawnAngles:
-  - {x: 0, y: 7}
-  - {x: 0, y: -7}
+  id: 8e5f5721-cb03-4c17-9dce-26eeeafc7d45
+  upgrade:
+    spawnAngles:
+    - {x: 0, y: 15}
+    - {x: 0, y: -15}

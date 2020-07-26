@@ -1,30 +1,35 @@
-﻿using System.Collections.Generic;
-using SejDev.Systems.Abilities;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace SejDev.Abilities
 {
     public partial class ProjectileAbility
     {
-        [CreateAssetMenu(fileName = "Assets/Resources/Abilities/Upgrades//NewProjectileAbilityUpgrade",
-            menuName = "Systems/Ability/Upgrades/Projectile Ability Upgrades")]
-        public class MoreProjectilesUpgrade : AbilityUpgrade
+        [Serializable]
+        public class MoreProjectilesUpgrade
         {
+            private ProjectileAbility ability;
             public List<Vector2> spawnAngles = new List<Vector2>();
 
-            protected override void Activate()
+            public void Bind(ProjectileAbility ability)
+            {
+                this.ability = ability;
+            }
+
+            public void Activate()
             {
                 foreach (var angle in spawnAngles)
                 {
-                    (ability as ProjectileAbility).spawnAngles.Add(angle);
+                    ability.spawnAngles.Add(angle);
                 }
             }
 
-            protected override void DeActivate()
+            public void DeActivate()
             {
                 foreach (var angle in spawnAngles)
                 {
-                    (ability as ProjectileAbility).spawnAngles.Remove(angle);
+                    ability.spawnAngles.Remove(angle);
                 }
             }
         }

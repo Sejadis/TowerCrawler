@@ -9,13 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: EvenMoarProjectiles
-  m_EditorClassIdentifier: Scripts:SejDev.Abilities:ProjectileAbility/MoreProjectilesUpgrade
+  m_Script: {fileID: 11500000, guid: 234c1cb64a4d8644a9c36cb604274ffb, type: 3}
+  m_Name: Over9000Projectiles
+  m_EditorClassIdentifier: 
   <Name>k__BackingField: 
   <Icon>k__BackingField: {fileID: 0}
   <Description>k__BackingField: 
-  id: 9eab1a7f-9a09-422d-90d5-f83d511089d5
-  spawnAngles:
-  - {x: 0, y: 15}
-  - {x: 0, y: -15}
+  id: 69127e3a-b652-4058-84e1-84f8a01013a8
+  upgrade:
+    spawnAngles:
+    - {x: -7, y: 10}
+    - {x: -7, y: -10}
+    - {x: -7, y: 0}

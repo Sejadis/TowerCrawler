@@ -94,6 +94,8 @@ namespace SejDev.Systems.Abilities
             {
                 movementHandler.OnMoveStateChanged += OnOnMoveStateChanged;
             }
+
+            LoadEquippedAbilities();
         }
 
 

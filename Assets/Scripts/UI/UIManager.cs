@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using SejDev.Player;
+using SejDev.Systems.Abilities;
 using SejDev.Systems.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,7 +12,7 @@ namespace SejDev.UI
     {
         public UIScreen upgradeScreen;
         public UIScreen abilityScreen;
-        public MouseLook player;
+        public GameObject player;
         List<UIScreen> activeScreens = new List<UIScreen>();
 
         private void Start()
@@ -22,7 +23,8 @@ namespace SejDev.UI
 
         private void CheckStuff()
         {
-            player.enabled = activeScreens.Count == 0;
+            player.GetComponent<MouseLook>().enabled = activeScreens.Count == 0;
+            player.GetComponent<AbilityHandler>()?.ReloadAbilities();
         }
 
         private void AbilityUi(InputAction.CallbackContext obj)

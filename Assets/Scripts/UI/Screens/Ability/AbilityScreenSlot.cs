@@ -9,7 +9,22 @@ using AbilitySlot = SejDev.Systems.Abilities.AbilitySlot;
 
 public class AbilityScreenSlot : MonoBehaviour, IDropHandler
 {
-    [SerializeField] private Ability ability;
+    private Ability ability;
+
+    public Ability Ability
+    {
+        get { return ability; }
+        set
+        {
+            ability = value;
+            SetVisuals();
+        }
+    }
+
+    private void SetVisuals()
+    {
+        iconImage.sprite = Ability.Icon;
+    }
 
     [SerializeField] private AbilitySlot slot;
 
@@ -17,10 +32,11 @@ public class AbilityScreenSlot : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        ability = eventData.pointerDrag.GetComponent<AbilityDraggable>()?.Ability;
-        if (ability != null)
+        var draggable = eventData.pointerDrag.GetComponent<AbilityDraggable>();
+        if (draggable != null)
         {
-            iconImage.sprite = ability.Icon;
+            Ability = draggable.Ability;
+            AbilityManager.SetAbility(Ability, slot);
         }
 
         Destroy(eventData.pointerDrag);

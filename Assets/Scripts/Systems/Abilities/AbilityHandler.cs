@@ -48,10 +48,6 @@ namespace SejDev.Systems.Abilities
             intendedSlot.OnAbilityInterrupted += RaiseOnAbilityInterrupted;
             intendedSlot.Bind(this, castTimeStat);
             OnPostAbilityChanged?.Invoke(this, new AbilityChangedEventArgs(slot, intendedSlot));
-            if (new List<AbilitySlot>() {AbilitySlot.Core1, AbilitySlot.Core2, AbilitySlot.Core3}.Contains(slot))
-            {
-                SaveManager.SetSave(new EquippedAbilitySave(core1, core2, core3));
-            }
         }
 
         public Ability GetAbilityBySlot(AbilitySlot slot)
@@ -98,9 +94,8 @@ namespace SejDev.Systems.Abilities
             {
                 movementHandler.OnMoveStateChanged += OnOnMoveStateChanged;
             }
-
-            LoadEquippedAbilities();
         }
+
 
         private void LoadEquippedAbilities()
         {
@@ -138,7 +133,6 @@ namespace SejDev.Systems.Abilities
         {
             activeAbility?.Interrupt();
         }
-
 
         private void OnEnable()
         {
@@ -258,6 +252,11 @@ namespace SejDev.Systems.Abilities
             if (activeAbility != null || (weaponSpecial?.CanActivate != null && !weaponSpecial.CanActivate)) return;
 
             weaponSpecial?.Activate();
+        }
+
+        public void ReloadAbilities()
+        {
+            LoadEquippedAbilities();
         }
     }
 }

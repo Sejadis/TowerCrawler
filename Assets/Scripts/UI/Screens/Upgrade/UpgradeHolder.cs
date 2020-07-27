@@ -13,12 +13,21 @@ namespace SejDev.UI
         [field: SerializeField, Rename] public AbilityUpgrade Upgrade { get; private set; }
         [SerializeField] private Image borderImage;
         [SerializeField] private Image iconImage;
-        public UpgradeScreen UpgradeScreen { get; set; }
+        private bool isBound;
+        public UpgradeScreen UpgradeScreen { get; private set; }
 
         private void Start()
         {
             UpdateState();
             iconImage.sprite = Upgrade.Icon;
+        }
+
+        public void Bind(AbilityUpgrade upgrade, UpgradeScreen screen)
+        {
+            if (isBound) return;
+            this.Upgrade = upgrade;
+            this.UpgradeScreen = screen;
+            isBound = true;
         }
 
         public void OnPointerClick(PointerEventData eventData)

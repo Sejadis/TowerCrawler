@@ -22,6 +22,34 @@ namespace SejDev.Systems.Abilities
             public int requiredPointsSpent = 0;
         }
 
+        private void OnValidate()
+        {
+            foreach (var upgradeRelation in upgrades)
+            {
+                if (upgradeRelation == null) return;
+                var min = GetMinPointsSpend(upgradeRelation.upgrade);
+                upgradeRelation.requiredPointsSpent = Mathf.Max(min, upgradeRelation.requiredPointsSpent);
+            }
+        }
+
+        private int GetMinPointsSpend(AbilityUpgrade upgrade)
+        {
+            int i = 0;
+            var relation = upgrades.FirstOrDefault(rel => rel.upgrade.Equals(upgrade));
+            if (relation != null && relation.requiredUpgrades.Count > 0)
+            {
+                var x = new List<int>();
+                foreach (var requiredUpgrade in relation.requiredUpgrades)
+                {
+                    x.Add(GetMinPointsSpend(requiredUpgrade));
+                }
+
+                i = x.Max() + 1;
+            }
+
+            return i;
+        }
+
         public List<AbilityUpgrade> GetActiveUpgrades()
         {
             var upgradeIDs = upgrades.Select(relation => relation.upgrade.GUID)

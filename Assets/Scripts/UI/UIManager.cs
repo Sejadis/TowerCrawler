@@ -23,8 +23,19 @@ namespace SejDev.UI
 
         private void CheckStuff()
         {
-            player.GetComponent<MouseLook>().enabled = activeScreens.Count == 0;
-            player.GetComponent<AbilityHandler>()?.ReloadAbilities();
+            var uiClosed = activeScreens.Count == 0;
+            player.GetComponent<MouseLook>().enabled = uiClosed;
+            if (uiClosed)
+            {
+                InputManager.Instance.PlayerInput.Abilities.Enable();
+                InputManager.Instance.PlayerInput.Controls.Enable();
+                player.GetComponent<AbilityHandler>()?.ReloadAbilities();
+            }
+            else
+            {
+                InputManager.Instance.PlayerInput.Abilities.Disable();
+                InputManager.Instance.PlayerInput.Controls.Disable();
+            }
         }
 
         private void AbilityUi(InputAction.CallbackContext obj)

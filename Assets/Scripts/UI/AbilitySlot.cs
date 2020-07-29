@@ -9,7 +9,6 @@ namespace SejDev.UI
 {
     public class AbilitySlot : MonoBehaviour
     {
-        //TODO remove, only for testing
         [SerializeField] private Ability ability;
 
         [SerializeField] private Image icon;
@@ -38,27 +37,40 @@ namespace SejDev.UI
         public void Bind(Ability ability)
         {
             if (ability == null) return; //slot is empty
+            if (this.ability != null)
+            {
+                if (this.ability.Type.Equals(AbilityType.Charge))
+                {
+                    ability.OnChargesChanged -= OnChargesChanged;
+                    chargesObject.SetActive(false);
+                }
+
+                ability.OnCooldownChanged -= OnCooldownChanged;
+            }
+
+            this.ability = ability;
             icon.sprite = ability.Icon;
             icon.gameObject.SetActive(true);
             switch (ability.Type)
             {
                 case AbilityType.Cooldown:
-                    cooldown = ability.Cooldown;
+                    cooldown = this.ability.Cooldown;
                     break;
                 case AbilityType.Energy:
                     break;
                 case AbilityType.Charge:
-                    cooldown = ability.ChargeCooldown;
+                    cooldown = this.ability.ChargeCooldown;
                     chargesObject.SetActive(true);
-                    ability.OnChargesChanged += OnChargesChanged;
-                    OnChargesChanged(this, new OldNewEventArgs<int>(ability.CurrentCharges, ability.CurrentCharges));
+                    this.ability.OnChargesChanged += OnChargesChanged;
+                    OnChargesChanged(this,
+                        new OldNewEventArgs<int>(this.ability.CurrentCharges, this.ability.CurrentCharges));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
-            ability.OnCooldownChanged += OnCooldownChanged;
-            OnCooldownChanged(this, new OldNewEventArgs<float>(0, ability.RemainingCooldown));
+            this.ability.OnCooldownChanged += OnCooldownChanged;
+            OnCooldownChanged(this, new OldNewEventArgs<float>(0, this.ability.RemainingCooldown));
         }
 
         private void OnChargesChanged(object sender, OldNewEventArgs<int> e)

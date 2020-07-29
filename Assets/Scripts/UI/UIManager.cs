@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using SejDev.Player;
 using SejDev.Systems.Abilities;
 using SejDev.Systems.UI;
@@ -10,14 +9,12 @@ namespace SejDev.UI
 {
     public class UIManager : MonoBehaviour
     {
-        public UIScreen upgradeScreen;
         public UIScreen abilityScreen;
         public GameObject player;
         List<UIScreen> activeScreens = new List<UIScreen>();
 
         private void Start()
         {
-            InputManager.Instance.OnUpgradeUI += UpgradeUi;
             InputManager.Instance.OnAbilityUI += AbilityUi;
         }
 
@@ -41,11 +38,6 @@ namespace SejDev.UI
         private void AbilityUi(InputAction.CallbackContext obj)
         {
             ChangeScreenState(abilityScreen, !abilityScreen.IsActive);
-        }
-
-        private void UpgradeUi(InputAction.CallbackContext obj)
-        {
-            ChangeScreenState(upgradeScreen, !upgradeScreen.IsActive);
         }
 
         private void ChangeScreenState(UIScreen screen, bool newState)

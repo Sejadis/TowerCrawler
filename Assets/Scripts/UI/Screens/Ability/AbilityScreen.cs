@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using SejDev.Systems.Abilities;
 using SejDev.Systems.UI;
@@ -10,7 +9,9 @@ public class AbilityScreen : UIScreen
 {
     List<AbilityHolder> holders = new List<AbilityHolder>();
 
+    [SerializeField] private UpgradeScreen upgradeScreen;
     [SerializeField] private GameObject abilityHolderPrefab;
+    [SerializeField] private GameObject dragPrefab;
     [SerializeField] private GameObject abilityParent;
     [SerializeField] private AbilityScreenSlot core1;
     [SerializeField] private AbilityScreenSlot core2;
@@ -25,12 +26,19 @@ public class AbilityScreen : UIScreen
             var holder = go.GetComponent<AbilityHolder>();
             if (holder != null)
             {
+                holder.OnElementClicked += OnAbilityElementClicked;
                 holder.Bind(ability);
                 holders.Add(holder);
             }
         }
 
         LoadAbilities();
+    }
+
+    private void OnAbilityElementClicked(object sender, Ability e)
+    {
+        upgradeScreen.CreateFromUpgradeTree(e.upgradeTree);
+        upgradeScreen.Show();
     }
 
     private void LoadAbilities()

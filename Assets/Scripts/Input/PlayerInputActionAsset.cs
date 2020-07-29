@@ -31,7 +31,7 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                     ""name"": ""Look"",
                     ""type"": ""Value"",
                     ""id"": ""6d60ef67-b0f4-42c9-9591-46df6b1bfc04"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -251,14 +251,6 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
             ""id"": ""b58d6693-7ec8-4a3b-87fd-fd37b4087971"",
             ""actions"": [
                 {
-                    ""name"": ""Upgrade"",
-                    ""type"": ""Button"",
-                    ""id"": ""1d831149-5559-4db2-9794-6fe242b42b3d"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""Ability"",
                     ""type"": ""Button"",
                     ""id"": ""92117261-df9c-4f4e-8230-204242fff405"",
@@ -270,19 +262,8 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""ecbf2bdb-b2b3-4272-8849-e58035cfcaf9"",
-                    ""path"": ""<Keyboard>/k"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Upgrade"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""e0d4ad73-3f78-4bb3-8422-41b6f4268273"",
-                    ""path"": ""<Keyboard>/j"",
+                    ""path"": ""<Keyboard>/k"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -322,7 +303,6 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
         m_Abilities_Core3 = m_Abilities.FindAction("Core3", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_Upgrade = m_UI.FindAction("Upgrade", throwIfNotFound: true);
         m_UI_Ability = m_UI.FindAction("Ability", throwIfNotFound: true);
     }
 
@@ -547,7 +527,6 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
     // UI
     private readonly InputActionMap m_UI;
     private IUIActions m_UIActionsCallbackInterface;
-    private readonly InputAction m_UI_Upgrade;
     private readonly InputAction m_UI_Ability;
 
     public struct UIActions
@@ -559,7 +538,6 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
             m_Wrapper = wrapper;
         }
 
-        public InputAction @Upgrade => m_Wrapper.m_UI_Upgrade;
         public InputAction @Ability => m_Wrapper.m_UI_Ability;
 
         public InputActionMap Get()
@@ -588,9 +566,6 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_UIActionsCallbackInterface != null)
             {
-                @Upgrade.started -= m_Wrapper.m_UIActionsCallbackInterface.OnUpgrade;
-                @Upgrade.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnUpgrade;
-                @Upgrade.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnUpgrade;
                 @Ability.started -= m_Wrapper.m_UIActionsCallbackInterface.OnAbility;
                 @Ability.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnAbility;
                 @Ability.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnAbility;
@@ -599,9 +574,6 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Upgrade.started += instance.OnUpgrade;
-                @Upgrade.performed += instance.OnUpgrade;
-                @Upgrade.canceled += instance.OnUpgrade;
                 @Ability.started += instance.OnAbility;
                 @Ability.performed += instance.OnAbility;
                 @Ability.canceled += instance.OnAbility;
@@ -640,7 +612,6 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
 
     public interface IUIActions
     {
-        void OnUpgrade(InputAction.CallbackContext context);
         void OnAbility(InputAction.CallbackContext context);
     }
 }

@@ -6,25 +6,27 @@ using UnityEngine.UI;
 
 namespace SejDev.UI
 {
-    public class AbilityHolder : MonoBehaviour, IBeginDragHandler, IDragHandler
+    public class AbilityHolder : MonoBehaviour, IBeginDragHandler, IDragHandler, IPointerClickHandler
     {
         [SerializeField] private Ability ability;
-        public Ability Ability => ability;
         [SerializeField] private Image borderImage;
         [SerializeField] private Image iconImage;
         [SerializeField] private GameObject dragPrefab;
+        public event EventHandler<Ability> OnElementClicked;
 
         private void Start()
         {
-            if (ability != null)
-            {
-                iconImage.sprite = ability.Icon;
-            }
+            SetVisuals();
         }
 
         public void Bind(Ability ability)
         {
             this.ability = ability;
+            SetVisuals();
+        }
+
+        private void SetVisuals()
+        {
             if (ability != null)
             {
                 iconImage.sprite = ability.Icon;
@@ -41,6 +43,12 @@ namespace SejDev.UI
 
         public void OnDrag(PointerEventData eventData)
         {
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            OnElementClicked?.Invoke(this, ability);
+            // ExecuteEvents.ExecuteHierarchy(transform.parent.gameObject, eventData, ExecuteEvents.pointerClickHandler);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using SejDev.Systems.Abilities;
 using SejDev.Systems.UI;
@@ -9,25 +8,20 @@ namespace SejDev.UI
 {
     public class UpgradeScreen : UIScreen
     {
-        [SerializeField] private UpgradeTree upgradeTree;
-        [SerializeField] private List<UpgradeHolder> upgradeHolders = new List<UpgradeHolder>();
         [SerializeField] private GameObject upgradeHolderPrefab;
-        private Dictionary<int, GameObject> conditionGroups = new Dictionary<int, GameObject>();
         [SerializeField] private GameObject vertParent;
         [SerializeField] private GameObject groupPrefab;
 
-        private void Start()
-        {
-            // foreach (var holder in upgradeHolders)
-            // {
-            //     holder.UpgradeScreen = this;
-            // }
+        private UpgradeTree upgradeTree;
+        private readonly List<UpgradeHolder> upgradeHolders = new List<UpgradeHolder>();
+        private readonly Dictionary<int, GameObject> conditionGroups = new Dictionary<int, GameObject>();
 
-            CreateFromUpgradeTree();
-        }
-
-        private void CreateFromUpgradeTree()
+        public void CreateFromUpgradeTree(UpgradeTree upgradeTree)
         {
+            CleanUpTree();
+            this.upgradeTree = upgradeTree;
+            if (upgradeTree == null) return;
+
             foreach (var upgradeRelation in upgradeTree.upgrades)
             {
                 var holderObj = Instantiate(upgradeHolderPrefab, transform);
@@ -45,14 +39,26 @@ namespace SejDev.UI
                 holderObj.transform.parent = conditionGroups[upgradeRelation.requiredPointsSpent].transform;
             }
 
-            foreach (var upgradeRelation in upgradeTree.upgrades)
+            // foreach (var upgradeRelation in upgradeTree.upgrades)
+            // {
+            //     var obj = upgradeHolders.First(holder => holder.Upgrade.Equals(upgradeRelation.upgrade)).gameObject;
+            //     foreach (var requiredUpgrade in upgradeRelation.requiredUpgrades)
+            //     {
+            //         var reqObj = upgradeHolders.First(holder => holder.Upgrade.Equals(requiredUpgrade)).gameObject;
+            //         var lineRenderer = obj.AddComponent<LineRenderer>();
+            //         lineRenderer.SetPositions(new[] {obj.transform.position, reqObj.transform.position});
+            //     }
+            // }
+        }
+
+        private void CleanUpTree()
+        {
+            upgradeHolders.Clear();
+            foreach (var key in conditionGroups.Keys)
             {
-                var obj = upgradeHolders.First(holder => holder.Upgrade.Equals(upgradeRelation.upgrade)).gameObject;
-                foreach (var requiredUpgrade in upgradeRelation.requiredUpgrades)
+                foreach (Transform child in conditionGroups[key].transform)
                 {
-                    var reqObj = upgradeHolders.First(holder => holder.Upgrade.Equals(requiredUpgrade)).gameObject;
-                    var lineRenderer = obj.AddComponent<LineRenderer>();
-                    lineRenderer.SetPositions(new[] {obj.transform.position, reqObj.transform.position});
+                    Destroy(child.gameObject);
                 }
             }
         }

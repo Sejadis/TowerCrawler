@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,7 +19,6 @@ public class InputManager : MonoBehaviour
     public Action<InputAction.CallbackContext> OnJump;
     public Action<InputAction.CallbackContext> OnSprint;
 
-    public Action<InputAction.CallbackContext> OnUpgradeUI;
     public Action<InputAction.CallbackContext> OnAbilityUI;
 
     // Start is called before the first frame update
@@ -95,10 +92,6 @@ public class InputManager : MonoBehaviour
 
     private void HookUpUI()
     {
-        // PlayerInput.UI.Upgrade.started += ctx => OnUpgradeUI?.Invoke(ctx);
-        PlayerInput.UI.Upgrade.performed += ctx => OnUpgradeUI?.Invoke(ctx);
-        // PlayerInput.UI.Upgrade.canceled += ctx => OnUpgradeUI?.Invoke(ctx);
-
         // PlayerInput.UI.Upgrade.started += ctx => OnUpgradeUI?.Invoke(ctx);
         PlayerInput.UI.Ability.performed += ctx => OnAbilityUI?.Invoke(ctx);
         // PlayerInput.UI.Upgrade.canceled += ctx => OnUpgradeUI?.Invoke(ctx);

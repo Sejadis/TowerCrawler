@@ -237,14 +237,6 @@
             "id": "b58d6693-7ec8-4a3b-87fd-fd37b4087971",
             "actions": [
                 {
-                    "name": "Upgrade",
-                    "type": "Button",
-                    "id": "1d831149-5559-4db2-9794-6fe242b42b3d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "Ability",
                     "type": "Button",
                     "id": "92117261-df9c-4f4e-8230-204242fff405",
@@ -256,19 +248,8 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "ecbf2bdb-b2b3-4272-8849-e58035cfcaf9",
-                    "path": "<Keyboard>/k",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Upgrade",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "e0d4ad73-3f78-4bb3-8422-41b6f4268273",
-                    "path": "<Keyboard>/j",
+                    "path": "<Keyboard>/k",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

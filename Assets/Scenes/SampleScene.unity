@@ -687,14 +687,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeScreen: {fileID: 1871400356}
-  abilityHolderPrefab: {fileID: 6145909808321536956, guid: be42e029af3f93f4897f284ea9a60784,
-    type: 3}
-  dragPrefab: {fileID: 6378785076946856027, guid: 5c534def34a9d8b48b155f764f43127d,
+  abilityElementPrefab: {fileID: 6145909808321536956, guid: be42e029af3f93f4897f284ea9a60784,
     type: 3}
   abilityParent: {fileID: 1113520791}
   core1: {fileID: 997349166}
   core2: {fileID: 635585791}
   core3: {fileID: 557093334}
+  describer: {fileID: 746320864}
 --- !u!1 &171502803
 GameObject:
   m_ObjectHideFlags: 0
@@ -3288,6 +3287,7 @@ GameObject:
   - component: {fileID: 746320863}
   - component: {fileID: 746320862}
   - component: {fileID: 746320861}
+  - component: {fileID: 746320864}
   m_Layer: 5
   m_Name: InfoPanel
   m_TagString: Untagged
@@ -3379,6 +3379,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 746320859}
   m_CullTransparentMesh: 0
+--- !u!114 &746320864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746320859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3dd3f5b3cf640b7a93b904f5f62cccf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iconImage: {fileID: 497406516}
+  nameText: {fileID: 1103717898}
+  descriptionText: {fileID: 2066086088}
 --- !u!1 &787300523
 GameObject:
   m_ObjectHideFlags: 0
@@ -7961,6 +7976,7 @@ MonoBehaviour:
     type: 3}
   lineMaterial: {fileID: 2100000, guid: 3994ae0899548e24bb3eaddb34809807, type: 2}
   vertParent: {fileID: 979529094}
+  describer: {fileID: 746320864}
 --- !u!1 &1914410837
 GameObject:
   m_ObjectHideFlags: 0

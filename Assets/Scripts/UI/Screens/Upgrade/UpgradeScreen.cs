@@ -13,6 +13,7 @@ namespace SejDev.UI
         [SerializeField] private GameObject groupPrefab;
         [SerializeField] private Material lineMaterial;
         [SerializeField] private GameObject vertParent;
+        [SerializeField] private ObjectDescriber describer;
 
         private UpgradeTree upgradeTree;
         private readonly List<UpgradeElement> upgradeElements = new List<UpgradeElement>();
@@ -39,10 +40,22 @@ namespace SejDev.UI
                 var element = elementObj.GetComponent<UpgradeElement>();
 
                 element?.Bind(upgradeRelation.upgrade, this);
+                element.OnElementEnter += OnUpgradeElementEnter;
+                element.OnElementExit += OnUpgradeElementExit;
                 upgradeElements.Add(element);
             }
 
             StartCoroutine(DrawLines());
+        }
+
+        private void OnUpgradeElementExit(object sender, AbilityUpgrade e)
+        {
+            describer.Reset();
+        }
+
+        private void OnUpgradeElementEnter(object sender, AbilityUpgrade e)
+        {
+            describer.Fill(e);
         }
 
         private void ReorderGroups()

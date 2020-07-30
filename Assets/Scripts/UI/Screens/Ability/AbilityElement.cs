@@ -6,13 +6,16 @@ using UnityEngine.UI;
 
 namespace SejDev.UI
 {
-    public class AbilityElement : MonoBehaviour, IBeginDragHandler, IDragHandler, IPointerClickHandler
+    public class AbilityElement : MonoBehaviour, IBeginDragHandler, IDragHandler, IPointerClickHandler,
+        IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] private Ability ability;
         [SerializeField] private Image borderImage;
         [SerializeField] private Image iconImage;
         [SerializeField] private GameObject dragPrefab;
         public event EventHandler<Ability> OnElementClicked;
+        public event EventHandler<Ability> OnElementEnter;
+        public event EventHandler<Ability> OnElementExit;
 
         private void Start()
         {
@@ -49,6 +52,16 @@ namespace SejDev.UI
         {
             OnElementClicked?.Invoke(this, ability);
             // ExecuteEvents.ExecuteHierarchy(transform.parent.gameObject, eventData, ExecuteEvents.pointerClickHandler);
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            OnElementEnter?.Invoke(this, ability);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            OnElementExit?.Invoke(this, ability);
         }
     }
 }

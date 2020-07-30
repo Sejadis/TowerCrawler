@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using JetBrains.Annotations;
 using SejDev.Editor;
 using SejDev.Save;
 using SejDev.Systems.Stats;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 namespace SejDev.Systems.Abilities
 {
@@ -56,19 +54,14 @@ namespace SejDev.Systems.Abilities
             {
                 case AbilitySlot.WeaponBase:
                     return weaponBase;
-                    break;
                 case AbilitySlot.WeaponSpecial:
                     return weaponSpecial;
-                    break;
                 case AbilitySlot.Core1:
                     return core1;
-                    break;
                 case AbilitySlot.Core2:
                     return core2;
-                    break;
                 case AbilitySlot.Core3:
                     return core3;
-                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(slot), slot, null);
             }
@@ -197,19 +190,14 @@ namespace SejDev.Systems.Abilities
             {
                 case AbilitySlot.WeaponBase:
                     return ref weaponBase;
-                    break;
                 case AbilitySlot.WeaponSpecial:
                     return ref weaponSpecial;
-                    break;
                 case AbilitySlot.Core1:
                     return ref core1;
-                    break;
                 case AbilitySlot.Core2:
                     return ref core2;
-                    break;
                 case AbilitySlot.Core3:
                     return ref core3;
-                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(slot), slot, null);
             }

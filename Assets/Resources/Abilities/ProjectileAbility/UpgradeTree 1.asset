@@ -15,8 +15,16 @@ MonoBehaviour:
   upgrades:
   - upgrade: {fileID: 11400000, guid: e7e71abb366ba314b8d8f513c88231ca, type: 2}
     requiredUpgrades: []
-    requiredPointsSpent: 0
+    requiredPointsSpent: 1
+  - upgrade: {fileID: 11400000, guid: a1b5c1ca049a8114d8ab14f7bb3fb9b0, type: 2}
+    requiredUpgrades:
+    - {fileID: 11400000, guid: e7e71abb366ba314b8d8f513c88231ca, type: 2}
+    requiredPointsSpent: 2
   - upgrade: {fileID: 11400000, guid: d5cf73d321eb5bd4b84202c004dca984, type: 2}
     requiredUpgrades:
     - {fileID: 11400000, guid: e7e71abb366ba314b8d8f513c88231ca, type: 2}
-    requiredPointsSpent: 1
+    - {fileID: 11400000, guid: 0532598feb090eb48b2e1284d980973a, type: 2}
+    requiredPointsSpent: 2
+  - upgrade: {fileID: 11400000, guid: 0532598feb090eb48b2e1284d980973a, type: 2}
+    requiredUpgrades: []
+    requiredPointsSpent: 0

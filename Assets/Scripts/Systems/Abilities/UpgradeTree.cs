@@ -21,6 +21,25 @@ namespace SejDev.Systems.Abilities
 
         private void OnValidate()
         {
+            //remove empty list elements
+            for (int i = upgrades.Count - 1; i >= 0; i--)
+            {
+                if (upgrades[i].upgrade == null)
+                {
+                    upgrades.RemoveAt(i);
+                    continue;
+                }
+
+                for (int j = upgrades[i].requiredUpgrades.Count - 1; j >= 0; j--)
+                {
+                    if (upgrades[i].requiredUpgrades[j] == null)
+                    {
+                        upgrades[i].requiredUpgrades.RemoveAt(j);
+                    }
+                }
+            }
+
+            //check if required points spend is set to atleast the amount of upgrades it requires
             foreach (var upgradeRelation in upgrades)
             {
                 if (upgradeRelation == null) return;

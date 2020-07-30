@@ -1,10 +1,11 @@
 ﻿using System;
 using SejDev.Editor;
+using SejDev.Systems.Core;
 using UnityEngine;
 
 namespace SejDev.Systems.Abilities
 {
-    public abstract class AbilityUpgrade : ScriptableObject
+    public abstract class AbilityUpgrade : ScriptableObject, IDescribable
     {
         [field: SerializeField, Rename] public string Name { get; private set; }
         [field: SerializeField, Rename] public Sprite Icon { get; private set; }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using SejDev.Abilities.Activator;
 using SejDev.Editor;
+using SejDev.Systems.Core;
 using SejDev.Systems.Stats;
 using UnityEditor;
 using UnityEngine;
@@ -10,7 +11,7 @@ using UnityEngine;
 namespace SejDev.Systems.Abilities
 {
     [Serializable]
-    public abstract class Ability : ScriptableObject, IEquatable<Ability>
+    public abstract class Ability : ScriptableObject, IEquatable<Ability>, IDescribable
     {
         public bool Equals(Ability other)
         {
@@ -59,11 +60,15 @@ namespace SejDev.Systems.Abilities
 
         [field: Rename]
         [field: SerializeField]
+        public Sprite Icon { get; protected set; }
+
+        [field: Rename]
+        [field: SerializeField]
         public string Name { get; protected set; }
 
         [field: Rename]
         [field: SerializeField]
-        public Sprite Icon { get; protected set; }
+        public string Description { get; protected set; }
 
         [SerializeField] protected List<AbilityUpgrade> upgrades = new List<AbilityUpgrade>();
         public UpgradeTree upgradeTree;

@@ -30,6 +30,7 @@ namespace SejDev.UI
                 {
                     conditionGroups[upgradeRelation.requiredPointsSpent] =
                         Instantiate(groupPrefab, vertParent.transform);
+                    ReorderGroups();
                 }
 
                 var elementObj = Instantiate(upgradeHolderPrefab,
@@ -42,6 +43,15 @@ namespace SejDev.UI
             }
 
             StartCoroutine(DrawLines());
+        }
+
+        private void ReorderGroups()
+        {
+            var sortedKeys = conditionGroups.Keys.OrderBy(key => key).ToArray();
+            for (int i = 0; i < sortedKeys.Length; i++)
+            {
+                conditionGroups[sortedKeys[i]].transform.SetSiblingIndex(i);
+            }
         }
 
         private IEnumerator DrawLines()

@@ -107,15 +107,13 @@ namespace SejDev.UI
             }
         }
 
-        public bool ChangeState(string id)
+        public void ChangeState(string id)
         {
-            var state = upgradeTree.ChangeState(id, out var implicitChanges);
+            upgradeTree.ChangeState(id, out var implicitChanges);
             foreach (var implicitChange in implicitChanges)
             {
                 upgradeElements.First(holder => holder.Upgrade.GUID.Equals(implicitChange)).UpdateState();
             }
-
-            return state;
         }
     }
 }

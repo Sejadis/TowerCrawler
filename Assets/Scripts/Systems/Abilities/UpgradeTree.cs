@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using NSubstitute.Core;
-using SejDev.Save;
 using UnityEngine;
 
 namespace SejDev.Systems.Abilities
@@ -63,12 +60,13 @@ namespace SejDev.Systems.Abilities
                 .ToList(); // filter only active ones
         }
 
-        public bool ChangeState(string id, out List<string> implicitChanges)
+        public void ChangeState(string id, out List<string> implicitChanges)
         {
             implicitChanges = new List<string>();
-            var state = UpgradeManager.GetActiveState(id);
-            state = UpgradeManager.SetActive(id, !state);
-            if (!state)
+            var newState = !UpgradeManager.GetActiveState(id);
+            UpgradeManager.SetActive(id, newState);
+
+            if (!newState)
             {
                 //setting upgrade to inactive, deactivate everything that requires this
                 var upgrade = upgrades.First(relation => relation.upgrade.GUID.Equals(id)).upgrade;
@@ -104,8 +102,6 @@ namespace SejDev.Systems.Abilities
                     implicitChanges.AddRange(recursiveImplicitChanges);
                 }
             }
-
-            return state;
         }
     }
 }

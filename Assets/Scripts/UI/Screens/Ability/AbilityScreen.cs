@@ -37,8 +37,8 @@ public class AbilityScreen : UIScreen
 
     private void OnAbilityElementClicked(object sender, Ability e)
     {
-        upgradeScreen.CreateFromUpgradeTree(e.upgradeTree);
         upgradeScreen.Show();
+        upgradeScreen.CreateFromUpgradeTree(e.upgradeTree);
     }
 
     private void LoadAbilities()

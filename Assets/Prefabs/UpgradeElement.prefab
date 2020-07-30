@@ -199,6 +199,8 @@ MonoBehaviour:
   <Upgrade>k__BackingField: {fileID: 0}
   borderImage: {fileID: 4290675861175940785}
   iconImage: {fileID: 5849098492065549580}
+  inObj: {fileID: 6265759735529402760}
+  outObj: {fileID: 2359533928171917868}
 --- !u!1 &7597856579700884506
 GameObject:
   m_ObjectHideFlags: 0

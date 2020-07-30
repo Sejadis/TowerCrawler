@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using SejDev.Systems.Abilities;
 using SejDev.Systems.UI;
@@ -9,51 +10,95 @@ namespace SejDev.UI
     public class UpgradeScreen : UIScreen
     {
         [SerializeField] private GameObject upgradeHolderPrefab;
-        [SerializeField] private GameObject vertParent;
         [SerializeField] private GameObject groupPrefab;
+        [SerializeField] private Material lineMaterial;
+        [SerializeField] private GameObject vertParent;
 
         private UpgradeTree upgradeTree;
-        private readonly List<UpgradeHolder> upgradeHolders = new List<UpgradeHolder>();
+        private readonly List<UpgradeElement> upgradeElements = new List<UpgradeElement>();
         private readonly Dictionary<int, GameObject> conditionGroups = new Dictionary<int, GameObject>();
 
-        public void CreateFromUpgradeTree(UpgradeTree upgradeTree)
+        public void CreateFromUpgradeTree(UpgradeTree tree)
         {
             CleanUpTree();
-            this.upgradeTree = upgradeTree;
+            upgradeTree = tree;
             if (upgradeTree == null) return;
 
             foreach (var upgradeRelation in upgradeTree.upgrades)
             {
-                var holderObj = Instantiate(upgradeHolderPrefab, transform);
-                var holder = holderObj.GetComponent<UpgradeHolder>();
-
-                holder?.Bind(upgradeRelation.upgrade, this);
-                upgradeHolders.Add(holder);
-
                 if (!conditionGroups.ContainsKey(upgradeRelation.requiredPointsSpent))
                 {
                     conditionGroups[upgradeRelation.requiredPointsSpent] =
                         Instantiate(groupPrefab, vertParent.transform);
                 }
 
-                holderObj.transform.parent = conditionGroups[upgradeRelation.requiredPointsSpent].transform;
+                var elementObj = Instantiate(upgradeHolderPrefab,
+                    conditionGroups[upgradeRelation.requiredPointsSpent].transform);
+                // holderObj.name += upgradeRelation.upgrade.name;
+                var element = elementObj.GetComponent<UpgradeElement>();
+
+                element?.Bind(upgradeRelation.upgrade, this);
+                upgradeElements.Add(element);
             }
 
-            // foreach (var upgradeRelation in upgradeTree.upgrades)
-            // {
-            //     var obj = upgradeHolders.First(holder => holder.Upgrade.Equals(upgradeRelation.upgrade)).gameObject;
-            //     foreach (var requiredUpgrade in upgradeRelation.requiredUpgrades)
-            //     {
-            //         var reqObj = upgradeHolders.First(holder => holder.Upgrade.Equals(requiredUpgrade)).gameObject;
-            //         var lineRenderer = obj.AddComponent<LineRenderer>();
-            //         lineRenderer.SetPositions(new[] {obj.transform.position, reqObj.transform.position});
-            //     }
-            // }
+            StartCoroutine(DrawLines());
+        }
+
+        private IEnumerator DrawLines()
+        {
+            yield return null;
+            foreach (var upgradeRelation in upgradeTree.upgrades)
+            {
+                var obj = upgradeElements.First(element => element.Upgrade.Equals(upgradeRelation.upgrade)).gameObject;
+                var inTransform = obj.GetComponent<UpgradeElement>().IN;
+                foreach (var requiredUpgrade in upgradeRelation.requiredUpgrades)
+                {
+                    var reqObj = upgradeElements.First(element => element.Upgrade.Equals(requiredUpgrade)).gameObject;
+                    var outTransform = reqObj.GetComponent<UpgradeElement>().OUT;
+
+                    var lineObj = CreateLineObject(inTransform);
+                    var lineRenderer = lineObj.AddComponent<LineRenderer>();
+                    InitializeLineRenderer(lineRenderer);
+                    lineRenderer.SetPositions(GetPositions(inTransform, outTransform));
+                }
+            }
+        }
+
+        private GameObject CreateLineObject(Transform parent)
+        {
+            var lineObj = new GameObject("LineObject");
+            lineObj.layer = LayerMask.NameToLayer("UI");
+            lineObj.transform.SetParent(parent);
+            lineObj.transform.localPosition = Vector3.zero;
+            lineObj.transform.localRotation = Quaternion.identity;
+            lineObj.transform.localScale = Vector3.one;
+            return lineObj;
+        }
+
+        private void InitializeLineRenderer(LineRenderer renderer)
+        {
+            renderer.startColor = Color.red;
+            renderer.endColor = Color.red;
+            renderer.material = lineMaterial;
+            renderer.startWidth = 2f;
+            renderer.endWidth = 2f;
+            renderer.useWorldSpace = false;
+        }
+
+        private Vector3[] GetPositions(Transform obj1, Transform obj2)
+        {
+            Vector3[] array =
+            {
+                Vector3.zero,
+                obj1.InverseTransformPoint(obj2.position)
+            };
+            Debug.Log($"WORLD 1:{obj1.position} 2:{obj2.position} CALCULATED 1:{array[0]}  2:{array[1]}");
+            return array;
         }
 
         private void CleanUpTree()
         {
-            upgradeHolders.Clear();
+            upgradeElements.Clear();
             foreach (var key in conditionGroups.Keys)
             {
                 foreach (Transform child in conditionGroups[key].transform)
@@ -68,7 +113,7 @@ namespace SejDev.UI
             var state = upgradeTree.ChangeState(id, out var implicitChanges);
             foreach (var implicitChange in implicitChanges)
             {
-                upgradeHolders.First(holder => holder.Upgrade.GUID.Equals(implicitChange)).UpdateState();
+                upgradeElements.First(holder => holder.Upgrade.GUID.Equals(implicitChange)).UpdateState();
             }
 
             return state;

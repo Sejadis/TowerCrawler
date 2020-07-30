@@ -1,18 +1,21 @@
-﻿using System;
-using SejDev.Editor;
+﻿using SejDev.Editor;
 using SejDev.Systems.Abilities;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 namespace SejDev.UI
 {
-    public class UpgradeHolder : MonoBehaviour, IPointerClickHandler
+    public class UpgradeElement : MonoBehaviour, IPointerClickHandler
     {
         [field: SerializeField, Rename] public AbilityUpgrade Upgrade { get; private set; }
         [SerializeField] private Image borderImage;
         [SerializeField] private Image iconImage;
+        [SerializeField] private GameObject inObj;
+        [SerializeField] private GameObject outObj;
+
+        public Transform IN => inObj.transform;
+        public Transform OUT => outObj.transform;
         private bool isBound;
         public UpgradeScreen UpgradeScreen { get; private set; }
 

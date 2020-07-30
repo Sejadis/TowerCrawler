@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class AbilityScreen : UIScreen
 {
-    List<AbilityHolder> holders = new List<AbilityHolder>();
+    List<AbilityElement> holders = new List<AbilityElement>();
 
     [SerializeField] private UpgradeScreen upgradeScreen;
     [SerializeField] private GameObject abilityHolderPrefab;
@@ -23,7 +23,7 @@ public class AbilityScreen : UIScreen
         foreach (var ability in ResourceManager.Instance.abilityLists.FirstOrDefault()?.abilities)
         {
             var go = Instantiate(abilityHolderPrefab, abilityParent.transform);
-            var holder = go.GetComponent<AbilityHolder>();
+            var holder = go.GetComponent<AbilityElement>();
             if (holder != null)
             {
                 holder.OnElementClicked += OnAbilityElementClicked;

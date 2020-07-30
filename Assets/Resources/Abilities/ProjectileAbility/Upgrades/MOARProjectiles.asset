@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 234c1cb64a4d8644a9c36cb604274ffb, type: 3}
   m_Name: MOARProjectiles
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: 
+  <Name>k__BackingField: moar
   <Icon>k__BackingField: {fileID: 21300000, guid: 89d749235b668c044a8649a3c028c0fa,
     type: 3}
   <Description>k__BackingField: 

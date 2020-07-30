@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace SejDev.UI
 {
-    public class AbilityHolder : MonoBehaviour, IBeginDragHandler, IDragHandler, IPointerClickHandler
+    public class AbilityElement : MonoBehaviour, IBeginDragHandler, IDragHandler, IPointerClickHandler
     {
         [SerializeField] private Ability ability;
         [SerializeField] private Image borderImage;

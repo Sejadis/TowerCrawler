@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 234c1cb64a4d8644a9c36cb604274ffb, type: 3}
   m_Name: EvenMoreProjectiles
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: 
+  <Name>k__BackingField: even more
   <Icon>k__BackingField: {fileID: 21300000, guid: d4ceccb6744254e4baed969f24099b29,
     type: 3}
   <Description>k__BackingField: 

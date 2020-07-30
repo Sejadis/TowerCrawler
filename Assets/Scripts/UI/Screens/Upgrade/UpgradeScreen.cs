@@ -92,7 +92,6 @@ namespace SejDev.UI
                 Vector3.zero,
                 obj1.InverseTransformPoint(obj2.position)
             };
-            Debug.Log($"WORLD 1:{obj1.position} 2:{obj2.position} CALCULATED 1:{array[0]}  2:{array[1]}");
             return array;
         }
 

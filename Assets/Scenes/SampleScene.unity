@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 70399554}
   - component: {fileID: 70399556}
   - component: {fileID: 70399557}
+  - component: {fileID: 70399558}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -269,7 +270,19 @@ MonoBehaviour:
   abilityScreen: {fileID: 163125368}
   menuScreen: {fileID: 167344798}
   playerGameScreen: {fileID: 594683999}
-  player: {fileID: 1831252489}
+--- !u!114 &70399558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 70399553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63ca97f2e99b57b40b978d8d4b52d436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1831252497}
 --- !u!1 &70713783
 GameObject:
   m_ObjectHideFlags: 0
@@ -8852,6 +8865,7 @@ GameObject:
   - component: {fileID: 1831252492}
   - component: {fileID: 1831252490}
   - component: {fileID: 1831252491}
+  - component: {fileID: 1831252497}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -8987,6 +9001,21 @@ CharacterController:
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1831252497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831252489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bc13c18bb664682a01058ee4dfb91ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseLook: {fileID: 1831252492}
+  playerMovement: {fileID: 1831252490}
+  playerGameScreen: {fileID: 594683999}
 --- !u!114 &1831252498
 MonoBehaviour:
   m_ObjectHideFlags: 0

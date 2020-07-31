@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using SejDev.Player;
-using SejDev.Systems.Abilities;
 using SejDev.Systems.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,8 +9,6 @@ namespace SejDev.UI
     {
         public UIScreen abilityScreen;
         public UIScreen menuScreen;
-        public UIScreen playerGameScreen;
-        public GameObject player;
         private readonly List<UIScreen> activeScreens = new List<UIScreen>();
 
         private void Start()
@@ -21,55 +17,51 @@ namespace SejDev.UI
             InputManager.Instance.OnBackUI += Back;
         }
 
+        private void AbilityUi(InputAction.CallbackContext obj)
+        {
+            ChangeScreenState(abilityScreen, !abilityScreen.IsActive);
+        }
+
         private void Back(InputAction.CallbackContext obj)
         {
             if (activeScreens.Count > 0)
             {
-                ChangeScreenState(activeScreens[activeScreens.Count - 1], false);
+                var screen = activeScreens[activeScreens.Count - 1];
+                ChangeScreenState(screen, !screen.IsActive);
             }
             else
             {
                 ChangeScreenState(menuScreen, true);
-                // ChangeScreenState(playerGameScreen, false);
             }
-        }
-
-        private void CheckStuff()
-        {
-            var uiClosed = activeScreens.Count == 0;
-            player.GetComponent<MouseLook>().enabled = uiClosed;
-            if (uiClosed)
-            {
-                InputManager.Instance.PlayerInput.Abilities.Enable();
-                InputManager.Instance.PlayerInput.Controls.Enable();
-                player.GetComponent<AbilityHandler>()?.ReloadAbilities();
-            }
-            else
-            {
-                InputManager.Instance.PlayerInput.Abilities.Disable();
-                InputManager.Instance.PlayerInput.Controls.Disable();
-            }
-        }
-
-        private void AbilityUi(InputAction.CallbackContext obj)
-        {
-            ChangeScreenState(abilityScreen, !abilityScreen.IsActive);
         }
 
         private void ChangeScreenState(UIScreen screen, bool newState)
         {
             if (newState)
             {
-                screen.Show();
                 activeScreens.Add(screen);
+                screen.Show();
             }
             else
             {
-                screen.Hide();
                 activeScreens.Remove(screen);
+                screen.Hide();
             }
 
             CheckStuff();
+        }
+
+        private void CheckStuff()
+        {
+            var uiClosed = activeScreens.Count == 0;
+            if (uiClosed)
+            {
+                GameManager.Instance.EnablePlayer();
+            }
+            else
+            {
+                GameManager.Instance.DisablePlayer();
+            }
         }
     }
 }

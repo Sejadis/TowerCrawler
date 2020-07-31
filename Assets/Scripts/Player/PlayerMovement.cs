@@ -34,6 +34,8 @@ namespace SejDev.Player
         private int performedMidAirJumps;
         private bool isSprinting;
 
+        private Animator animator;
+
         private void Awake()
         {
             StatsManager statsManager = GetComponent<StatsManager>();
@@ -53,6 +55,8 @@ namespace SejDev.Player
                     allowedMidAirJumps = (int) midAirJumpStat.Value;
                 }
             }
+
+            animator = GetComponentInChildren<Animator>();
         }
 
         private void Start()
@@ -119,6 +123,9 @@ namespace SejDev.Player
             finalMove.Normalize();
             finalMove *= isSprinting ? moveSpeed * sprintSpeedMultiplier : moveSpeed;
             finalMove *= Time.deltaTime;
+            
+            animator.SetFloat("Speed_f", Mathf.Clamp01(movementData.sqrMagnitude));
+            
             controller.Move(finalMove);
         }
 

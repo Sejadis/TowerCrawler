@@ -24,7 +24,7 @@ MonoBehaviour:
     requiredUpgrades:
     - {fileID: 11400000, guid: e7e71abb366ba314b8d8f513c88231ca, type: 2}
     - {fileID: 11400000, guid: 0532598feb090eb48b2e1284d980973a, type: 2}
-    requiredPointsSpent: 2
+    requiredPointsSpent: 1
   - upgrade: {fileID: 11400000, guid: 0532598feb090eb48b2e1284d980973a, type: 2}
     requiredUpgrades: []
     requiredPointsSpent: 0

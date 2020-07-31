@@ -257,6 +257,14 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Back"",
+                    ""type"": ""Button"",
+                    ""id"": ""2662127a-3e16-4f8e-bf06-e8e6e225b9d7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -268,6 +276,17 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Ability"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be07cf5c-a810-4468-8650-74b38cf8a1f3"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -304,6 +323,7 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Ability = m_UI.FindAction("Ability", throwIfNotFound: true);
+        m_UI_Back = m_UI.FindAction("Back", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -528,6 +548,7 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
     private readonly InputActionMap m_UI;
     private IUIActions m_UIActionsCallbackInterface;
     private readonly InputAction m_UI_Ability;
+    private readonly InputAction m_UI_Back;
 
     public struct UIActions
     {
@@ -539,6 +560,7 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
         }
 
         public InputAction @Ability => m_Wrapper.m_UI_Ability;
+        public InputAction @Back => m_Wrapper.m_UI_Back;
 
         public InputActionMap Get()
         {
@@ -569,6 +591,9 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                 @Ability.started -= m_Wrapper.m_UIActionsCallbackInterface.OnAbility;
                 @Ability.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnAbility;
                 @Ability.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnAbility;
+                @Back.started -= m_Wrapper.m_UIActionsCallbackInterface.OnBack;
+                @Back.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnBack;
+                @Back.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnBack;
             }
 
             m_Wrapper.m_UIActionsCallbackInterface = instance;
@@ -577,6 +602,9 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                 @Ability.started += instance.OnAbility;
                 @Ability.performed += instance.OnAbility;
                 @Ability.canceled += instance.OnAbility;
+                @Back.started += instance.OnBack;
+                @Back.performed += instance.OnBack;
+                @Back.canceled += instance.OnBack;
             }
         }
     }
@@ -613,5 +641,6 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
     public interface IUIActions
     {
         void OnAbility(InputAction.CallbackContext context);
+        void OnBack(InputAction.CallbackContext context);
     }
 }

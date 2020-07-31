@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace SejDev.Systems.UI
 {
+    [Serializable]
     public abstract class UIScreen : MonoBehaviour
     {
         public bool IsActive => gameObject.activeInHierarchy;

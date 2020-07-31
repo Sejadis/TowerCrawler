@@ -10,12 +10,28 @@ namespace SejDev.UI
     public class UIManager : MonoBehaviour
     {
         public UIScreen abilityScreen;
+        public UIScreen menuScreen;
+        public UIScreen playerGameScreen;
         public GameObject player;
-        List<UIScreen> activeScreens = new List<UIScreen>();
+        private readonly List<UIScreen> activeScreens = new List<UIScreen>();
 
         private void Start()
         {
             InputManager.Instance.OnAbilityUI += AbilityUi;
+            InputManager.Instance.OnBackUI += Back;
+        }
+
+        private void Back(InputAction.CallbackContext obj)
+        {
+            if (activeScreens.Count > 0)
+            {
+                ChangeScreenState(activeScreens[activeScreens.Count - 1], false);
+            }
+            else
+            {
+                ChangeScreenState(menuScreen, true);
+                // ChangeScreenState(playerGameScreen, false);
+            }
         }
 
         private void CheckStuff()

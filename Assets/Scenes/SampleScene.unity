@@ -269,7 +269,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityScreen: {fileID: 163125368}
   menuScreen: {fileID: 167344798}
-  playerGameScreen: {fileID: 594683999}
 --- !u!114 &70399558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,6 +282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1831252497}
+  UICamera: {fileID: 171502804}
 --- !u!1 &70713783
 GameObject:
   m_ObjectHideFlags: 0

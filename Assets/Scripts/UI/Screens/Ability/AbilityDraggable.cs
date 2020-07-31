@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using SejDev.Systems.Abilities;
+﻿using SejDev.Systems.Abilities;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -28,7 +26,11 @@ public class AbilityDraggable : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnDrag(PointerEventData eventData)
     {
-        eventData.pointerDrag.transform.position = Input.mousePosition;
+        var cam = GameManager.Instance.UICamera;
+        var mousePos = Input.mousePosition;
+        mousePos.z = 100f;
+        var pos = cam.ScreenToWorldPoint(mousePos);
+        eventData.pointerDrag.transform.position = pos;
     }
 
 

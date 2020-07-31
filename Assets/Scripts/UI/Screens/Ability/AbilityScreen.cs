@@ -32,7 +32,7 @@ public class AbilityScreen : UIScreen
                 element.OnElementClicked += OnAbilityElementClicked;
                 element.OnElementEnter += OnAbilityElementEnter;
                 element.OnElementExit += OnAbilityElementExit;
-                element.Bind(ability);
+                element.Bind(ability, transform);
                 elements.Add(element);
             }
         }

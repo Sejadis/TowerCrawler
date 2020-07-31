@@ -13,6 +13,7 @@ namespace SejDev.UI
         [SerializeField] private Image borderImage;
         [SerializeField] private Image iconImage;
         [SerializeField] private GameObject dragPrefab;
+        private Transform dragParent;
         public event EventHandler<Ability> OnElementClicked;
         public event EventHandler<Ability> OnElementEnter;
         public event EventHandler<Ability> OnElementExit;
@@ -22,8 +23,9 @@ namespace SejDev.UI
             SetVisuals();
         }
 
-        public void Bind(Ability ability)
+        public void Bind(Ability ability, Transform dragParent)
         {
+            this.dragParent = dragParent;
             this.ability = ability;
             SetVisuals();
         }
@@ -38,9 +40,9 @@ namespace SejDev.UI
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            var go = Instantiate(dragPrefab, transform.parent.parent, true);
+            var go = Instantiate(dragPrefab, dragParent, true);
             go.GetComponent<AbilityDraggable>().Ability = ability;
-            go.transform.position = Input.mousePosition;
+            go.transform.localScale = Vector3.one;
             eventData.pointerDrag = go;
         }
 

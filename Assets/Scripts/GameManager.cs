@@ -4,6 +4,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public PlayerController player;
+    public Camera UICamera;
 
     public static GameManager Instance { get; private set; }
 

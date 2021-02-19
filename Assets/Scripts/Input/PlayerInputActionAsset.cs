@@ -265,6 +265,14 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""882a8216-ac64-46d8-9fdb-482d9f43c9ac"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -287,6 +295,17 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7e3dd729-3cd4-41c9-aa6c-494649ca52c2"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -324,6 +343,7 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Ability = m_UI.FindAction("Ability", throwIfNotFound: true);
         m_UI_Back = m_UI.FindAction("Back", throwIfNotFound: true);
+        m_UI_Inventory = m_UI.FindAction("Inventory", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -549,6 +569,7 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
     private IUIActions m_UIActionsCallbackInterface;
     private readonly InputAction m_UI_Ability;
     private readonly InputAction m_UI_Back;
+    private readonly InputAction m_UI_Inventory;
 
     public struct UIActions
     {
@@ -561,6 +582,7 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
 
         public InputAction @Ability => m_Wrapper.m_UI_Ability;
         public InputAction @Back => m_Wrapper.m_UI_Back;
+        public InputAction @Inventory => m_Wrapper.m_UI_Inventory;
 
         public InputActionMap Get()
         {
@@ -594,6 +616,9 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                 @Back.started -= m_Wrapper.m_UIActionsCallbackInterface.OnBack;
                 @Back.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnBack;
                 @Back.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnBack;
+                @Inventory.started -= m_Wrapper.m_UIActionsCallbackInterface.OnInventory;
+                @Inventory.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnInventory;
+                @Inventory.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnInventory;
             }
 
             m_Wrapper.m_UIActionsCallbackInterface = instance;
@@ -605,6 +630,9 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                 @Back.started += instance.OnBack;
                 @Back.performed += instance.OnBack;
                 @Back.canceled += instance.OnBack;
+                @Inventory.started += instance.OnInventory;
+                @Inventory.performed += instance.OnInventory;
+                @Inventory.canceled += instance.OnInventory;
             }
         }
     }
@@ -642,5 +670,6 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
     {
         void OnAbility(InputAction.CallbackContext context);
         void OnBack(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
     }
 }

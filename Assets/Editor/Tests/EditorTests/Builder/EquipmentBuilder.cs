@@ -5,6 +5,7 @@ namespace Editor.Tests.EditorTests.Builder
     public class EquipmentBuilder
     {
         EquipSlotType slotType;
+
         public EquipmentBuilder(EquipSlotType slotType)
         {
             this.slotType = slotType;
@@ -20,14 +21,14 @@ namespace Editor.Tests.EditorTests.Builder
             return this;
         }
 
-        public Equipment Build()
-        {
-            return new Equipment(slotType);
-        }
+        // public Equipment Build()
+        // {
+        //     //return new Equipment(slotType);
+        // }
 
-        public static implicit operator Equipment(EquipmentBuilder equipmentBuilder)
-        {
-            return equipmentBuilder.Build();
-        }
+        // public static implicit operator Equipment(EquipmentBuilder equipmentBuilder)
+        // {
+        //     return equipmentBuilder.Build();
+        // }
     }
 }

@@ -6,6 +6,7 @@ namespace Editor.Tests.EditorTests.Builder
     {
         IInventory inventory;
         Equipment weaponSlot;
+
         public EquipmentHolderBuilder(IInventory inventory, Equipment weaponSlot = null)
         {
             this.inventory = inventory;
@@ -17,25 +18,28 @@ namespace Editor.Tests.EditorTests.Builder
 
         // }
 
-        public EquipmentHolderBuilder WithItemInSlot(Equipment item){
+        public EquipmentHolderBuilder WithItemInSlot(Equipment item)
+        {
             switch (item.EquipSlot)
             {
-                case EquipSlotType.Weapon:{
+                case EquipSlotType.Weapon:
+                {
                     weaponSlot = item;
                     break;
                 }
                 default:
                     break;
             }
+
             return this;
         }
 
-        public EquipmentHolder Build(){
-            return new EquipmentHolder(inventory, weaponSlot);
-        }
-
-        public static implicit operator EquipmentHolder(EquipmentHolderBuilder equipmentHolderBuilder){
-            return equipmentHolderBuilder.Build();
-        }
+        // public EquipmentHolder Build(){
+        //     return new EquipmentHolder(inventory, weaponSlot);
+        // }
+        //
+        // public static implicit operator EquipmentHolder(EquipmentHolderBuilder equipmentHolderBuilder){
+        //     return equipmentHolderBuilder.Build();
+        // }
     }
 }

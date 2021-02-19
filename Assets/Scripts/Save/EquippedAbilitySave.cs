@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using JetBrains.Annotations;
 using SejDev.Systems.Abilities;
 using SejDev.Systems.Save;
 using UnityEngine;
@@ -18,6 +15,7 @@ public class EquippedAbilitySave : Save
         this.core1ID = core1ID;
         this.core2ID = core2ID;
         this.core3ID = core3ID;
+        Debug.Log(core1ID + " " + core2ID + " " + core3ID);
     }
 
     public EquippedAbilitySave(Ability core1, Ability core2, Ability core3)

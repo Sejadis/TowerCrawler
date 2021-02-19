@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 257974cfc71247c49d13ec6cfff308ad, type: 3}
+  m_Name: Sword
+  m_EditorClassIdentifier: 
+  id: 0a1768b3-c810-4b92-a553-8cbfbed81307
+  <Icon>k__BackingField: {fileID: 21300000, guid: 0e645fcb51cda2144ad582bab961a2c7,
+    type: 3}
+  <Name>k__BackingField: Sword
+  <Description>k__BackingField: By the might of Greyskull
+  <EquipSlot>k__BackingField: 0
+  baseAbility: {fileID: 11400000, guid: 7bb343d307d274c4fb1b330a34806c35, type: 2}
+  specialAbility: {fileID: 0}
+  prefab: {fileID: 3334294995311861348, guid: a3785c1b2a3c16d478ecfbeb2cee45c3, type: 3}
+  damage: 5

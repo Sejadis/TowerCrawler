@@ -7,19 +7,19 @@ namespace SejDev.Systems.Gear
     public class Inventory : IInventory
     {
         private readonly List<Item> items;
-        private readonly int maxSpace;
+        public int MaxSpace { get; }
 
         public Inventory(int maxSpace, List<Item> items = null)
         {
             this.items = items ?? new List<Item>();
-            this.maxSpace = maxSpace;
+            MaxSpace = maxSpace;
         }
 
         public Inventory() : this(10)
         {
         }
 
-        public int AvailableSpace => maxSpace - items.Count;
+        public int AvailableSpace => MaxSpace - items.Count;
         public ReadOnlyCollection<Item> Items => items.AsReadOnly();
 
         public void AddItem(Item item)

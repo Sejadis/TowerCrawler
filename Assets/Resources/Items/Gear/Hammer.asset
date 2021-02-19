@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 257974cfc71247c49d13ec6cfff308ad, type: 3}
+  m_Name: Hammer
+  m_EditorClassIdentifier: 
+  id: be092783-cc4f-422f-868b-78c2547cc06c
+  <Icon>k__BackingField: {fileID: 21300000, guid: e357efdcda4dde948b17a42edc6aac40,
+    type: 3}
+  <Name>k__BackingField: Hammer
+  <Description>k__BackingField: The mighty hammer the lion sleeps tonight
+  <EquipSlot>k__BackingField: 0
+  baseAbility: {fileID: 11400000, guid: 7bb343d307d274c4fb1b330a34806c35, type: 2}
+  specialAbility: {fileID: 0}
+  prefab: {fileID: 486147554437436373, guid: 475610fabfc85bd48ae865e04b29edfa, type: 3}
+  damage: 15

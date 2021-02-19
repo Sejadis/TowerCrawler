@@ -5,9 +5,9 @@ namespace SejDev.Systems.Gear
     public class EquipmentHolder
     {
         private readonly IInventory inventory;
-        private Equipment weaponSlot;
+        public Weapon weaponSlot;
 
-        public EquipmentHolder(IInventory inventory, Equipment weaponSlot = null)
+        public EquipmentHolder(IInventory inventory, Weapon weaponSlot = null)
         {
             this.inventory = inventory;
             this.weaponSlot = weaponSlot;
@@ -39,7 +39,7 @@ namespace SejDev.Systems.Gear
             {
                 case EquipSlotType.Weapon:
                 {
-                    weaponSlot = item;
+                    weaponSlot = item as Weapon;
                     break;
                 }
             }

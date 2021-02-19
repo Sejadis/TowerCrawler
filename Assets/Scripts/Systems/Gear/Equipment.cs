@@ -1,12 +1,7 @@
 namespace SejDev.Systems.Gear
 {
-    public class Equipment : Item
+    public abstract class Equipment : Item
     {
-        public Equipment(EquipSlotType equipSlot = EquipSlotType.Weapon)
-        {
-            EquipSlot = equipSlot;
-        }
-
-        public EquipSlotType EquipSlot { get; }
+        public abstract EquipSlotType EquipSlot { get; protected set; }
     }
 }

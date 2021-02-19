@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using SejDev.Systems.Abilities;
+using SejDev.Systems.Gear;
 using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
 {
     public List<AbilityList> abilityLists = new List<AbilityList>();
+    public List<Equipment> gearList = new List<Equipment>();
     public static ResourceManager Instance { get; private set; }
 
     private void Awake()
@@ -35,5 +35,10 @@ public class ResourceManager : MonoBehaviour
     {
         return abilityLists.Select(abilityList => abilityList.abilities.First(ability => ability.GUID.Equals(id)))
             .FirstOrDefault();
+    }
+
+    public Equipment GetEquipmentByID(string id)
+    {
+        return gearList.First(gear => gear.GUID.Equals(id));
     }
 }

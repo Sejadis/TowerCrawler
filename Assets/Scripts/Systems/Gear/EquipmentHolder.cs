@@ -1,31 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
+using SejDev.Save;
 
 namespace SejDev.Systems.Gear
 {
     public class EquipmentHolder
     {
         private readonly IInventory inventory;
-        public Weapon weaponSlot;
+        private readonly Dictionary<EquipSlotType, Equipment> equipment = new Dictionary<EquipSlotType, Equipment>();
+        private readonly WeaponHandler weaponHandler;
 
-        public EquipmentHolder(IInventory inventory, Weapon weaponSlot = null)
+        public EquipmentHolder(IInventory inventory, WeaponHandler weaponHandler)
         {
             this.inventory = inventory;
-            this.weaponSlot = weaponSlot;
+            this.weaponHandler = weaponHandler;
+            var equipmentSave = SaveManager.GetSave<EquipmentSave>();
+            equipment = equipmentSave.GetEquipment();
+            if (equipment[EquipSlotType.Weapon] != null)
+            {
+                weaponHandler.EquipWeapon(equipment[EquipSlotType.Weapon] as Weapon);
+            }
         }
 
         public Equipment GetItemForSlot(EquipSlotType equipSlot)
         {
-            Equipment item = null;
-            switch (equipSlot)
-            {
-                case EquipSlotType.Weapon:
-                {
-                    item = weaponSlot;
-                    break;
-                }
-            }
-
-            return item;
+            equipment.TryGetValue(equipSlot, out var eq);
+            return eq;
         }
 
         public void EquipItem(Equipment item)
@@ -33,18 +33,17 @@ namespace SejDev.Systems.Gear
             if (!inventory.ContainsItem(item)) throw new InvalidOperationException("Item not in Inventory");
 
             var currentItem = GetItemForSlot(item.EquipSlot);
-            if (currentItem != null) inventory.AddItem(currentItem);
+            if (currentItem != null) inventory.AddItem(currentItem); //TODO fix switching gear with full inventory
 
-            switch (item.EquipSlot)
+            equipment[item.EquipSlot] = item;
+            if (item.EquipSlot == EquipSlotType.Weapon)
             {
-                case EquipSlotType.Weapon:
-                {
-                    weaponSlot = item as Weapon;
-                    break;
-                }
+                weaponHandler.EquipWeapon(item as Weapon);
             }
 
             inventory.RemoveItem(item);
+            var save = new EquipmentSave(equipment);
+            SaveManager.SetSave(save);
         }
     }
 }

@@ -16,7 +16,8 @@ namespace SejDev.Save
                 {typeof(UpgradeStateSave), null},
                 {typeof(AbilityStateSave), null},
                 {typeof(EquippedAbilitySave), null},
-                {typeof(EquipmentSave), null}
+                {typeof(EquipmentSave), null},
+                {typeof(InventorySave), null}
             };
 
         public static void SetSave<T>(T save, bool skipWritingToFile = false) where T : Systems.Save.Save
@@ -55,6 +56,7 @@ namespace SejDev.Save
                 trackedSaves[typeof(AbilityStateSave)] = save.abilityState;
                 trackedSaves[typeof(EquippedAbilitySave)] = save.equippedAbilities;
                 trackedSaves[typeof(EquipmentSave)] = save.equipment;
+                trackedSaves[typeof(InventorySave)] = save.inventory;
             }
 
             isLoaded = true;

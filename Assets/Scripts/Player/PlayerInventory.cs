@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using SejDev.Save;
 using SejDev.Systems.Gear;
 using UnityEngine;
@@ -15,17 +16,35 @@ namespace SejDev.Player
 
         private void Awake()
         {
-            Inventory = new Inventory(40, startItems);
-            var save = new EquipmentSave(weapon);
+            var inventorySave = SaveManager.GetSave<InventorySave>();
+            Inventory = new Inventory(40, inventorySave?.Items);
+            Inventory.OnInventoryChanged += OnInventoryChanged;
+            // var save = new EquipmentSave(weapon);
+            // SaveManager.SetSave(save);
+        }
+
+        private void OnInventoryChanged()
+        {
+            var save = new InventorySave(Inventory.Items.ToList());
             SaveManager.SetSave(save);
         }
 
         private void Start()
         {
-            var equipmentSave = SaveManager.GetSave<EquipmentSave>();
-            weapon = ResourceManager.Instance.GetEquipmentByID(equipmentSave.weaponID) as Weapon;
-            equipmentHolder = new EquipmentHolder(Inventory, weapon);
-            weaponHandler.EquipWeapon(weapon);
+            equipmentHolder = new EquipmentHolder(Inventory, weaponHandler);
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                Inventory.AddItem(startItems[0]);
+            }
+
+            if (Input.GetKeyDown(KeyCode.N))
+            {
+                Inventory.AddItem(startItems[1]);
+            }
         }
     }
 }

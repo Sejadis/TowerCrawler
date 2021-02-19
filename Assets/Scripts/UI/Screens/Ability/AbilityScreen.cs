@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SejDev.Systems.Abilities;
 using SejDev.Systems.Core;
@@ -8,7 +9,7 @@ using UnityEngine;
 
 public class AbilityScreen : UIScreen
 {
-    private readonly List<AbilityElement> elements = new List<AbilityElement>();
+    private readonly List<UIElement> elements = new List<UIElement>();
 
     [SerializeField] private UpgradeScreen upgradeScreen;
     [SerializeField] private GameObject abilityElementPrefab;
@@ -26,7 +27,7 @@ public class AbilityScreen : UIScreen
         foreach (var ability in ResourceManager.Instance.abilityLists.FirstOrDefault()?.abilities)
         {
             var go = Instantiate(abilityElementPrefab, abilityParent.transform);
-            var element = go.GetComponent<AbilityElement>();
+            var element = go.GetComponent<UIElement>();
             if (element != null)
             {
                 element.OnElementClicked += OnAbilityElementClicked;
@@ -50,10 +51,15 @@ public class AbilityScreen : UIScreen
         describer.Fill(e);
     }
 
-    private void OnAbilityElementClicked(object sender, Ability e)
+    private void OnAbilityElementClicked(object sender, IDescribable e)
     {
+        if (!(e is Ability))
+        {
+            throw new Exception("receiving element click that is not an ability element");
+        }
+
         upgradeScreen.Show();
-        upgradeScreen.CreateFromUpgradeTree(e.upgradeTree);
+        upgradeScreen.CreateFromUpgradeTree(((Ability) e).upgradeTree);
         describer.FallBackDescribable = e;
         describer.Fill(e);
     }

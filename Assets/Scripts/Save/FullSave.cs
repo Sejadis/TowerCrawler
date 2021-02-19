@@ -18,6 +18,7 @@ namespace SejDev.Save
             upgradeState = saves[typeof(UpgradeStateSave)] as UpgradeStateSave;
             equippedAbilities = saves[typeof(EquippedAbilitySave)] as EquippedAbilitySave;
             equipment = saves[typeof(EquipmentSave)] as EquipmentSave;
+            inventory = saves[typeof(InventorySave)] as InventorySave;
         }
     }
 }

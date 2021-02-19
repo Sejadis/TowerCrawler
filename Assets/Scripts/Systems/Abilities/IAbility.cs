@@ -7,7 +7,7 @@ namespace SejDev.Systems.Abilities
     {
         Transform AbilityOrigin { get; }
         Camera TargetingCamera { get; }
-        void ChangeAbility(Ability ability, AbilitySlot slot);
+        void ChangeAbility(Ability ability, AbilitySlot slot, WeaponController weaponController = null);
         Ability GetAbilityBySlot(AbilitySlot slot);
         event EventHandler OnPreAbilityChanged;
         event EventHandler<AbilityChangedEventArgs> OnPostAbilityChanged;

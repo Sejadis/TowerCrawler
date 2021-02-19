@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using SejDev.Save;
-using SejDev.Systems.Save;
 using UnityEngine;
-
 
 namespace SejDev.Systems.Abilities
 {
@@ -14,6 +11,8 @@ namespace SejDev.Systems.Abilities
         private static Ability core1;
         private static Ability core2;
         private static Ability core3;
+        private static Ability weaponBase;
+        private static Ability weaponSpecial;
         private static bool isLoaded;
 
         public static Ability Core1
@@ -52,6 +51,32 @@ namespace SejDev.Systems.Abilities
                 }
 
                 return core3;
+            }
+        }
+
+        public static Ability WeaponBase
+        {
+            get
+            {
+                if (!isLoaded)
+                {
+                    Load();
+                }
+
+                return weaponBase;
+            }
+        }
+
+        public static Ability WeaponSpecial
+        {
+            get
+            {
+                if (!isLoaded)
+                {
+                    Load();
+                }
+
+                return weaponSpecial;
             }
         }
 
@@ -101,8 +126,14 @@ namespace SejDev.Systems.Abilities
                 case AbilitySlot.Core3:
                     core3 = ability;
                     break;
+                // case AbilitySlot.WeaponBase:
+                //     weaponBase = ability;
+                //     break;
+                // case AbilitySlot.WeaponSpecial:
+                //     weaponSpecial = ability;
+                //     break;
                 default:
-                    Debug.LogWarning("Trying to set weapon abilities. This is handled via the equipped weapon");
+                    Debug.LogWarning("Setting ability for unknown slot");
                     break;
             }
 

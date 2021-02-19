@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace SejDev.Player
@@ -30,6 +28,7 @@ namespace SejDev.Player
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+
             if (InputManager.Instance != null)
             {
                 InputManager.Instance.OnLook -= OnLook;
@@ -38,9 +37,12 @@ namespace SejDev.Player
 
         private void Update()
         {
-            transform.Rotate(Vector3.up, lookData.y * horizontalLookSensitivity * Time.deltaTime);
+            transform.Rotate(Vector3.up, lookData.y * horizontalLookSensitivity);
+        }
 
-            var rotation = lookData.x * verticalLookSensitivity * Time.deltaTime;
+        private void LateUpdate()
+        {
+            var rotation = lookData.x * verticalLookSensitivity;
             currentCameraRotation += rotation;
             currentCameraRotation = Mathf.Clamp(currentCameraRotation, lowerRotationLimit, upperRotationLimit);
             camera.localRotation = Quaternion.Euler(currentCameraRotation, 0, 0);

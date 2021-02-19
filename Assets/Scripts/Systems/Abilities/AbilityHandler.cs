@@ -28,9 +28,11 @@ namespace SejDev.Systems.Abilities
         private Stat castTimeStat;
         private float cooldownRate = 1;
         private Ability activeAbility;
+        IWeapon weaponHandler;
 
-        public void ChangeAbility(Ability ability, AbilitySlot slot)
+        public void ChangeAbility(Ability ability, AbilitySlot slot, WeaponController weaponController = null)
         {
+            if (ability == null) return;
             OnPreAbilityChanged?.Invoke(this, null);
             ref var intendedSlot = ref GetSlot(slot);
             if (intendedSlot != null)
@@ -44,7 +46,16 @@ namespace SejDev.Systems.Abilities
             intendedSlot.OnPreAbilityActivation += RaiseOnPreAbilityActivation;
             intendedSlot.OnPostAbilityActivation += RaiseOnPostAbilityActivation;
             intendedSlot.OnAbilityInterrupted += RaiseOnAbilityInterrupted;
-            intendedSlot.Bind(this, castTimeStat);
+            if (ability is WeaponAbility &&
+                (slot == AbilitySlot.WeaponBase || slot == AbilitySlot.WeaponSpecial))
+            {
+                (intendedSlot as WeaponAbility).Bind(this, weaponController, castTimeStat);
+            }
+            else
+            {
+                intendedSlot.Bind(this, castTimeStat);
+            }
+
             OnPostAbilityChanged?.Invoke(this, new AbilityChangedEventArgs(slot, intendedSlot));
         }
 
@@ -69,6 +80,7 @@ namespace SejDev.Systems.Abilities
 
         private void Start()
         {
+            weaponHandler = GetComponent<IWeapon>();
             var handler = GetComponent<IStats>();
             if (handler != null)
             {
@@ -230,10 +242,10 @@ namespace SejDev.Systems.Abilities
 
         public void ActivateWeaponBase(InputAction.CallbackContext context)
         {
-            Debug.Log(context.ToString());
+            // Debug.Log(context.ToString());
             if (activeAbility != null || (weaponBase?.CanActivate != null && !weaponBase.CanActivate)) return;
 
-            weaponBase?.Activate();
+            (weaponBase as WeaponAbility)?.Activate();
         }
 
         public void ActivateWeaponSpecial(InputAction.CallbackContext context)
@@ -241,7 +253,7 @@ namespace SejDev.Systems.Abilities
             // Debug.Log(context.ToString());
             if (activeAbility != null || (weaponSpecial?.CanActivate != null && !weaponSpecial.CanActivate)) return;
 
-            weaponSpecial?.Activate();
+            (weaponSpecial as WeaponAbility)?.Activate();
         }
 
         public void ReloadAbilities()

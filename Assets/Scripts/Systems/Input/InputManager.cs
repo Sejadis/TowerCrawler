@@ -21,6 +21,7 @@ public class InputManager : MonoBehaviour
 
     public Action<InputAction.CallbackContext> OnAbilityUI;
     public Action<InputAction.CallbackContext> OnBackUI;
+    public Action<InputAction.CallbackContext> OnInventoryUI;
 
     // Start is called before the first frame update
     void Awake()
@@ -100,5 +101,7 @@ public class InputManager : MonoBehaviour
         // PlayerInput.UI.Upgrade.started += ctx => OnUpgradeUI?.Invoke(ctx);
         PlayerInput.UI.Back.performed += ctx => OnBackUI?.Invoke(ctx);
         // PlayerInput.UI.Upgrade.canceled += ctx => OnUpgradeUI?.Invoke(ctx);
+
+        PlayerInput.UI.Inventory.performed += ctx => OnInventoryUI?.Invoke(ctx);
     }
 }

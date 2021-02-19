@@ -17,7 +17,7 @@ public class AbilityScreen : UIScreen
     [SerializeField] private AbilityScreenSlot core2;
     [SerializeField] private AbilityScreenSlot core3;
     [SerializeField] private ObjectDescriber describer;
-
+    [SerializeField] private Transform dragParent;
     private IDescribable selectedDescribable;
 
     // Start is called before the first frame update
@@ -32,7 +32,7 @@ public class AbilityScreen : UIScreen
                 element.OnElementClicked += OnAbilityElementClicked;
                 element.OnElementEnter += OnAbilityElementEnter;
                 element.OnElementExit += OnAbilityElementExit;
-                element.Bind(ability, transform);
+                element.Bind(ability, dragParent);
                 elements.Add(element);
             }
         }

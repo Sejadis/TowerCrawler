@@ -1,18 +1,18 @@
-﻿using SejDev.Systems.Abilities;
+﻿using SejDev.Systems.Core;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class AbilityDraggable : MonoBehaviour, IDragHandler, IEndDragHandler
+public class Draggable : MonoBehaviour, IDragHandler, IEndDragHandler
 {
-    private Ability ability;
+    private IDescribable describable;
 
-    public Ability Ability
+    public IDescribable Describable
     {
-        get => ability;
+        get => describable;
         set
         {
-            ability = value;
+            describable = value;
             UpdateIcon();
         }
     }
@@ -21,7 +21,7 @@ public class AbilityDraggable : MonoBehaviour, IDragHandler, IEndDragHandler
 
     private void UpdateIcon()
     {
-        iconImage.sprite = ability.Icon;
+        iconImage.sprite = describable.Icon;
     }
 
     public void OnDrag(PointerEventData eventData)

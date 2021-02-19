@@ -1,49 +1,46 @@
 ﻿using System;
-using SejDev.Systems.Abilities;
+using SejDev.Systems.Gear;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace SejDev.UI
+namespace SejDev.UI.Screens.Inventory
 {
-    public class AbilityElement : MonoBehaviour, IBeginDragHandler, IDragHandler, IPointerClickHandler,
+    public class ItemElement : MonoBehaviour, IBeginDragHandler, IDragHandler, IPointerClickHandler,
         IPointerEnterHandler, IPointerExitHandler
     {
-        [SerializeField] private Ability ability;
-        [SerializeField] private Image borderImage;
-        [SerializeField] private Image iconImage;
+        [SerializeField] private Image icon;
+        [SerializeField] private GameObject tooltip;
         [SerializeField] private GameObject dragPrefab;
+        [SerializeField] private Item item;
         private Transform dragParent;
-        private bool isDragging;
-        private GameObject dragObj;
-        public event EventHandler<Ability> OnElementClicked;
-        public event EventHandler<Ability> OnElementEnter;
-        public event EventHandler<Ability> OnElementExit;
 
-        private void Start()
-        {
-            SetVisuals();
-        }
+        public event EventHandler<Item> OnElementClicked;
+        public event EventHandler<Item> OnElementEnter;
+        public event EventHandler<Item> OnElementExit;
 
-        public void Bind(Ability ability, Transform dragParent)
+        public void Bind(Item inventoryItem, GameObject tooltip, Transform dragParent)
         {
+            item = inventoryItem;
+            this.tooltip = tooltip;
             this.dragParent = dragParent;
-            this.ability = ability;
             SetVisuals();
         }
+
 
         private void SetVisuals()
         {
-            if (ability != null)
+            if (item != null)
             {
-                iconImage.sprite = ability.Icon;
+                icon.sprite = item.Icon;
             }
         }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            if (item == null) return;
             var go = Instantiate(dragPrefab, dragParent, true);
-            go.GetComponent<Draggable>().Describable = ability;
+            go.GetComponent<Draggable>().Describable = item;
             go.transform.localScale = Vector3.one;
             go.transform.rotation = new Quaternion(0, 0, 0, 0);
             eventData.pointerDrag = go;
@@ -56,18 +53,18 @@ namespace SejDev.UI
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            OnElementClicked?.Invoke(this, ability);
+            OnElementClicked?.Invoke(this, item);
             // ExecuteEvents.ExecuteHierarchy(transform.parent.gameObject, eventData, ExecuteEvents.pointerClickHandler);
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            OnElementEnter?.Invoke(this, ability);
+            OnElementEnter?.Invoke(this, item);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            OnElementExit?.Invoke(this, ability);
+            OnElementExit?.Invoke(this, item);
         }
     }
 }

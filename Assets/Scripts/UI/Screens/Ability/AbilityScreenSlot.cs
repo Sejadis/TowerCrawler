@@ -1,11 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using SejDev.Systems.Abilities;
-using SejDev.UI;
+﻿using SejDev.Systems.Abilities;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using AbilitySlot = SejDev.Systems.Abilities.AbilitySlot;
 
 public class AbilityScreenSlot : MonoBehaviour, IDropHandler
 {
@@ -17,13 +13,19 @@ public class AbilityScreenSlot : MonoBehaviour, IDropHandler
         set
         {
             ability = value;
-            SetVisuals();
+            if (ability != null)
+            {
+                SetVisuals();
+            }
         }
     }
 
     private void SetVisuals()
     {
-        iconImage.sprite = Ability.Icon;
+        if (Ability.Icon != null)
+        {
+            iconImage.sprite = Ability.Icon;
+        }
     }
 
     [SerializeField] private AbilitySlot slot;
@@ -32,10 +34,10 @@ public class AbilityScreenSlot : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        var draggable = eventData.pointerDrag.GetComponent<AbilityDraggable>();
+        var draggable = eventData.pointerDrag.GetComponent<Draggable>();
         if (draggable != null)
         {
-            Ability = draggable.Ability;
+            Ability = draggable.Describable as Ability; //TODO proper type checking or separate field for payload
             AbilityManager.SetAbility(Ability, slot);
         }
 

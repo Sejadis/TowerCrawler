@@ -9,12 +9,19 @@ namespace SejDev.UI
     {
         public UIScreen abilityScreen;
         public UIScreen menuScreen;
+        public UIScreen inventoryScreen;
         private readonly List<UIScreen> activeScreens = new List<UIScreen>();
 
         private void Start()
         {
             InputManager.Instance.OnAbilityUI += AbilityUi;
             InputManager.Instance.OnBackUI += Back;
+            InputManager.Instance.OnInventoryUI += InventoryUI;
+        }
+
+        private void InventoryUI(InputAction.CallbackContext obj)
+        {
+            ChangeScreenState(inventoryScreen, !inventoryScreen.IsActive);
         }
 
         private void AbilityUi(InputAction.CallbackContext obj)

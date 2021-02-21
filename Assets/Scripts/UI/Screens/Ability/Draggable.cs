@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Draggable : MonoBehaviour, IDragHandler, IEndDragHandler
 {
     private IDescribable describable;
+    public IBeginDragHandler Source { get; set; }
 
     public IDescribable Describable
     {

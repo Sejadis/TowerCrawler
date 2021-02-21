@@ -7,25 +7,51 @@ using UnityEngine.UI;
 namespace SejDev.UI
 {
     public class UIElement : MonoBehaviour, IBeginDragHandler, IDragHandler,
-        IPointerEnterHandler, IPointerExitHandler
+        IPointerEnterHandler, IPointerExitHandler, IDropHandler
     {
         [SerializeField] protected Image icon;
         [SerializeField] protected GameObject dragPrefab;
-        private IDescribable payload;
+        protected IDescribable payload;
         private Transform dragParent;
+        public event EventHandler<(IBeginDragHandler, IDescribable)> OnElementDropped;
 
         public event EventHandler<IDescribable> OnElementEnter;
         public event EventHandler<IDescribable> OnElementExit;
         public event EventHandler<IDescribable> OnElementClicked;
 
+        protected virtual void RaiseOnElementDropped(IBeginDragHandler dragHandler, IDescribable describable)
+        {
+            OnElementDropped?.Invoke(this, (dragHandler, describable));
+        }
+
+        protected virtual void RaiseOnElementEnter(IDescribable e)
+        {
+            OnElementEnter?.Invoke(this, e);
+        }
+
+        protected virtual void RaiseOnElementExit(IDescribable e)
+        {
+            OnElementExit?.Invoke(this, e);
+        }
+
+        protected virtual void RaiseOnElementClicked(IDescribable e)
+        {
+            OnElementClicked?.Invoke(this, e);
+        }
+
         public void Bind(IDescribable payload, Transform dragParent)
         {
             this.payload = payload;
+            Bind(dragParent);
+        }
+
+        public void Bind(Transform dragParent)
+        {
             this.dragParent = dragParent;
             SetVisuals();
         }
 
-        private void SetVisuals()
+        protected void SetVisuals()
         {
             icon.sprite = payload?.Icon;
         }
@@ -34,7 +60,9 @@ namespace SejDev.UI
         {
             if (payload == null) return;
             var go = Instantiate(dragPrefab, dragParent, true);
-            go.GetComponent<Draggable>().Describable = payload;
+            var draggable = go.GetComponent<Draggable>();
+            draggable.Describable = payload;
+            draggable.Source = this;
             go.transform.localScale = Vector3.one;
             go.transform.rotation = new Quaternion(0, 0, 0, 0);
             eventData.pointerDrag = go;
@@ -46,17 +74,23 @@ namespace SejDev.UI
 
         public virtual void OnPointerEnter(PointerEventData eventData)
         {
-            OnElementEnter?.Invoke(this, payload);
+            RaiseOnElementEnter(payload);
         }
 
         public virtual void OnPointerExit(PointerEventData eventData)
         {
-            OnElementExit?.Invoke(this, payload);
+            RaiseOnElementExit(payload);
         }
 
         public virtual void OnPointerClick(PointerEventData eventData)
         {
-            OnElementClicked?.Invoke(this, payload);
+            RaiseOnElementClicked(payload);
+        }
+
+        public virtual void OnDrop(PointerEventData eventData)
+        {
+            var draggable = eventData.pointerDrag.GetComponent<Draggable>();
+            RaiseOnElementDropped(draggable.Source, draggable.Describable);
         }
     }
 }

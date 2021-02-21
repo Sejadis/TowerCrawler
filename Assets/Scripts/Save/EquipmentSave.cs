@@ -7,27 +7,35 @@ namespace SejDev.Save
     [Serializable]
     public class EquipmentSave : Systems.Save.Save
     {
-        private Dictionary<EquipSlotType, string> equipment = new Dictionary<EquipSlotType, string>();
+        private Dictionary<EquipSlotType, EquipmentStateSave> equipment =
+            new Dictionary<EquipSlotType, EquipmentStateSave>();
 
         public EquipmentSave(Dictionary<EquipSlotType, Equipment> equipment)
         {
             foreach (EquipSlotType slotType in (EquipSlotType[]) Enum.GetValues(typeof(EquipSlotType)))
             {
-                equipment.TryGetValue(slotType, out var eq);
-                this.equipment[slotType] = eq?.GUID;
+                if (equipment.TryGetValue(slotType, out var eq))
+                {
+                    this.equipment[slotType] = new EquipmentStateSave(eq);
+                }
             }
         }
 
         public Dictionary<EquipSlotType, Equipment> GetEquipment()
         {
             var resourceManager = ResourceManager.Instance;
-            var eq = new Dictionary<EquipSlotType, Equipment>();
+            var loadedEquipment = new Dictionary<EquipSlotType, Equipment>();
             foreach (EquipSlotType slotType in (EquipSlotType[]) Enum.GetValues(typeof(EquipSlotType)))
             {
-                eq[slotType] = resourceManager.GetEquipmentByID(equipment[slotType]);
+                if (equipment.TryGetValue(slotType, out var eq))
+                {
+                    var equip = resourceManager.GetEquipmentByID(eq.guid);
+                    equip.SetValuesFromSave(equipment[slotType]);
+                    loadedEquipment[slotType] = equip;
+                }
             }
 
-            return eq;
+            return loadedEquipment;
         }
     }
 }

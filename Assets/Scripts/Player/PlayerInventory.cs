@@ -34,16 +34,37 @@ namespace SejDev.Player
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.B))
+            if (Input.GetKeyDown(KeyCode.Keypad0))
             {
                 var eq = (startItems[0] as Equipment).CreateDeepClone();
                 eq.RollStats();
                 Inventory.AddItem(eq);
             }
 
-            if (Input.GetKeyDown(KeyCode.N))
+            if (Input.GetKeyDown(KeyCode.Keypad1))
             {
                 var eq = (startItems[1] as Equipment).CreateDeepClone();
+                eq.RollStats();
+                Inventory.AddItem(eq);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Keypad2))
+            {
+                var eq = (startItems[2] as Equipment).CreateDeepClone();
+                eq.RollStats();
+                Inventory.AddItem(eq);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Keypad3))
+            {
+                var eq = (startItems[3] as Equipment).CreateDeepClone();
+                eq.RollStats();
+                Inventory.AddItem(eq);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Keypad4))
+            {
+                var eq = (startItems[4] as Equipment).CreateDeepClone();
                 eq.RollStats();
                 Inventory.AddItem(eq);
             }

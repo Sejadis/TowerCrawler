@@ -39,6 +39,6 @@ public class ResourceManager : MonoBehaviour
 
     public Equipment GetEquipmentByID(string id)
     {
-        return gearList.FirstOrDefault(gear => gear.GUID.Equals(id));
+        return gearList.FirstOrDefault(gear => gear.GUID.Equals(id)).CreateDeepClone();
     }
 }

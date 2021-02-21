@@ -1,4 +1,5 @@
-﻿using SejDev.Systems.Core;
+﻿using System;
+using SejDev.Systems.Core;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,6 +23,7 @@ namespace SejDev.Systems.UI
             descriptionText.text = describable.Description;
             if (describable is Equipment.Equipment eq)
             {
+                nameText.text += " " + Enum.GetName(typeof(Rarity), eq.rarity);
                 foreach (Transform child in statParent.transform)
                 {
                     Destroy(child.gameObject);

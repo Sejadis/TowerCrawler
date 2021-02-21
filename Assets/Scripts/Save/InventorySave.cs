@@ -17,22 +17,17 @@ namespace SejDev.Save
         public InventorySave(List<Item> items)
         {
             Items = new List<EquipmentStateSave>();
-            items.ForEach(i =>
-            {
-                var eq = i as Equipment;
-                Items.Add(new EquipmentStateSave(eq.GUID, eq.stats));
-            });
+            items.ForEach(i => { Items.Add(new EquipmentStateSave(i as Equipment)); });
         }
 
         public List<Item> GetItems()
         {
             var items = new List<Item>();
             var resourceManager = ResourceManager.Instance;
-            foreach (var item in Items)
+            foreach (var itemSave in Items)
             {
-                var i = resourceManager.GetEquipmentByID(item.guid);
-                i.stats = item.stats;
-                items.Add(i);
+                var item = resourceManager.GetEquipmentByID(itemSave.guid).SetValuesFromSave(itemSave);
+                items.Add(item);
             }
 
             return items;

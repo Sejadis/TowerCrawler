@@ -36,5 +36,13 @@ namespace SejDev.Systems.Equipment
 
             return currentWeaponControllerInstance;
         }
+
+        public void UnEquipWeapon()
+        {
+            if (currentWeaponControllerInstance != null)
+            {
+                Destroy(currentWeaponControllerInstance.gameObject);
+            }
+        }
     }
 }

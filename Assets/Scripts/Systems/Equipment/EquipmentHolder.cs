@@ -46,5 +46,20 @@ namespace SejDev.Systems.Equipment
             var save = new EquipmentSave(equipment);
             SaveManager.SetSave(save);
         }
+
+        public void UnEquipItem(Equipment item)
+        {
+            if (!equipment.ContainsValue(item)) throw new InvalidOperationException("Item not equipped");
+            inventory.AddItem(item); //TODO fix switching gear with full inventory
+
+            equipment[item.EquipSlot] = null;
+            if (item.EquipSlot == EquipSlotType.Weapon)
+            {
+                weaponHandler.UnEquipWeapon();
+            }
+
+            var save = new EquipmentSave(equipment);
+            SaveManager.SetSave(save);
+        }
     }
 }

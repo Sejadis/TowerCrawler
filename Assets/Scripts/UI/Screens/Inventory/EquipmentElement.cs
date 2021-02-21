@@ -1,45 +1,36 @@
-﻿using System;
-using SejDev.Editor;
+﻿using SejDev.Editor;
 using SejDev.Systems.Equipment;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace SejDev.UI.Screens.Inventory
 {
-    public class EquipmentElement : UIElement, IDropHandler
+    public class EquipmentElement : UIElement
     {
         [field: Rename]
         [field: SerializeField]
         public EquipSlotType SlotType { get; private set; }
 
-        public EventHandler<Equipment> OnEquipmentDropped;
-        private Equipment equipment;
-
         public Equipment Equipment
         {
-            get { return equipment; }
+            get { return payload as Equipment; }
             set
             {
-                equipment = value;
+                payload = value;
 
                 SetVisuals();
             }
         }
 
-        private void SetVisuals()
-        {
-            icon.sprite = Equipment?.Icon;
-        }
-
-
-        public void OnDrop(PointerEventData eventData)
+        public override void OnDrop(PointerEventData eventData)
         {
             var draggable = eventData.pointerDrag.GetComponent<Draggable>();
             if (draggable != null &&
                 draggable.Describable is Equipment eq &&
                 eq.EquipSlot == SlotType)
             {
-                OnEquipmentDropped.Invoke(this, draggable.Describable as Equipment);
+                RaiseOnElementDropped(draggable.Source, draggable.Describable);
+                Equipment = eq;
             }
         }
     }

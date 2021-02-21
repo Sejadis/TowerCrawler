@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using SejDev.Player;
 using SejDev.Systems.Core;
-using SejDev.Systems.Gear;
+using SejDev.Systems.Equipment;
 using SejDev.Systems.UI;
 using UnityEngine;
 
@@ -16,7 +16,7 @@ namespace SejDev.UI.Screens.Inventory
         [SerializeField] private ObjectDescriber tooltip;
         [SerializeField] private List<EquipmentElement> gearElements = new List<EquipmentElement>();
 
-        private Systems.Gear.Inventory inventory;
+        private Systems.Equipment.Inventory inventory;
         private EquipmentHolder equipmentHolder;
         private readonly List<UIElement> itemSlots = new List<UIElement>();
 

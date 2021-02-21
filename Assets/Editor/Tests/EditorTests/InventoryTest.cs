@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Editor.Tests.EditorTests.Builder;
 using NUnit.Framework;
-using SejDev.Systems.Gear;
+using SejDev.Systems.Equipment;
 
 namespace Editor.Tests.EditorTests
 {

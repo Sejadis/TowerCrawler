@@ -4,7 +4,7 @@ using SejDev.Systems.Core;
 using UnityEditor;
 using UnityEngine;
 
-namespace SejDev.Systems.Gear
+namespace SejDev.Systems.Equipment
 {
     public abstract class Item : ScriptableObject, IEquatable<Item>, IDescribable
     {

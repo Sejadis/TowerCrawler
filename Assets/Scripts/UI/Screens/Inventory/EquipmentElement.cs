@@ -1,6 +1,6 @@
 ﻿using System;
 using SejDev.Editor;
-using SejDev.Systems.Gear;
+using SejDev.Systems.Equipment;
 using UnityEngine;
 using UnityEngine.EventSystems;
 

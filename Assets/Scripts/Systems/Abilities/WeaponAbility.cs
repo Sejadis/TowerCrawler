@@ -1,5 +1,6 @@
 ﻿using System;
 using JetBrains.Annotations;
+using SejDev.Systems.Equipment;
 using SejDev.Systems.Stats;
 
 namespace SejDev.Systems.Abilities

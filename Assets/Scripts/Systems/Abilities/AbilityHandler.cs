@@ -2,6 +2,7 @@
 using JetBrains.Annotations;
 using SejDev.Editor;
 using SejDev.Save;
+using SejDev.Systems.Equipment;
 using SejDev.Systems.Stats;
 using UnityEngine;
 using UnityEngine.InputSystem;

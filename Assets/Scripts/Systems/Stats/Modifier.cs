@@ -5,7 +5,7 @@ namespace SejDev.Systems.Stats
     [Serializable]
     public class Modifier
     {
-        public object source;
+        [NonSerialized] public object source;
         public ModifierType type;
         public float value;
         public bool ignoreRestriction;

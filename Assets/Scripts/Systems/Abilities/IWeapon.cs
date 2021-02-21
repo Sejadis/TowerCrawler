@@ -1,4 +1,4 @@
-﻿using SejDev.Systems.Gear;
+﻿using SejDev.Systems.Equipment;
 
 namespace SejDev.Systems.Abilities
 {

@@ -1,7 +1,7 @@
 ﻿using SejDev.Systems.Abilities;
 using UnityEngine;
 
-namespace SejDev.Systems.Gear
+namespace SejDev.Systems.Equipment
 {
     [CreateAssetMenu(fileName = "Assets/Resources/Items/Gear/NewWeapon",
         menuName = "Systems/Equipment/Weapon")]

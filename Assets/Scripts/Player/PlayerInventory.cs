@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using SejDev.Save;
-using SejDev.Systems.Gear;
+using SejDev.Systems.Equipment;
 using UnityEngine;
 
 namespace SejDev.Player
@@ -17,7 +17,7 @@ namespace SejDev.Player
         private void Awake()
         {
             var inventorySave = SaveManager.GetSave<InventorySave>();
-            Inventory = new Inventory(40, inventorySave?.Items);
+            Inventory = new Inventory(40, inventorySave?.GetItems());
             Inventory.OnInventoryChanged += OnInventoryChanged;
         }
 

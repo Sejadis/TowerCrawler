@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace SejDev.Systems.Gear
+namespace SejDev.Systems.Equipment
 {
     public class Inventory : IInventory
     {

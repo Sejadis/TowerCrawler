@@ -1,7 +1,7 @@
 ﻿using System;
 using NSubstitute;
 using NUnit.Framework;
-using SejDev.Systems.Gear;
+using SejDev.Systems.Equipment;
 
 namespace Editor.Tests.EditorTests
 {

@@ -1,4 +1,4 @@
-namespace SejDev.Systems.Gear
+namespace SejDev.Systems.Equipment
 {
     public enum EquipSlotType
     {

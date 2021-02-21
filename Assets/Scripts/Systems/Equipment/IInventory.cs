@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace SejDev.Systems.Gear
+namespace SejDev.Systems.Equipment
 {
     public interface IInventory
     {

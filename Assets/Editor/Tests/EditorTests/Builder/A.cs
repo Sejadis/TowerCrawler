@@ -1,4 +1,4 @@
-using SejDev.Systems.Gear;
+using SejDev.Systems.Equipment;
 
 namespace Editor.Tests.EditorTests.Builder
 {
@@ -8,6 +8,7 @@ namespace Editor.Tests.EditorTests.Builder
         {
             return new InventoryBuilder();
         }
+
         public static EquipmentHolderBuilder EquipmentHolder(IInventory inventory)
         {
             return new EquipmentHolderBuilder(inventory);

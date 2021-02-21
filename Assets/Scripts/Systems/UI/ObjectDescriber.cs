@@ -1,5 +1,4 @@
 ﻿using SejDev.Systems.Core;
-using SejDev.Systems.Gear;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,20 +20,23 @@ namespace SejDev.Systems.UI
             iconImage.sprite = describable.Icon;
             nameText.text = describable.Name;
             descriptionText.text = describable.Description;
-            if (describable is Equipment eq)
+            if (describable is Equipment.Equipment eq)
             {
                 foreach (Transform child in statParent.transform)
                 {
                     Destroy(child.gameObject);
                 }
 
-                foreach (var modifier in eq.stats)
+                foreach (var stat in eq.stats)
                 {
                     var go = new GameObject("Text", typeof(TextMeshProUGUI));
                     go.transform.parent = statParent.transform;
                     go.transform.localPosition = Vector3.zero;
                     go.transform.localScale = Vector3.one;
-                    go.GetComponent<TMP_Text>().text = modifier.ToString();
+                    go.transform.rotation = new Quaternion(0, 0, 0, 0);
+                    var text = go.GetComponent<TextMeshProUGUI>();
+                    text.enableAutoSizing = true;
+                    text.text = stat.ToString();
                 }
             }
         }

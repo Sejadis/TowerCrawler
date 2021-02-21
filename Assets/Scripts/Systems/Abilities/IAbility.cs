@@ -1,4 +1,5 @@
 ﻿using System;
+using SejDev.Systems.Equipment;
 using UnityEngine;
 
 namespace SejDev.Systems.Abilities

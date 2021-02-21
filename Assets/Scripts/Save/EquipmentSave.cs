@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using SejDev.Systems.Gear;
+using SejDev.Systems.Equipment;
 
 namespace SejDev.Save
 {

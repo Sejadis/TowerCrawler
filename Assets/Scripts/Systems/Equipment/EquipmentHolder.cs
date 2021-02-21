@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using SejDev.Save;
 
-namespace SejDev.Systems.Gear
+namespace SejDev.Systems.Equipment
 {
     public class EquipmentHolder
     {
         private readonly IInventory inventory;
-        private readonly Dictionary<EquipSlotType, Equipment> equipment = new Dictionary<EquipSlotType, Equipment>();
+        private readonly Dictionary<EquipSlotType, Equipment> equipment;
         private readonly WeaponHandler weaponHandler;
 
         public EquipmentHolder(IInventory inventory, WeaponHandler weaponHandler)
@@ -15,15 +15,16 @@ namespace SejDev.Systems.Gear
             this.inventory = inventory;
             this.weaponHandler = weaponHandler;
             var equipmentSave = SaveManager.GetSave<EquipmentSave>();
-            equipment = equipmentSave.GetEquipment();
-            if (equipment[EquipSlotType.Weapon] != null)
+            equipment = equipmentSave?.GetEquipment() ?? new Dictionary<EquipSlotType, Equipment>();
+            if (equipment != null && equipment.TryGetValue(EquipSlotType.Weapon, out var weapon))
             {
-                weaponHandler.EquipWeapon(equipment[EquipSlotType.Weapon] as Weapon);
+                weaponHandler.EquipWeapon(weapon as Weapon);
             }
         }
 
         public Equipment GetItemForSlot(EquipSlotType equipSlot)
         {
+            if (equipment == null) return null;
             equipment.TryGetValue(equipSlot, out var eq);
             return eq;
         }

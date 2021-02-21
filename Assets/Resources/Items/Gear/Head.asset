@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b659eacf50b84a0c818f79fc3c7e2ecc, type: 3}
+  m_Script: {fileID: 11500000, guid: f393686ec3427f54192bb3b8284c02cc, type: 3}
   m_Name: Head
   m_EditorClassIdentifier: 
-  id: 3f036aea-8215-49b2-b77d-6256e15527dd
-  <Icon>k__BackingField: {fileID: 21300000, guid: c8f56312d032a264898364892f6e388b,
+  id: 73d78969-7af4-4739-8a60-2cfef34cdc1c
+  <Icon>k__BackingField: {fileID: 21300000, guid: 3ce2fc65c3c62b84691aaf84c25c836a,
     type: 3}
-  <Name>k__BackingField: Shiny Crown
+  <Name>k__BackingField: Dwarf Helmet
   <Description>k__BackingField: 
   <EquipSlot>k__BackingField: 1
   stats: []

@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b659eacf50b84a0c818f79fc3c7e2ecc, type: 3}
+  m_Script: {fileID: 11500000, guid: f393686ec3427f54192bb3b8284c02cc, type: 3}
   m_Name: Chest
   m_EditorClassIdentifier: 
-  id: 063fac1c-9a0c-4e47-8100-5147828ffe8d
+  id: e48d1c36-9ba1-4170-9ce5-23716f625593
   <Icon>k__BackingField: {fileID: 21300000, guid: b90d7154905e07946b5d85418e028aa2,
     type: 3}
   <Name>k__BackingField: Leather Armor
-  <Description>k__BackingField: 
+  <Description>k__BackingField: blah
   <EquipSlot>k__BackingField: 3
   stats: []

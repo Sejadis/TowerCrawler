@@ -258,9 +258,9 @@ MonoBehaviour:
   gearList:
   - {fileID: 11400000, guid: eb14f601825a5e942846c8605b15dd6b, type: 2}
   - {fileID: 11400000, guid: 05f80972664ad2d4190156b9df29100a, type: 2}
-  - {fileID: 11400000, guid: 5d396b01e5f07a54b8bceaf3d50da07e, type: 2}
   - {fileID: 11400000, guid: d1b345891b20fb948953ca33f16eda85, type: 2}
   - {fileID: 11400000, guid: 4265ee7ad30cda248bfaac004e9f525c, type: 2}
+  - {fileID: 11400000, guid: d22e4cdeffac45e4892b78a1617d56c1, type: 2}
 --- !u!114 &70399557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11792,8 +11792,8 @@ MonoBehaviour:
   weapon: {fileID: 11400000, guid: eb14f601825a5e942846c8605b15dd6b, type: 2}
   weaponHandler: {fileID: 1831252501}
   startItems:
-  - {fileID: 11400000, guid: 5d396b01e5f07a54b8bceaf3d50da07e, type: 2}
   - {fileID: 11400000, guid: d1b345891b20fb948953ca33f16eda85, type: 2}
+  - {fileID: 11400000, guid: 4265ee7ad30cda248bfaac004e9f525c, type: 2}
 --- !u!1 &1845449152
 GameObject:
   m_ObjectHideFlags: 0
@@ -13361,22 +13361,22 @@ PrefabInstance:
     - target: {fileID: 4921239379558384718, guid: 7cf2e9a2cbdead7479fcefcefae8b43a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 539
+      value: 235
       objectReference: {fileID: 0}
     - target: {fileID: 4921239379558384718, guid: 7cf2e9a2cbdead7479fcefcefae8b43a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -99
+      value: 160
       objectReference: {fileID: 0}
     - target: {fileID: 4921239379558384718, guid: 7cf2e9a2cbdead7479fcefcefae8b43a,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 200
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 4921239379558384718, guid: 7cf2e9a2cbdead7479fcefcefae8b43a,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 250
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4921239379558384718, guid: 7cf2e9a2cbdead7479fcefcefae8b43a,
         type: 3}
@@ -13386,7 +13386,7 @@ PrefabInstance:
     - target: {fileID: 4921239379558384718, guid: 7cf2e9a2cbdead7479fcefcefae8b43a,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4921239379558384718, guid: 7cf2e9a2cbdead7479fcefcefae8b43a,
         type: 3}
@@ -13396,7 +13396,7 @@ PrefabInstance:
     - target: {fileID: 4921239379558384718, guid: 7cf2e9a2cbdead7479fcefcefae8b43a,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4921239379558384718, guid: 7cf2e9a2cbdead7479fcefcefae8b43a,
         type: 3}
@@ -13406,12 +13406,17 @@ PrefabInstance:
     - target: {fileID: 4921239379558384718, guid: 7cf2e9a2cbdead7479fcefcefae8b43a,
         type: 3}
       propertyPath: m_Pivot.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4921239379558384719, guid: 7cf2e9a2cbdead7479fcefcefae8b43a,
         type: 3}
       propertyPath: m_Name
       value: Tooltip
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921239379558384719, guid: 7cf2e9a2cbdead7479fcefcefae8b43a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cf2e9a2cbdead7479fcefcefae8b43a, type: 3}

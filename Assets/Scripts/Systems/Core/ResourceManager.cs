@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using SejDev.Systems.Abilities;
-using SejDev.Systems.Gear;
+using SejDev.Systems.Equipment;
 using UnityEngine;
 
 public class ResourceManager : MonoBehaviour

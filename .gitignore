@@ -22,7 +22,8 @@ Assets/Plugins/Editor/JetBrains*
 
 # Visual Studio Code
 .vscode/
-
+# Visual Studio
+.vs/
 
 ### Unity ###
 [Ll]ibrary/

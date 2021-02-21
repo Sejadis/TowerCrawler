@@ -2,12 +2,15 @@
 using System.Linq;
 using SejDev.Save;
 using SejDev.Systems.Equipment;
+using SejDev.Systems.Stats;
 using UnityEngine;
 
 namespace SejDev.Player
 {
     public class PlayerInventory : MonoBehaviour
     {
+        //TODO make private and serialize and grab automatically where possible
+        public StatsManager statsManager;
         public Weapon weapon;
         public EquipmentHolder equipmentHolder;
         public WeaponHandler weaponHandler;
@@ -29,7 +32,7 @@ namespace SejDev.Player
 
         private void Start()
         {
-            equipmentHolder = new EquipmentHolder(Inventory, weaponHandler);
+            equipmentHolder = new EquipmentHolder(statsManager, Inventory, weaponHandler);
         }
 
         private void Update()

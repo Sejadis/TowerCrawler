@@ -14,7 +14,7 @@ namespace SejDev.UI.Screens.Inventory
         [SerializeField] private GameObject itemElementPrefab;
         [SerializeField] private GameObject itemParent;
         [SerializeField] private ObjectDescriber tooltip;
-        [SerializeField] private List<GearElement> gearElements = new List<GearElement>();
+        [SerializeField] private List<EquipmentElement> gearElements = new List<EquipmentElement>();
 
         private Systems.Gear.Inventory inventory;
         private EquipmentHolder equipmentHolder;
@@ -48,7 +48,7 @@ namespace SejDev.UI.Screens.Inventory
         private void EquipmentDropped(object sender, Equipment e)
         {
             equipmentHolder.EquipItem(e);
-            (sender as GearElement).Equipment = e;
+            (sender as EquipmentElement).Equipment = e;
         }
 
         private void OnInventoryChanged()

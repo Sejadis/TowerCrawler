@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 namespace SejDev.UI.Screens.Inventory
 {
-    public class GearElement : UIElement, IDropHandler
+    public class EquipmentElement : UIElement, IDropHandler
     {
         [field: Rename]
         [field: SerializeField]

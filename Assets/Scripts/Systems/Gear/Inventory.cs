@@ -26,7 +26,9 @@ namespace SejDev.Systems.Gear
             if (itemIDs == null) return;
             foreach (var id in itemIDs)
             {
-                items.Add(ResourceManager.Instance.GetEquipmentByID(id));
+                var item = ResourceManager.Instance.GetEquipmentByID(id).CreateDeepClone();
+                item.RollStats();
+                items.Add(item);
             }
         }
 

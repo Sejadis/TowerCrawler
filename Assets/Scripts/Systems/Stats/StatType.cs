@@ -7,5 +7,6 @@
         CastTime,
         CooldownRate,
         MidAirJump,
+        Damage,
     }
 }

@@ -19,8 +19,6 @@ namespace SejDev.Player
             var inventorySave = SaveManager.GetSave<InventorySave>();
             Inventory = new Inventory(40, inventorySave?.Items);
             Inventory.OnInventoryChanged += OnInventoryChanged;
-            // var save = new EquipmentSave(weapon);
-            // SaveManager.SetSave(save);
         }
 
         private void OnInventoryChanged()
@@ -38,12 +36,16 @@ namespace SejDev.Player
         {
             if (Input.GetKeyDown(KeyCode.B))
             {
-                Inventory.AddItem(startItems[0]);
+                var eq = (startItems[0] as Equipment).CreateDeepClone();
+                eq.RollStats();
+                Inventory.AddItem(eq);
             }
 
             if (Input.GetKeyDown(KeyCode.N))
             {
-                Inventory.AddItem(startItems[1]);
+                var eq = (startItems[1] as Equipment).CreateDeepClone();
+                eq.RollStats();
+                Inventory.AddItem(eq);
             }
         }
     }

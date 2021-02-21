@@ -17,5 +17,10 @@ namespace SejDev.Systems.Stats
             this.source = source;
             this.ignoreRestriction = ignoreRestriction;
         }
+
+        public override string ToString()
+        {
+            return $"+ {value}";
+        }
     }
 }

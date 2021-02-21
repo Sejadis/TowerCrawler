@@ -29,8 +29,8 @@ namespace SejDev.Systems.Gear
             }
         }
 
-        private Guid guid;
-        [SerializeField] private string id;
+        protected Guid guid;
+        [SerializeField] protected string id;
         public string GUID => id;
 
         [field: Rename]

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using SejDev.Player;
 using SejDev.Systems.Core;
 using SejDev.Systems.Equipment;
+using SejDev.Systems.Stats;
 using SejDev.Systems.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,8 +14,11 @@ namespace SejDev.UI.Screens.Inventory
     public class InventoryScreen : UIScreen
     {
         [SerializeField] private PlayerInventory playerInventory;
+        [SerializeField] private StatsManager statsManager;
         [SerializeField] private GameObject itemElementPrefab;
         [SerializeField] private GameObject itemParent;
+        [SerializeField] private GameObject statParent;
+        [SerializeField] private GameObject statPrefab;
         [SerializeField] private ObjectDescriber tooltip;
         [SerializeField] private List<EquipmentElement> equipmentElements = new List<EquipmentElement>();
 
@@ -23,6 +28,7 @@ namespace SejDev.UI.Screens.Inventory
 
         private void Start()
         {
+            statsManager.OnAnyStatChanged += OnStatChanged;
             equipmentHolder = playerInventory.equipmentHolder;
             inventory = playerInventory.Inventory;
 
@@ -39,6 +45,23 @@ namespace SejDev.UI.Screens.Inventory
             CreateItemElements();
             UpdateInventory();
             UpdateEquipment();
+            OnStatChanged(null, null);
+        }
+
+        private void OnStatChanged(object sender, EventArgs e)
+        {
+            foreach (Transform child in statParent.transform)
+            {
+                Destroy(child.gameObject);
+            }
+
+            foreach (var stat in statsManager.stats)
+            {
+                var go = Instantiate(statPrefab, statParent.transform, false);
+                var text = go.GetComponent<TextMeshProUGUI>();
+                text.text = stat.ToString();
+                go.SetActive(true);
+            }
         }
 
         private void UpdateEquipment()

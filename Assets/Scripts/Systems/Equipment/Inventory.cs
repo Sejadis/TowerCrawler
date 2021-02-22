@@ -20,17 +20,17 @@ namespace SejDev.Systems.Equipment
             this.items = items ?? new List<Item>();
         }
 
-        public Inventory(int maxSpace, IEnumerable<string> itemIDs) : this(maxSpace)
-        {
-            items = new List<Item>();
-            if (itemIDs == null) return;
-            foreach (var id in itemIDs)
-            {
-                var item = ResourceManager.Instance.GetEquipmentByID(id).CreateDeepClone();
-                item.RollStats();
-                items.Add(item);
-            }
-        }
+        // public Inventory(int maxSpace, IEnumerable<string> itemIDs) : this(maxSpace)
+        // {
+        //     items = new List<Item>();
+        //     if (itemIDs == null) return;
+        //     foreach (var id in itemIDs)
+        //     {
+        //         var item = ResourceManager.Instance.GetEquipmentByID(id).CreateDeepClone();
+        //         item.RollStats();
+        //         items.Add(item);
+        //     }
+        // }
 
         public Inventory() : this(10)
         {

@@ -18,7 +18,7 @@ namespace SejDev.Systems.Equipment
         public override string ToString()
         {
             return
-                $"+ {modifier.value}{(modifier.type == ModifierType.Percent ? "%" : "")} {Enum.GetName(typeof(StatType), type)}";
+                $"+ {(modifier.value * (modifier.type == ModifierType.Percent ? 100 : 1)).ToString()}{(modifier.type == ModifierType.Percent ? "%" : "")} {Enum.GetName(typeof(StatType), type)}";
         }
     }
 }

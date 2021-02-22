@@ -9,7 +9,7 @@ namespace SejDev.Systems.Stats
     {
         [SerializeField] protected float baseValue;
 
-        private float? currentValue;
+        private float? currentValue = null;
 
         private readonly ModifierContainer modContainer = new ModifierContainer();
 
@@ -18,6 +18,10 @@ namespace SejDev.Systems.Stats
         [field: Rename]
         [field: SerializeField]
         public StatType Type { get; protected set; }
+
+        [field: Rename]
+        [field: SerializeField]
+        public DisplayStyle DisplayStyle { get; protected set; }
 
         public float Value
         {
@@ -98,6 +102,30 @@ namespace SejDev.Systems.Stats
             modContainer.Modifiers.Remove(modifier);
             RaiseOnStatChanged();
         }
+
+        public override string ToString()
+        {
+            //{(modifier.type == ModifierType.Percent ? "%" : "")} 
+            string value = String.Empty;
+            switch (DisplayStyle)
+            {
+                case DisplayStyle.Basic:
+                    value = Value.ToString();
+                    break;
+                case DisplayStyle.PercentToBaseValue:
+                    value = $"{((Value / baseValue) * 100f).ToString()}%";
+                    break;
+            }
+
+            return
+                $"{value} {Enum.GetName(typeof(StatType), value: Type)}";
+        }
+    }
+
+    public enum DisplayStyle
+    {
+        Basic,
+        PercentToBaseValue
     }
 
     public class ModifierEvalutationTestImpl

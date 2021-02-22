@@ -13,7 +13,7 @@ namespace SejDev.Systems.Equipment
         menuName = "Systems/Equipment/Armor")]
     public class Equipment : Item
     {
-        [field: Rename, SerializeField] public Rarity rarity { get; protected set; }
+        [field: Rename, SerializeField] public Rarity rarity { get; set; }
         [field: Rename, SerializeField] public EquipSlotType EquipSlot { get; protected set; }
         public List<EquipmentStat> stats = new List<EquipmentStat>();
 

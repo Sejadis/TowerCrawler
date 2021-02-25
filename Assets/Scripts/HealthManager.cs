@@ -1,14 +1,37 @@
 ﻿using System;
 using SejDev.Player;
 using SejDev.Systems.Core;
+using SejDev.Systems.Stats;
 using UnityEngine;
 
 namespace SejDev
 {
     public class HealthManager : MonoBehaviour, IDamagable, IHealable, IHealth
     {
-        public int MaxHealth { get; private set; }
-        public int CurrentHealth { get; private set; }
+        private int maxHealth;
+        private int currentHealth;
+
+        public int MaxHealth
+        {
+            get => maxHealth;
+            private set
+            {
+                var args = new HealthChangedEventArgs(maxHealth, value);
+                maxHealth = value;
+                OnMaxHealthChanged?.Invoke(this, args);
+            }
+        }
+
+        public int CurrentHealth
+        {
+            get => currentHealth;
+            private set
+            {
+                var args = new HealthChangedEventArgs(currentHealth, value);
+                currentHealth = value;
+                OnCurrentHealthChanged?.Invoke(this, args);
+            }
+        }
 
         public event EventHandler<DamageHandlerEventArgs> OnPreDamage;
         public event EventHandler<DamageHandlerEventArgs> OnPostDamage;
@@ -22,7 +45,22 @@ namespace SejDev
 
         void Awake()
         {
-            MaxHealth = 150;
+            StatsManager statsManager = GetComponent<StatsManager>();
+            if (statsManager != null)
+            {
+                Stat healthStat = statsManager.GetStatByType(StatType.Health);
+                if (healthStat != null)
+                {
+                    healthStat.OnStatChanged += (_, args) =>
+                    {
+                        var percent = CurrentHealth / (float) MaxHealth;
+                        MaxHealth = (int) args.NewValue;
+                        CurrentHealth = Mathf.CeilToInt(MaxHealth * percent);
+                    };
+                    MaxHealth = (int) healthStat.Value;
+                }
+            }
+
             CurrentHealth = MaxHealth;
         }
 

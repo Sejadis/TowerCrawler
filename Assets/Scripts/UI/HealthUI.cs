@@ -8,13 +8,11 @@ namespace SejDev.UI
     public class HealthUI : MonoBehaviour
     {
         //TODO remove, only for testing
-        [SerializeField]
-        private Component healthComponent;
-        [SerializeField]
-        private TextMeshProUGUI healthText;
-        [SerializeField]
-        private Image healthFillImage;
+        [SerializeField] private Component healthComponent;
+        [SerializeField] private TextMeshProUGUI healthText;
+        [SerializeField] private Image healthFillImage;
         private int maxHealth;
+        private int currentHealth;
 
         protected void OnValidate()
         {
@@ -33,19 +31,26 @@ namespace SejDev.UI
         {
             healthComponent.OnCurrentHealthChanged += OnCurrentHealthChanged;
             healthComponent.OnMaxHealthChanged += OnMaxHealthChanged;
-            OnMaxHealthChanged(healthComponent,new HealthChangedEventArgs(0,healthComponent.MaxHealth));
-            OnCurrentHealthChanged(healthComponent,new HealthChangedEventArgs(0,healthComponent.CurrentHealth));
+            OnMaxHealthChanged(healthComponent, new HealthChangedEventArgs(0, healthComponent.MaxHealth));
+            OnCurrentHealthChanged(healthComponent, new HealthChangedEventArgs(0, healthComponent.CurrentHealth));
         }
 
         private void OnMaxHealthChanged(object sender, HealthChangedEventArgs e)
         {
             maxHealth = e.NewHealth;
+            UpdateFillPercent();
         }
 
         private void OnCurrentHealthChanged(object sender, HealthChangedEventArgs e)
         {
+            currentHealth = e.NewHealth;
             healthText.text = e.NewHealth.ToString();
-            float fillPercent = (float)e.NewHealth / maxHealth;
+            UpdateFillPercent();
+        }
+
+        private void UpdateFillPercent()
+        {
+            float fillPercent = (float) currentHealth / maxHealth;
             healthFillImage.fillAmount = fillPercent;
         }
     }

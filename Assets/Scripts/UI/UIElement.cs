@@ -59,12 +59,10 @@ namespace SejDev.UI
         public virtual void OnBeginDrag(PointerEventData eventData)
         {
             if (payload == null) return;
-            var go = Instantiate(dragPrefab, dragParent, true);
+            var go = Instantiate(dragPrefab, dragParent, false);
             var draggable = go.GetComponent<Draggable>();
             draggable.Describable = payload;
             draggable.Source = this;
-            go.transform.localScale = Vector3.one;
-            go.transform.rotation = new Quaternion(0, 0, 0, 0);
             eventData.pointerDrag = go;
         }
 

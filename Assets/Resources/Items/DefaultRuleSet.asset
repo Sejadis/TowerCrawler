@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 411e47879fd848e3968c0782f836cc09, type: 3}
   m_Name: DefaultRuleSet
   m_EditorClassIdentifier: Scripts:SejDev.Systems.Stats:RuleSet
   slotRarityDistributionData:
@@ -104,6 +104,7 @@ MonoBehaviour:
         maxValue: 5
   statValueDistributionData:
   - modifierType: 0
+    valueType: 0
     distributionData:
     - minMaxData:
         minValue: 0
@@ -241,6 +242,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   - modifierType: 2
+    valueType: 0
     distributionData:
     - minMaxData:
         minValue: 0
@@ -378,6 +380,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   - modifierType: 2
+    valueType: 0
     distributionData:
     - minMaxData:
         minValue: 0.5
@@ -515,6 +518,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   - modifierType: 2
+    valueType: 0
     distributionData:
     - minMaxData:
         minValue: 0.5
@@ -652,6 +656,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   - modifierType: 1
+    valueType: 1
     distributionData:
     - minMaxData:
         minValue: 0
@@ -789,6 +794,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   - modifierType: 1
+    valueType: 1
     distributionData:
     - minMaxData:
         minValue: 1
@@ -926,6 +932,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   - modifierType: 1
+    valueType: 1
     distributionData:
     - minMaxData:
         minValue: 5

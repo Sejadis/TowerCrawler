@@ -10,7 +10,7 @@ namespace SejDev.Systems.Stats
         public float value;
         public bool ignoreRestriction;
 
-        public Modifier(ModifierType type, float value, object source, bool ignoreRestriction)
+        public Modifier(ModifierType type, float value, object source, bool ignoreRestriction = false)
         {
             this.type = type;
             this.value = value;

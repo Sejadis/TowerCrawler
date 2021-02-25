@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c886dda536beac4b8d6aca09bd39067, type: 3}
-  m_Name: CastTime
+  m_Name: Health
   m_EditorClassIdentifier: 
-  baseValue: 1
+  baseValue: 150
   restrictor: {fileID: 0}
-  <Type>k__BackingField: 2
-  <DisplayStyle>k__BackingField: 1
+  <Type>k__BackingField: 6
+  <DisplayStyle>k__BackingField: 0

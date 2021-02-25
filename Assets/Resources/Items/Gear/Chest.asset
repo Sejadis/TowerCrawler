@@ -19,4 +19,5 @@ MonoBehaviour:
   <Description>k__BackingField: blah
   <rarity>k__BackingField: 0
   <EquipSlot>k__BackingField: 3
+  GuaranteedStats: []
   stats: []

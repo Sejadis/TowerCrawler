@@ -32,10 +32,7 @@ namespace SejDev.Systems.UI
                 foreach (var stat in eq.stats)
                 {
                     var go = new GameObject("Text", typeof(TextMeshProUGUI));
-                    go.transform.parent = statParent.transform;
-                    go.transform.localPosition = Vector3.zero;
-                    go.transform.localScale = Vector3.one;
-                    go.transform.rotation = new Quaternion(0, 0, 0, 0);
+                    go.transform.SetParent(statParent.transform, false);
                     var text = go.GetComponent<TextMeshProUGUI>();
                     text.enableAutoSizing = true;
                     text.text = stat.ToString();

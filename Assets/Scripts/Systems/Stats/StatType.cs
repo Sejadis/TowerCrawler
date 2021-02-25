@@ -8,5 +8,6 @@
         CooldownRate,
         MidAirJump,
         Damage,
+        Health,
     }
 }

@@ -66,5 +66,31 @@ namespace SejDev.Systems.Stats
         {
             return statValueDistributionData[(int) statType].modifierType;
         }
+
+        public List<StatType> GetPossibleStats(Rarity rarity)
+        {
+            var result = new List<StatType>();
+            var statTypeLength = Enum.GetNames(typeof(StatType)).Length;
+            for (int i = 0; i < statTypeLength; i++)
+            {
+                var valueData = statValueDistributionData[i].distributionData[(int) rarity];
+                if (!valueData.IsEmpty())
+                {
+                    result.Add((StatType) i);
+                }
+            }
+
+            return result;
+        }
+
+        public MinMaxData GetStatAmount(EquipSlotType equipSlot, Rarity rarity)
+        {
+            return slotRarityDistributionData.distributionData[(int) equipSlot].distributionData[(int) rarity];
+        }
+
+        public ValueType GetValueType(StatType statType)
+        {
+            return statValueDistributionData[(int) statType].valueType;
+        }
     }
 }

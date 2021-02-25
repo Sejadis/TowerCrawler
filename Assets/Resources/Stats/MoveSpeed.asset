@@ -15,3 +15,4 @@ MonoBehaviour:
   baseValue: 5
   restrictor: {fileID: 11400000, guid: 9f0c3037316ce0f42b81d4af0d78bb57, type: 2}
   <Type>k__BackingField: 1
+  <DisplayStyle>k__BackingField: 1

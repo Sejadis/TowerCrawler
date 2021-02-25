@@ -16,5 +16,10 @@ namespace SejDev.Systems.Stats
             var rangePercent = distribution.Evaluate(Random.Range(0f, 1f)) * range;
             return minMaxData.minValue + rangePercent;
         }
+
+        public bool IsEmpty()
+        {
+            return minMaxData.maxValue == 0 && minMaxData.minValue == 0;
+        }
     }
 }

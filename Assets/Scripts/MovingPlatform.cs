@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using TreeEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
@@ -12,6 +8,8 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] private float speed = 2f;
     private Vector3 startPosition;
     private Vector3 currentDestination;
+    private bool movePlayer;
+    private CharacterController characterController;
 
     private bool isReturning;
 
@@ -33,16 +31,33 @@ public class MovingPlatform : MonoBehaviour
 
             currentDestination = isReturning ? startPosition : destination.position;
         }
+    }
+
+    private void FixedUpdate()
+    {
+        if (movePlayer && characterController != null)
+        {
+            characterController.Move(moveDirection * (speed * Time.fixedDeltaTime));
+        }
 
         transform.position += moveDirection * (speed * Time.deltaTime);
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            var characterController = other.GetComponent<CharacterController>();
-            characterController.Move(moveDirection * (speed * Time.deltaTime));
+            characterController = other.GetComponent<CharacterController>();
+            movePlayer = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            characterController = null;
+            movePlayer = false;
         }
     }
 }

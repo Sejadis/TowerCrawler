@@ -16,9 +16,10 @@ MonoBehaviour:
   <Icon>k__BackingField: {fileID: 21300000, guid: 0e645fcb51cda2144ad582bab961a2c7,
     type: 3}
   <Name>k__BackingField: Sword
-  <Description>k__BackingField: By the might of Greyskull
+  <Description>k__BackingField: By the power of Greyskull
   <rarity>k__BackingField: 0
   <EquipSlot>k__BackingField: 0
+  GuaranteedStats: []
   stats: []
   baseAbility: {fileID: 11400000, guid: 7bb343d307d274c4fb1b330a34806c35, type: 2}
   specialAbility: {fileID: 0}

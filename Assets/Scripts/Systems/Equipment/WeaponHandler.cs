@@ -39,6 +39,9 @@ namespace SejDev.Systems.Equipment
 
         public void UnEquipWeapon()
         {
+            abilityHandler.ChangeAbility(null, AbilitySlot.WeaponBase);
+            abilityHandler.ChangeAbility(null, AbilitySlot.WeaponSpecial,
+                currentWeaponControllerInstance);
             if (currentWeaponControllerInstance != null)
             {
                 Destroy(currentWeaponControllerInstance.gameObject);

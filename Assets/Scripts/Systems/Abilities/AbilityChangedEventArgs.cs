@@ -1,5 +1,4 @@
 ﻿using System;
-using JetBrains.Annotations;
 
 namespace SejDev.Systems.Abilities
 {
@@ -8,10 +7,10 @@ namespace SejDev.Systems.Abilities
         public Ability ability;
         public AbilitySlot slot;
 
-        public AbilityChangedEventArgs(AbilitySlot slot, [NotNull] Ability ability)
+        public AbilityChangedEventArgs(AbilitySlot slot, Ability ability)
         {
             this.slot = slot;
-            this.ability = ability ?? throw new ArgumentNullException(nameof(ability));
+            this.ability = ability;
         }
     }
 }

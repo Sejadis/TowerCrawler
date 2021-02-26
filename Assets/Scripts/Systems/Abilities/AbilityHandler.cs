@@ -33,7 +33,6 @@ namespace SejDev.Systems.Abilities
 
         public void ChangeAbility(Ability ability, AbilitySlot slot, WeaponController weaponController = null)
         {
-            if (ability == null) return;
             OnPreAbilityChanged?.Invoke(this, null);
             ref var intendedSlot = ref GetSlot(slot);
             if (intendedSlot != null)
@@ -43,18 +42,26 @@ namespace SejDev.Systems.Abilities
                 intendedSlot.OnAbilityInterrupted -= RaiseOnAbilityInterrupted;
             }
 
-            intendedSlot = ability.CreateDeepClone();
-            intendedSlot.OnPreAbilityActivation += RaiseOnPreAbilityActivation;
-            intendedSlot.OnPostAbilityActivation += RaiseOnPostAbilityActivation;
-            intendedSlot.OnAbilityInterrupted += RaiseOnAbilityInterrupted;
-            if (ability is WeaponAbility &&
-                (slot == AbilitySlot.WeaponBase || slot == AbilitySlot.WeaponSpecial))
+            if (ability == null)
             {
-                (intendedSlot as WeaponAbility).Bind(this, weaponController, castTimeStat);
+                intendedSlot = null;
             }
             else
             {
-                intendedSlot.Bind(this, castTimeStat);
+                intendedSlot = ability.CreateDeepClone();
+                intendedSlot.OnPreAbilityActivation += RaiseOnPreAbilityActivation;
+                intendedSlot.OnPostAbilityActivation += RaiseOnPostAbilityActivation;
+                intendedSlot.OnAbilityInterrupted += RaiseOnAbilityInterrupted;
+
+                if (ability is WeaponAbility &&
+                    (slot == AbilitySlot.WeaponBase || slot == AbilitySlot.WeaponSpecial))
+                {
+                    (intendedSlot as WeaponAbility).Bind(this, weaponController, castTimeStat);
+                }
+                else
+                {
+                    intendedSlot.Bind(this, castTimeStat);
+                }
             }
 
             OnPostAbilityChanged?.Invoke(this, new AbilityChangedEventArgs(slot, intendedSlot));

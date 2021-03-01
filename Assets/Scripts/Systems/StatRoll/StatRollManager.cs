@@ -17,9 +17,15 @@ namespace SejDev.Systems.Stats
 
         public static Equipment.Equipment RollStats(Equipment.Equipment item)
         {
-            var eq = item.CreateDeepClone();
             //roll rarity
-            eq.rarity = RollRarity();
+            Rarity rarity = RollRarity();
+            return RollStats(item, rarity);
+        }
+
+        public static Equipment.Equipment RollStats(Equipment.Equipment item, Rarity rarity)
+        {
+            var eq = item.CreateDeepClone();
+            eq.rarity = rarity;
 
             var guaranteedStatDataSlot = ruleSet.GetGuaranteedStats(eq.EquipSlot);
             var guaranteedStatDataEquipment = item.GuaranteedStats;
@@ -81,8 +87,7 @@ namespace SejDev.Systems.Stats
             if (modType == ModifierType.Percent)
             {
                 //convert display value to value based on 1 as 100% (i.e. 2.5% -> 0.025)
-                //so / 100 for conversion and /10 to revert the change made for rounding
-                roll /= 1000;
+                roll /= 100;
             }
 
             Modifier mod;

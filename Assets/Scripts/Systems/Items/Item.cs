@@ -45,7 +45,7 @@ namespace SejDev.Systems.Equipment
         [field: SerializeField]
         public string Description { get; protected set; }
 
-        private void OnValidate()
+        protected virtual void OnValidate()
         {
             if (string.IsNullOrEmpty(id))
             {

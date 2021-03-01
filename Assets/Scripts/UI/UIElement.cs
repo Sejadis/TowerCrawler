@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace SejDev.UI
 {
     public class UIElement : MonoBehaviour, IBeginDragHandler, IDragHandler,
-        IPointerEnterHandler, IPointerExitHandler, IDropHandler
+        IPointerEnterHandler, IPointerExitHandler, IDropHandler, IPointerClickHandler
     {
         [SerializeField] protected Image icon;
         [SerializeField] protected GameObject dragPrefab;

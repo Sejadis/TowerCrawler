@@ -12,6 +12,7 @@ namespace SejDev.Systems.UI
         [SerializeField] private TextMeshProUGUI nameText;
         [SerializeField] private TextMeshProUGUI descriptionText;
         [SerializeField] private GameObject statParent;
+        [SerializeField] private Image backgroundImage;
 
         public IDescribable FallBackDescribable { get; set; }
 
@@ -23,6 +24,7 @@ namespace SejDev.Systems.UI
             descriptionText.text = describable.Description;
             if (describable is Equipment.Equipment eq)
             {
+                backgroundImage.color = Utility.RarityColors[eq.rarity];
                 nameText.text += " " + Enum.GetName(typeof(Rarity), eq.rarity);
                 foreach (Transform child in statParent.transform)
                 {

@@ -23,7 +23,7 @@ namespace SejDev.UI.Screens.Inventory
 
         [SerializeField] private ObjectDescriber tooltip;
         [SerializeField] private List<EquipmentElement> equipmentElements = new List<EquipmentElement>();
-
+        [SerializeField] private List<CurrencyElement> currencyElements = new List<CurrencyElement>();
         private Systems.Equipment.Inventory inventory;
         private EquipmentHolder equipmentHolder;
         private readonly List<UIElement> itemSlots = new List<UIElement>();
@@ -39,6 +39,12 @@ namespace SejDev.UI.Screens.Inventory
             foreach (var element in equipmentElements)
             {
                 element.OnElementDropped += EquipmentDropped;
+                element.OnElementEnter += OnItemElementEnter;
+                element.OnElementExit += OnItemElementExit;
+            }
+
+            foreach (var element in currencyElements)
+            {
                 element.OnElementEnter += OnItemElementEnter;
                 element.OnElementExit += OnItemElementExit;
             }
@@ -122,6 +128,13 @@ namespace SejDev.UI.Screens.Inventory
             {
                 //bind slot to item if still items left to bind, clear slot otherwise
                 itemSlots[i].Bind(i < inventory.Items.Count ? inventory.Items[i] : null, transform);
+            }
+
+            foreach (var currency in inventory.Currencies)
+            {
+                var element =
+                    currencyElements.Find(curElement => curElement.CurrencyData.Equals(currency.CurrencyData));
+                element.Amount = currency.Amount;
             }
         }
 

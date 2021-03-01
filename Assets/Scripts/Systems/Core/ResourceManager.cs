@@ -7,7 +7,8 @@ using UnityEngine;
 public class ResourceManager : MonoBehaviour
 {
     public List<AbilityList> abilityLists = new List<AbilityList>();
-    public List<Equipment> gearList = new List<Equipment>();
+    public List<Equipment> equipmentList = new List<Equipment>();
+    public List<CurrencyData> currencyList = new List<CurrencyData>();
     public static ResourceManager Instance { get; private set; }
 
     private void Awake()
@@ -39,6 +40,16 @@ public class ResourceManager : MonoBehaviour
 
     public Equipment GetEquipmentByID(string id)
     {
-        return gearList.FirstOrDefault(gear => gear.GUID.Equals(id)).CreateDeepClone();
+        return equipmentList.FirstOrDefault(gear => gear.GUID.Equals(id)).CreateDeepClone();
+    }
+
+    public List<Equipment> GetItemsForSlot(EquipSlotType slot)
+    {
+        return equipmentList.Where(equipment => equipment.EquipSlot == slot).ToList();
+    }
+
+    public CurrencyData GetCurrencyByID(string id)
+    {
+        return currencyList.FirstOrDefault(gear => gear.GUID.Equals(id));
     }
 }

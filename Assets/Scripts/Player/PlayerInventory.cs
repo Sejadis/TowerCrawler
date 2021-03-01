@@ -35,38 +35,5 @@ namespace SejDev.Player
         {
             equipmentHolder = new EquipmentHolder(statsManager, Inventory, weaponHandler);
         }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Keypad0))
-            {
-                var eq = (startItems[0] as Equipment);
-                Inventory.AddItem(StatRollManager.RollStats(eq));
-            }
-
-            if (Input.GetKeyDown(KeyCode.Keypad1))
-            {
-                var eq = (startItems[1] as Equipment);
-                Inventory.AddItem(StatRollManager.RollStats(eq));
-            }
-
-            if (Input.GetKeyDown(KeyCode.Keypad2))
-            {
-                var eq = (startItems[2] as Equipment);
-                Inventory.AddItem(StatRollManager.RollStats(eq));
-            }
-
-            if (Input.GetKeyDown(KeyCode.Keypad3))
-            {
-                var eq = (startItems[3] as Equipment);
-                Inventory.AddItem(StatRollManager.RollStats(eq));
-            }
-
-            if (Input.GetKeyDown(KeyCode.Keypad4))
-            {
-                var eq = (startItems[4] as Equipment);
-                Inventory.AddItem(StatRollManager.RollStats(eq));
-            }
-        }
     }
 }

@@ -17,8 +17,10 @@ namespace SejDev.UI.Screens.Inventory
         [SerializeField] private StatsManager statsManager;
         [SerializeField] private GameObject itemElementPrefab;
         [SerializeField] private GameObject itemParent;
+
         [SerializeField] private GameObject statParent;
         [SerializeField] private GameObject statPrefab;
+
         [SerializeField] private ObjectDescriber tooltip;
         [SerializeField] private List<EquipmentElement> equipmentElements = new List<EquipmentElement>();
 

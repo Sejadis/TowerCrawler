@@ -55,6 +55,11 @@ namespace SejDev.Systems.StatusEffects
             return Equals((StatusEffect) obj);
         }
 
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         public event EventHandler<StatusEffectChangedEventArgs> OnStatusEffectChanged;
 
         protected void RaiseOnStatusEffectChanged(StatusEffectChangedEventArgs statusEffectChangedEventArgs)

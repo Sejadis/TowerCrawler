@@ -8,8 +8,8 @@ namespace SejDev.Editor
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            string newName = property.name.Replace("<", string.Empty).Replace(">k__BackingField", string.Empty);
-            EditorGUI.PropertyField(position, property, new GUIContent(newName));
+            label.text = property.name.Replace("<", string.Empty).Replace(">k__BackingField", string.Empty);
+            EditorGUI.PropertyField(position, property, label);
         }
     }
 }

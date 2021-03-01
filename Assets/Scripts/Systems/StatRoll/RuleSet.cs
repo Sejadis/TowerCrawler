@@ -33,12 +33,6 @@ namespace SejDev.Systems.Stats
                     ? statValueDistributionData.Length
                     : array.Length;
                 Array.Copy(statValueDistributionData, array, copyLength);
-                // for (int i = 0; i < statValueDistributionData.Length && i < enumLength; i++)
-                // {
-                //     array[i] = statValueDistributionData[i];
-                // }
-                //
-                // statValueDistributionData = array;
             }
 
             enumLength = Enum.GetNames(typeof(EquipSlotType)).Length;

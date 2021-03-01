@@ -48,17 +48,19 @@ namespace SejDev.Systems.Stats
 
         public List<GuaranteedStatData> GetGuaranteedStats(EquipSlotType slotType)
         {
-            return guaranteedSlotStatData[(int) slotType].guaranteedStatData;
+            return guaranteedSlotStatData[Utility.GetValueIndex(slotType)].guaranteedStatData;
         }
 
         public MinMaxDistributionData GetStatRules(StatType statType, Rarity rarity)
         {
-            return statValueDistributionData[(int) statType].distributionData[(int) rarity];
+            var typeValue = Utility.GetValueIndex(statType);
+            var rarityValue = Utility.GetValueIndex(rarity);
+            return statValueDistributionData[typeValue].distributionData[rarityValue];
         }
 
         public ModifierType GetModifierType(StatType statType)
         {
-            return statValueDistributionData[(int) statType].modifierType;
+            return statValueDistributionData[Utility.GetValueIndex(statType)].modifierType;
         }
 
         public List<StatType> GetPossibleStats(Rarity rarity)
@@ -67,10 +69,10 @@ namespace SejDev.Systems.Stats
             var statTypeLength = Enum.GetNames(typeof(StatType)).Length;
             for (int i = 0; i < statTypeLength; i++)
             {
-                var valueData = statValueDistributionData[i].distributionData[(int) rarity];
+                var valueData = statValueDistributionData[i].distributionData[Utility.GetValueIndex(rarity)];
                 if (!valueData.IsEmpty())
                 {
-                    result.Add((StatType) i);
+                    result.Add((StatType) (1 << i));
                 }
             }
 
@@ -79,12 +81,13 @@ namespace SejDev.Systems.Stats
 
         public MinMaxData GetStatAmount(EquipSlotType equipSlot, Rarity rarity)
         {
-            return slotRarityDistributionData.distributionData[(int) equipSlot].distributionData[(int) rarity];
+            return slotRarityDistributionData.distributionData[Utility.GetValueIndex(equipSlot)]
+                .distributionData[Utility.GetValueIndex(rarity)];
         }
 
         public ValueType GetValueType(StatType statType)
         {
-            return statValueDistributionData[(int) statType].valueType;
+            return statValueDistributionData[Utility.GetValueIndex(statType)].valueType;
         }
     }
 }

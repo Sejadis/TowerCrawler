@@ -80,9 +80,6 @@ namespace SejDev.Systems.Stats
             var modType = ruleSet.GetModifierType(statType);
             if (modType == ModifierType.Percent)
             {
-                //rounding
-                // roll *= 10;
-                // roll = Mathf.Round(roll);
                 //convert display value to value based on 1 as 100% (i.e. 2.5% -> 0.025)
                 //so / 100 for conversion and /10 to revert the change made for rounding
                 roll /= 1000;

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 021d87f54db54ec5a7e8a0600b88cc3f, type: 3}
+  m_Name: ArmorShard
+  m_EditorClassIdentifier: 
+  id: fd36bf87-5341-4353-a3ce-325784bbc8c0
+  <Icon>k__BackingField: {fileID: 21300000, guid: f03903b913d3a8548815d96bf9e3b050,
+    type: 3}
+  <Name>k__BackingField: Armor Shard
+  <Description>k__BackingField: Used for crafting armor
+  <Rarity>k__BackingField: 2

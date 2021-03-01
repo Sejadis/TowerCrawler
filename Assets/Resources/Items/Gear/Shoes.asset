@@ -17,6 +17,6 @@ MonoBehaviour:
     type: 3}
   <Name>k__BackingField: Sandal
   <Description>k__BackingField: oh yeah
-  <rarity>k__BackingField: 0
-  <EquipSlot>k__BackingField: 7
+  <EquipSlot>k__BackingField: 128
+  GuaranteedStats: []
   stats: []

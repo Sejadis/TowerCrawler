@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseValue: 150
   restrictor: {fileID: 0}
-  <Type>k__BackingField: 6
+  <Type>k__BackingField: 32
   <DisplayStyle>k__BackingField: 0

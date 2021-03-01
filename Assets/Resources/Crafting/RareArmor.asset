@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95dcc01b03844ab2a4769e0f092439c3, type: 3}
+  m_Name: RareArmor
+  m_EditorClassIdentifier: 
+  id: 8be15b75-7ed8-4924-83e9-79ab908cd72f
+  <Icon>k__BackingField: {fileID: 0}
+  <Name>k__BackingField: Rare Armor
+  <Description>k__BackingField: Create a random piece of armor with rarity RARE
+  craftingResult:
+    possibleResults: 254
+    rarity: 4
+    item: {fileID: 0}
+  craftingCosts:
+  - currency: {fileID: 11400000, guid: 81db556418308b740a5f0e2a0c34d3db, type: 2}
+    amount: 1
+  - currency: {fileID: 11400000, guid: 7a5b4088213b55a4f8990ed7fe4fb480, type: 2}
+    amount: 1

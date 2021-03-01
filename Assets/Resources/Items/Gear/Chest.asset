@@ -17,7 +17,6 @@ MonoBehaviour:
     type: 3}
   <Name>k__BackingField: Leather Armor
   <Description>k__BackingField: blah
-  <rarity>k__BackingField: 0
-  <EquipSlot>k__BackingField: 3
+  <EquipSlot>k__BackingField: 8
   GuaranteedStats: []
   stats: []

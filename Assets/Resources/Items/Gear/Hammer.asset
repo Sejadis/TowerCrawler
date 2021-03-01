@@ -17,8 +17,8 @@ MonoBehaviour:
     type: 3}
   <Name>k__BackingField: Hammer
   <Description>k__BackingField: The mighty hammer the lion sleeps tonight
-  <rarity>k__BackingField: 0
-  <EquipSlot>k__BackingField: 0
+  <EquipSlot>k__BackingField: 1
+  GuaranteedStats: []
   stats: []
   baseAbility: {fileID: 11400000, guid: 7bb343d307d274c4fb1b330a34806c35, type: 2}
   specialAbility: {fileID: 0}

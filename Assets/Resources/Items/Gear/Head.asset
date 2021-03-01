@@ -17,6 +17,6 @@ MonoBehaviour:
     type: 3}
   <Name>k__BackingField: Dwarf Helmet
   <Description>k__BackingField: 
-  <rarity>k__BackingField: 0
-  <EquipSlot>k__BackingField: 1
+  <EquipSlot>k__BackingField: 2
+  GuaranteedStats: []
   stats: []

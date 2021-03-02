@@ -39,7 +39,7 @@ namespace SejDev.UI
             OnElementClicked?.Invoke(this, e);
         }
 
-        public void Bind(IDescribable payload, Transform dragParent)
+        public void Bind(IDescribable payload, Transform dragParent = null)
         {
             this.payload = payload;
             Bind(dragParent);

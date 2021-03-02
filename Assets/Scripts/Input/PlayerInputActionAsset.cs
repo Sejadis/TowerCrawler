@@ -273,6 +273,14 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Crafting"",
+                    ""type"": ""Button"",
+                    ""id"": ""44936fae-3a27-45c7-9e80-f2c784b2c585"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -306,6 +314,17 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9dce3e48-fd81-47bb-a864-62e8e999e3e3"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Crafting"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -344,6 +363,7 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
         m_UI_Ability = m_UI.FindAction("Ability", throwIfNotFound: true);
         m_UI_Back = m_UI.FindAction("Back", throwIfNotFound: true);
         m_UI_Inventory = m_UI.FindAction("Inventory", throwIfNotFound: true);
+        m_UI_Crafting = m_UI.FindAction("Crafting", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -570,6 +590,7 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
     private readonly InputAction m_UI_Ability;
     private readonly InputAction m_UI_Back;
     private readonly InputAction m_UI_Inventory;
+    private readonly InputAction m_UI_Crafting;
 
     public struct UIActions
     {
@@ -583,6 +604,7 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
         public InputAction @Ability => m_Wrapper.m_UI_Ability;
         public InputAction @Back => m_Wrapper.m_UI_Back;
         public InputAction @Inventory => m_Wrapper.m_UI_Inventory;
+        public InputAction @Crafting => m_Wrapper.m_UI_Crafting;
 
         public InputActionMap Get()
         {
@@ -619,6 +641,9 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                 @Inventory.started -= m_Wrapper.m_UIActionsCallbackInterface.OnInventory;
                 @Inventory.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnInventory;
                 @Inventory.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnInventory;
+                @Crafting.started -= m_Wrapper.m_UIActionsCallbackInterface.OnCrafting;
+                @Crafting.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnCrafting;
+                @Crafting.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnCrafting;
             }
 
             m_Wrapper.m_UIActionsCallbackInterface = instance;
@@ -633,6 +658,9 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
                 @Inventory.started += instance.OnInventory;
                 @Inventory.performed += instance.OnInventory;
                 @Inventory.canceled += instance.OnInventory;
+                @Crafting.started += instance.OnCrafting;
+                @Crafting.performed += instance.OnCrafting;
+                @Crafting.canceled += instance.OnCrafting;
             }
         }
     }
@@ -671,5 +699,6 @@ public class @PlayerInputActionAsset : IInputActionCollection, IDisposable
         void OnAbility(InputAction.CallbackContext context);
         void OnBack(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
+        void OnCrafting(InputAction.CallbackContext context);
     }
 }

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: RareArmor
   m_EditorClassIdentifier: 
   id: 8be15b75-7ed8-4924-83e9-79ab908cd72f
-  <Icon>k__BackingField: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 8c3da85456c2cda4ba28e77d708acb25,
+    type: 3}
   <Name>k__BackingField: Rare Armor
   <Description>k__BackingField: Create a random piece of armor with rarity RARE
   craftingResult:
@@ -21,7 +22,7 @@ MonoBehaviour:
     rarity: 4
     item: {fileID: 0}
   craftingCosts:
-  - currency: {fileID: 11400000, guid: 81db556418308b740a5f0e2a0c34d3db, type: 2}
+  - currencyData: {fileID: 11400000, guid: 81db556418308b740a5f0e2a0c34d3db, type: 2}
     amount: 1
-  - currency: {fileID: 11400000, guid: 7a5b4088213b55a4f8990ed7fe4fb480, type: 2}
+  - currencyData: {fileID: 11400000, guid: 796e64333ceef49478d41aaa4178ec2c, type: 2}
     amount: 1

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using SejDev.Player;
+using SejDev.Systems.Crafting;
 using SejDev.Systems.Equipment;
 using SejDev.Systems.Stats;
 using UnityEngine;
@@ -9,8 +10,10 @@ public class DEV_HELPER : MonoBehaviour
     public List<Equipment> equipment = new List<Equipment>();
 
     public List<CurrencyData> currency = new List<CurrencyData>();
+    public CraftingBlueprint blueprint;
 
     public PlayerInventory playerInventory;
+    public CraftingHandler craftingHandler;
 
     private IInventory inventory;
 
@@ -66,6 +69,18 @@ public class DEV_HELPER : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Keypad9))
         {
             inventory.AddCurrency(currency[2], 5);
+        }
+
+        if (Input.GetKeyDown(KeyCode.KeypadPlus))
+        {
+            if (craftingHandler.TryCraft(blueprint, out var item))
+            {
+                inventory.AddItem(item as Equipment);
+            }
+            else
+            {
+                Debug.Log("Could not craft item");
+            }
         }
     }
 }

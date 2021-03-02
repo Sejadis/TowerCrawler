@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using SejDev.Systems.Abilities;
+using SejDev.Systems.Crafting;
 using SejDev.Systems.Equipment;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class ResourceManager : MonoBehaviour
     public List<AbilityList> abilityLists = new List<AbilityList>();
     public List<Equipment> equipmentList = new List<Equipment>();
     public List<CurrencyData> currencyList = new List<CurrencyData>();
+    public List<CraftingBlueprint> blueprintList = new List<CraftingBlueprint>();
     public static ResourceManager Instance { get; private set; }
 
     private void Awake()
@@ -20,16 +22,6 @@ public class ResourceManager : MonoBehaviour
         }
 
         Instance = this;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 
     public Ability GetAbilityByID(string id)

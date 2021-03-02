@@ -259,6 +259,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Crafting",
+                    "type": "Button",
+                    "id": "44936fae-3a27-45c7-9e80-f2c784b2c585",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -292,6 +300,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9dce3e48-fd81-47bb-a864-62e8e999e3e3",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crafting",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

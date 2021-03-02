@@ -1,21 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using SejDev.Player;
 using SejDev.Systems.Core;
 using SejDev.Systems.Equipment;
 using SejDev.Systems.Stats;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace SejDev.Systems.Crafting
 {
-    [RequireComponent(typeof(IInventory))]
     public class CraftingHandler : MonoBehaviour
     {
         private IInventory inventory;
 
         private void Start()
         {
-            inventory = GetComponent<IInventory>();
+            inventory = GetComponent<PlayerInventory>().Inventory;
         }
 
         public bool TryCraft(CraftingBlueprint blueprint, out Item item)
@@ -41,15 +41,27 @@ namespace SejDev.Systems.Crafting
             {
                 var enumValues = Enum.GetValues(typeof(EquipSlotType));
                 var filteredValue = enumValues.Cast<EquipSlotType>()
-                    .Where(slotType => result.possibleResults.HasFlag(slotType)).ToArray();
-                var rolledSlot = filteredValue[Random.Range(0, filteredValue.Length)];
-                var possibleItems = ResourceManager.Instance.GetItemsForSlot(rolledSlot);
+                    .Where(slotType => result.possibleResults.HasFlag(slotType)).ToList();
+                EquipSlotType rolledSlot;
+                List<Equipment.Equipment> possibleItems;
+                int maxTries = 5; //TODO maybe throw error instead of retrieing?
+                do
+                {
+                    rolledSlot = Utility.GetRandomValueFromList(filteredValue);
+                    possibleItems = ResourceManager.Instance.GetItemsForSlot(rolledSlot);
+                } while (possibleItems.Count == 0 && maxTries-- > 0);
+
                 var selectedItem = Utility.GetRandomValueFromList(possibleItems);
                 rolledItem = StatRollManager.RollStats(selectedItem, result.rarity);
             }
 
+            foreach (var craftingCost in blueprint.CraftingCosts)
+            {
+                inventory.RemoveCurrency(craftingCost.currencyData, craftingCost.amount);
+            }
+
             item = rolledItem;
-            return item != null;
+            return (bool) item;
         }
     }
 }

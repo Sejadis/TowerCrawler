@@ -28,11 +28,25 @@ namespace SejDev.UI.Screens.Inventory
             }
         }
 
-        public CurrencyData CurrencyData => currencyData;
+        public CurrencyData CurrencyData
+        {
+            get => currencyData;
+            set
+            {
+                currencyData = value;
+                icon.sprite = currencyData.Icon;
+            }
+        }
+
+        public Color Color
+        {
+            get => text.color;
+            set { text.color = value; }
+        }
 
         private void Awake()
         {
-            icon.sprite = currencyData.Icon;
+            icon.sprite = currencyData?.Icon;
             Amount = -1;
         }
 

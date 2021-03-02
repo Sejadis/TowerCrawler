@@ -10,13 +10,25 @@ namespace SejDev.UI
         public UIScreen abilityScreen;
         public UIScreen menuScreen;
         public UIScreen inventoryScreen;
+        public UIScreen craftingScreen;
         private readonly List<UIScreen> activeScreens = new List<UIScreen>();
 
         private void Start()
         {
+            ChangeScreenState(abilityScreen, false);
+            ChangeScreenState(menuScreen, false);
+            ChangeScreenState(inventoryScreen, false);
+            ChangeScreenState(craftingScreen, false);
+
             InputManager.Instance.OnAbilityUI += AbilityUi;
             InputManager.Instance.OnBackUI += Back;
             InputManager.Instance.OnInventoryUI += InventoryUI;
+            InputManager.Instance.OnCraftingUI += CraftingUI;
+        }
+
+        private void CraftingUI(InputAction.CallbackContext obj)
+        {
+            ChangeScreenState(craftingScreen, !craftingScreen.IsActive);
         }
 
         private void InventoryUI(InputAction.CallbackContext obj)
@@ -58,6 +70,7 @@ namespace SejDev.UI
             CheckStuff();
         }
 
+//TODO rename
         private void CheckStuff()
         {
             var uiClosed = activeScreens.Count == 0;
